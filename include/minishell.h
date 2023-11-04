@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 15:57:07 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/04 16:41:22 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -23,6 +23,6 @@
 # define FAILURE 1
 # define SUCCESS 0
 
-// WARNING tests
+// WARNING: test:
 void	init_promt(char *str);
 #endif
