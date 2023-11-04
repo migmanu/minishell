@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 15:17:17 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:52:27 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -22,4 +22,7 @@
 # define ERROR -1
 # define FAILURE 1
 # define SUCCESS 0
+
+// tests
+void	init_promt(char *str);
 #endif
