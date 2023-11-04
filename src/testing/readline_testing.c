@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:21:59 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 14:40:28 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:15:50 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	main(void)
 {
+	char	*hostname;
 	char	*promt;
 	char	*line;
 
+	hostname = getenv("HOSTNAME");
 	promt = "_> ";
 	while (1)
 	{

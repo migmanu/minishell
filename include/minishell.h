@@ -6,11 +6,12 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 14:28:47 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:17:17 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
