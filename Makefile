@@ -6,14 +6,14 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/04 15:28:52 by migmanu          ###   ########.fr        #
+#    Updated: 2023/11/04 15:53:01 by migmanu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SOURCES
 SRCS_DIR = ./src
 SRCS = $(wildcard $(SRCS_DIR)/*/*.c)
-# SRCS += $(wildcard $(SRCS_DIR)/main.c)
+SRCS += $(wildcard $(SRCS_DIR)/main.c)
 
 OBJ_FILES = $(patsubst %.c, %.o, $(SRCS))
 
