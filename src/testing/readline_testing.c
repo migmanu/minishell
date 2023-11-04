@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:21:59 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 15:47:44 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:51:23 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,4 @@ void	init_promt(char *str)
 		add_history(line);
 	}
 	free(promt);
-}
-
-int	main(void)
-{
-	init_promt("USER");
-	return (0);
 }
