@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:21:59 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 16:48:20 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:48:48 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ void	init_promt(char *str)
 		promt = symbol;
 	while (1)
 	{
+		sig_listener();
 		line = readline(promt);
 		add_history(line);
+		if (ft_strncmp(line, "exit", 4) == 0)
+			exit(SUCCESS);
 	}
 	free(promt);
 }

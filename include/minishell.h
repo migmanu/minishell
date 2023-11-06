@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/04 16:41:22 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:46:32 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -25,4 +25,6 @@
 
 // WARNING: test:
 void	init_promt(char *str);
+// singals.c
+void	sig_listener();
 #endif
