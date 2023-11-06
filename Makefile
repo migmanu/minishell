@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/04 15:53:01 by migmanu          ###   ########.fr        #
+#    Updated: 2023/11/06 17:55:32 by migmanu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,18 +47,12 @@ $(NAME): $(OBJ_FILES) $(LIBFT_PATH)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LDFLAGS)
 	@echo $(GREEN) "OK COMPILED" $(EOC)
 
-testing: fclean $(OBJ_FILES) $(LIBFT_PATH)
-	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
-	@$(CC) -o $(NAME) $(OBJ_FILES) $(LDFLAGS)
-	@echo $(GREEN) "COMPILED"
-	@echo  $(RED) "\nWITHOUT REQUIRED FLAGS!" $(EOC)
-
 $(LIBFT_PATH):
 	@$(MAKE) -C $(LIBFT_DIR) -s
 
 %.o: %.c
 	@git submodule update --init -q
-	@$(CC) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo $(RED) "Cleaning..." $(EOC)
