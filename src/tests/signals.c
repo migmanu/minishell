@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/06 18:14:15 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/06 18:43:24 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_sigint(int signum)
 	(void)signum;
 }
 
-void	config_signals()
+void	config_signals(void)
 {
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
