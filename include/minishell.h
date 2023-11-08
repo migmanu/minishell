@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/08 16:51:27 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/08 17:00:04 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct s_hash_item
 
 typedef struct s_hashmap
 {
-	t_hash_item	**items;
-	int			size;
-	int			count;
+	t_hash_item		**items;
+	unsigned int	size;
+	unsigned int	count;
 }			t_hashmap;
 
 typedef struct s_scmd
@@ -60,6 +60,7 @@ char				*hashmap_search(t_hashmap *table, char *key);
 void				hashmap_print_table(t_hashmap *table);
 
 void				init_promt(char *str);
+t_hashmap			*env_to_hash(char **env);
 // singals.c
 void				config_signals();
 
