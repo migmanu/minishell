@@ -6,9 +6,10 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/08 16:10:04 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/08 16:51:27 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
@@ -45,9 +46,6 @@ typedef struct s_scmd
 	int		out_fd;
 }			t_scmd;
 
-// WARNING: test:
-void				init_promt(char *str);
-
 // HASHMAP
 unsigned long int	hash(char *key, unsigned int size);
 t_hash_item			*hashmap_create_item(char *key, char *value);
@@ -60,5 +58,9 @@ void				hashmap_handle_collision(t_hashmap *table, \
 void				hashmap_insert(char *key, char *value, t_hashmap *table);
 char				*hashmap_search(t_hashmap *table, char *key);
 void				hashmap_print_table(t_hashmap *table);
+
+void				init_promt(char *str);
+// singals.c
+void				config_signals();
 
 #endif
