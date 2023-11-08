@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/04 15:53:01 by migmanu          ###   ########.fr        #
+#    Updated: 2023/11/08 16:39:13 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,19 @@ OBJ_FILES = $(patsubst %.c, %.o, $(SRCS))
 #LIBFT
 LIBFT_DIR = ./libft
 LIBFT_PATH = $(LIBFT_DIR)/libft.a
+READLINE_MAC_PATH = /opt/homebrew/opt/readline
 
 #LIBRARIES
-INCLUDE_DIRS = -I ./include -I $(LIBFT_DIR)
+ifeq ($(shell uname), Darwin)
+	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR) -I$(READLINE_MAC_PATH)/include
+	LDFLAGS = -lreadline \
+			  -L$(READLINE_MAC_PATH)/lib -L$(LIBFT_DIR) -lft
+else
+	INCLUDE_DIRS = -I ./include -I $(LIBFT_DIR)
+	LDFLAGS = -lreadline -lhistory -L$(LIBFT_DIR) -lft
+endif
+
 CFLAGS = -Wall -Werror -Wextra -g $(INCLUDE_DIRS)
-LDFLAGS = -lreadline -lhistory -L$(LIBFT_DIR) -lft
 
 # COMPILATION
 NAME = minishell
