@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:55:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/08 16:56:13 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/08 18:53:32 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*dup_value(char *env_line)
 }
 
 // TODO: Add error handling
+// TODO: Handling not envp
 t_hashmap	*env_to_hash(char **env)
 {
 	t_hashmap	*table;
@@ -55,7 +56,7 @@ t_hashmap	*env_to_hash(char **env)
 		len++;
 	table = hashmap_create_table(len * 2);
 	if (!table)
-		exit(1);
+		exit(FAILURE);
 	while (i < len)
 	{
 		key = dup_key(env[i]);
