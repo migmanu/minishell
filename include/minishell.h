@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/08 21:53:51 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/09 17:56:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_hashmap
 typedef struct s_scmd
 {
 	char	**full_cmd;
-	char	*path;		
+	char	*path;
 	int		in_fd;
 	int		out_fd;
 }				t_scmd;
@@ -74,6 +74,6 @@ void				init_prompt(t_data *mish);
 void				init_mish(t_data *mish, char *envp[]);
 t_hashmap			*env_to_hash(char **env);
 // singals.c
-void				config_signals();
+void				config_signals(void);
 
 #endif

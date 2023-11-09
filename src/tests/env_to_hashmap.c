@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:55:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/08 18:53:32 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/09 17:56:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_hashmap	*env_to_hash(char **env)
 	int			len;
 	char		*key;
 	char		*value;
-	int			i; 
+	int			i;
 
 	len = 0;
 	i = 0;
