@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/09 18:21:00 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:41:00 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -47,7 +47,7 @@ typedef struct s_scmd
 
 typedef struct s_data
 {
-	t_list			*line;
+	char			*line;
 	t_hashmap		*env;
 	struct s_scmd	*scmds;
 	char			*pwd;
