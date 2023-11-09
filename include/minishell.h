@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/08 15:46:33 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:17:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -23,24 +23,37 @@
 # define FAILURE 1
 # define SUCCESS 0
 
+typedef struct s_hash_item
+{
+	char				*key;
+	char				*value;
+	struct s_hash_item	*next;
+}			t_hash_item;
+
+typedef struct s_hashmap
+{
+	t_hash_item		**items;
+	unsigned int	size;
+	unsigned int	count;
+}				t_hashmap;
+
 typedef struct s_scmd
 {
-	char			*full_cmd;
-	char			*path;
-	// we might still need pointer to builtin function here
-	int				in_fd;
-	int				out_fd;
-	struct s_scmd	*next;
-}			t_scmd;
+	char	**full_cmd;
+	char	*path;
+	int		in_fd;
+	int		out_fd;
+}				t_scmd;
 
 typedef struct s_data
 {
-	char			*line; // store the line from readline()
-	char			**envp;
+	t_list			*line;
+	t_hashmap		*env;
 	struct s_scmd	*scmds;
 	char			*pwd;
 	char			*old_pwd;
-}	t_data;
+	pid_t			pid;
+}				t_data;
 
 // WARNING: test:
 void	init_promt(char *str);
