@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:21:59 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/06 18:59:13 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:46:35 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 // Initiates user promt with readlie function. Str is an enviroment
 // variable that is to be display in the promt, like USER.
-void	init_promt(char *str)
+void	init_prompt(t_data *mish)
 {
 	char	*symbol;
 	char	*var;
-	char	*promt;
+	char	*prompt;
 	char	*line;
 
 	symbol = " $_> ";
-	var = getenv(str);
+	var = hashmap_search(mish->env, "USER");
 	if (var)
 	{
-		promt = ft_strjoin(var, symbol);
+		prompt = ft_strjoin(var, symbol);
 	}
 	else
-		promt = symbol;
+		prompt = symbol;
 	while (1)
 	{
 		config_signals();
-		line = readline(promt);
+		line = readline(prompt);
 		add_history(line);
 		if (ft_strncmp(line, "exit", 4) == 0)
 			exit(SUCCESS);
+		input_handler(line, mish);
 	}
-	free(promt);
+	free(prompt);
 }
