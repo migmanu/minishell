@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:51:02 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/08 21:51:20 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/09 17:30:42 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,9 @@ static void	get_mish_pid(t_data *mish)
 
 	pid = fork();
 	if (pid < 0)
-	{
-		perror("fork");
-		hashmap_free_table(mish->env);
-		exit(FAILURE);
-	}
+		mish_error(mish, NULL, FORK_ERR, 1);
 	if (pid == 0)
-	{
-		hashmap_free_table(mish->env);
-		exit(FAILURE);
-	}
+		mish_error(mish, NULL, FAILURE, 1);
 	waitpid(pid, NULL, 0);
 	mish->pid = pid - 1;
 }

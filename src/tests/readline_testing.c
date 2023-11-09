@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:21:59 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/08 21:46:35 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/09 17:23:36 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,17 @@ void	init_prompt(t_data *mish)
 		prompt = ft_strjoin(var, symbol);
 	}
 	else
-		prompt = symbol;
+		prompt = ft_strdup(symbol);
 	while (1)
 	{
 		config_signals();
 		line = readline(prompt);
 		add_history(line);
 		if (ft_strncmp(line, "exit", 4) == 0)
-			exit(SUCCESS);
+		{
+			free(prompt);
+			mish_error(mish, NULL, SUCCESS, 1);
+		}
 		input_handler(line, mish);
 	}
 	free(prompt);
