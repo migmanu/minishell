@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/09 18:17:42 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:21:00 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -28,14 +28,14 @@ typedef struct s_hash_item
 	char				*key;
 	char				*value;
 	struct s_hash_item	*next;
-}			t_hash_item;
+}				t_hash_item;
 
 typedef struct s_hashmap
 {
 	t_hash_item		**items;
 	unsigned int	size;
 	unsigned int	count;
-}				t_hashmap;
+}					t_hashmap;
 
 typedef struct s_scmd
 {
@@ -43,7 +43,7 @@ typedef struct s_scmd
 	char	*path;
 	int		in_fd;
 	int		out_fd;
-}				t_scmd;
+}			t_scmd;
 
 typedef struct s_data
 {
@@ -53,10 +53,10 @@ typedef struct s_data
 	char			*pwd;
 	char			*old_pwd;
 	pid_t			pid;
-}				t_data;
+}					t_data;
 
 // WARNING: test:
 void	init_promt(char *str);
 // singals.c
-void	config_signals();
+void	config_signals(void);
 #endif
