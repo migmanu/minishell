@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:51:02 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/10 14:39:14 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:01:46 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	get_mish_pid(t_data *mish)
 // TODO: Handling not envp
 void	init_mish(t_data *mish, char *envp[])
 {
-	printf("init_mish init\n");
 	char	**full_cmd;
 
 	mish->cmds = NULL;
@@ -43,7 +42,6 @@ void	init_mish(t_data *mish, char *envp[])
 		ft_putstr_fd("Error creating fake cmd", STDERR_FILENO);
 		exit(ERROR);
 	}
-	printf("cmd is : %s\n", full_cmd[0]);
 	mish->pwd = malloc(sizeof(char) * PATH_MAX);
 	getcwd(mish->pwd, PATH_MAX);
 	mish->scmd->in_fd = 0;
