@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:46:38 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/10 11:45:11 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/10 12:13:09 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,21 @@ char	**split_in_words(char *str, char *set)
 	return (words);
 }
 
+void	fill_subwords(char **subwords, char *str, char *set, int i[3])
+{
+
+}
+
 char	**split_subwords(const char *str, char *set)
 {
-	char	**tmp;
+	char	**subwords;
 	int		len;
 	int		counters[2];
+	int		index[3];
 
+	index[0] = 0;
+	index[1] = 0;
+	index[2] = 0;
 	if (!str)
 		return (NULL);
 	counters[0] = 0;
@@ -105,6 +114,10 @@ char	**split_subwords(const char *str, char *set)
 	len = count_words(str, set, counters);
 	if (len == -1)
 		return (NULL);
+	subwords = ft_calloc(len + 1, sizeof(char *));
+	if (!subwords)
+		return (NULL);
+	fill_subwords(subwords, (char *)str, set, index);
 	return (NULL);
 }
 
