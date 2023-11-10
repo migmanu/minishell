@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
 /*   Updated: 2023/11/10 18:18:42 by johnavar         ###   ########.fr       */
@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
+# include <linux/limits.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -56,16 +57,19 @@ typedef struct s_hashmap
 typedef struct s_scmd
 {
 	char	**full_cmd;
-	char	*path;		
+	char	*path;
 	int		in_fd;
 	int		out_fd;
 }				t_scmd;
 
 typedef struct s_data
 {
-	t_list		*cmds;
+	t_list		*cmds; // WARNING: what is this structure?
+	t_scmd		*scmd;
 	t_hashmap	*env;
 	pid_t		pid;
+	char		*pwd;
+	char		*old_pwd;
 }				t_data;
 
 // hashmap
@@ -89,11 +93,16 @@ void				mish_error(t_data *mish, char *param, int err, int is_exit);
 void				ft_free_matrix(char ***matrix);
 
 // init
-void				init_prompt(t_data *mish);
+char				*init_prompt(t_data *mish);
 void				init_mish(t_data *mish, char *envp[]);
 t_hashmap			*env_to_hash(char **env);
 
 // singals.c
-void				config_signals();
+void				config_signals(void);
 
+// get_cmd_path.c
+char				*get_cmd_path(char *cmd, char *env[]);
+
+// executor_router.c
+void				executor_router(t_data *mish);
 #endif
