@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 16:46:13 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:50:54 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ char	*create_promt(t_data mish, char *str)
 		prompt = ft_strdup(symbol);
 	}
 	return (prompt);
+}
+
+char	*init_prompt(t_data *mish)
+{
+
 }
