@@ -6,20 +6,27 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/09 17:30:44 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:26:10 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_free_matrix(char **matrix)
+void	ft_free_matrix(char ***matrix)
 {
 	int	i;
 
-	i = -1;
-	while (matrix[++i])
-		free(matrix[i]);
-	free(matrix);
+	i = 0;
+	while (matrix && matrix[0] && matrix[0][i])
+	{
+		free(matrix[0][i]);
+		i++;
+	}
+	if (matrix)
+	{
+		free(matrix[0]);
+		*matrix = NULL;
+	}
 }
 
 // TODO: the exit code its wrong, maybe we can implement a global with

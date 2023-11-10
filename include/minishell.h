@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/09 17:30:47 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:18:42 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void				*input_handler(char *line, t_data *mish);
 
 // exit.c
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
-void				ft_free_matrix(char **matrix);
+void				ft_free_matrix(char ***matrix);
 
 // init
 void				init_prompt(t_data *mish);
