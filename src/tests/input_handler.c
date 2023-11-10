@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:46:38 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/09 17:30:38 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/10 11:45:11 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	count_words(const char *str, char *set, int cts[2])
 
 	quote[0] = 0;
 	quote[1] = 0;
-	while (str[cts[0]] != '\0')
+	while (str && str[cts[0]] != '\0')
 	{
-		if (ft_strchr(set, str[cts[0]]) == 0)
+		if (!ft_strchr(set, str[cts[0]]))
 		{
 			cts[1]++;
 			while ((!ft_strchr(set, str[cts[0]]) || quote[0]) && str[cts[0]])
@@ -68,7 +68,7 @@ char	**fill_array(char **words, const char *str, char *set, int i[3])
 	return (words);
 }
 
-char	**split_in_tokens(char *str, char *set)
+char	**split_in_words(char *str, char *set)
 {
 	char	**words;
 	int		size;
@@ -92,24 +92,54 @@ char	**split_in_tokens(char *str, char *set)
 	return (words);
 }
 
+char	**split_subwords(const char *str, char *set)
+{
+	char	**tmp;
+	int		len;
+	int		counters[2];
+
+	if (!str)
+		return (NULL);
+	counters[0] = 0;
+	counters[1] = 0;
+	len = count_words(str, set, counters);
+	if (len == -1)
+		return (NULL);
+	return (NULL);
+}
+
+void	split_operators(char **tokens)
+{
+	char	**subwords;
+	int		i;
+
+	i = -1;
+	while (tokens && tokens[++i])
+	{
+		subwords = split_subwords(tokens[i], "<|>");
+	}
+	(void)subwords;
+}
+
 //TODO: continue with parse_and_expand function
 void	*input_handler(char *line, t_data *mish)
 {
-	char	**words;
+	char	**tokens;
 	int		i;
 
-	words = split_in_tokens(line, " ");
+	tokens = split_in_words(line, " ");
+	split_operators(tokens);
 	free(line);
-	if (!words)
+	if (!tokens)
 	{
 		mish_error(mish, NULL, UNQUOTE, 0);
 		return ("");
 	}
 	i = 0;
-	while (words[i])
+	while (tokens[i])
 	{
-		printf("%s\n", words[i++]);
+		printf("%s\n", tokens[i++]);
 	}
-	ft_free_matrix(words);
+	ft_free_matrix(tokens);
 	return (mish);
 }
