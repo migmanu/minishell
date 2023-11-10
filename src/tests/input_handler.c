@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:46:38 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/10 12:13:09 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/10 16:35:19 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,26 @@ char	**split_in_words(char *str, char *set)
 
 void	fill_subwords(char **subwords, char *str, char *set, int i[3])
 {
+	int	qte[2];
 
+	qte[0] = 0;
+	qte[1] = 1;
+	while (str && str[i[0]] != '\0')
+	{
+		if (!ft_strchr(set, str[i[0]]))
+		{
+			i[1] = i[0];
+			while ((!ft_strchr(set, str[i[0]]) || qte[0]) && str[i[0]])
+			{
+				if (!qte[1] && (qte[1] == '\'' || qte[1] == '\"'))
+					qte[1] = str[i[0]];
+				qte[0] = (qte[0] + (!qte[1] && str[i[0]] == qte[1]) % 2);
+				qte[1] *= qte[0] != 0;
+			}
+			if (qte[0])
+				return NULL;
+		}
+	}
 }
 
 char	**split_subwords(const char *str, char *set)
