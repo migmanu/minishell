@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:46:38 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/08 21:46:59 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/09 17:30:38 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,21 @@ char	**split_in_tokens(char *str, char *set)
 //TODO: continue with parse_and_expand function
 void	*input_handler(char *line, t_data *mish)
 {
-	char	**tokens;
+	char	**words;
 	int		i;
 
-	tokens = split_in_tokens(line, " ");
+	words = split_in_tokens(line, " ");
 	free(line);
-	if (!tokens)
+	if (!words)
 	{
-		ft_putendl_fd("mish: unmatch quote", 2);
+		mish_error(mish, NULL, UNQUOTE, 0);
 		return ("");
 	}
 	i = 0;
-	while (tokens[i])
+	while (words[i])
 	{
-		printf("%s\n", tokens[i++]);
+		printf("%s\n", words[i++]);
 	}
+	ft_free_matrix(words);
 	return (mish);
 }

@@ -6,7 +6,6 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/09 17:56:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +18,25 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <errno.h>
 
-# define ERROR -1
-# define FAILURE 1
-# define SUCCESS 0
+// I remplaced them for the enum below, to iteract with the err msg.
+// we leave here if we want to come back.
+/*# define ERROR -1*/
+/*# define FAILURE 1*/
+/*# define SUCCESS 0*/
+
+enum e_mish_err
+{
+	ERROR = -1,
+	SUCCESS,
+	FAILURE,
+	INV_ARGS,
+	FORK_ERR,
+	UNQUOTE
+};
 
 typedef struct s_hash_item
 {
@@ -69,10 +83,15 @@ void				hashmap_print_table(t_hashmap *table);
 // input_handler.c
 void				*input_handler(char *line, t_data *mish);
 
+// exit.c
+void				mish_error(t_data *mish, char *param, int err, int is_exit);
+void				ft_free_matrix(char **matrix);
+
 // init
 void				init_prompt(t_data *mish);
 void				init_mish(t_data *mish, char *envp[]);
 t_hashmap			*env_to_hash(char **env);
+
 // singals.c
 void				config_signals(void);
 
