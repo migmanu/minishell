@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 14:53:36 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:11:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	fork_s_cmds(t_data *mish, int fds[])
 
 	pid = fork();
 	if (pid == -1)
-		return ; // TODO: handle error
+		return; // TODO: handle error
 	if (pid == 0)
 	{
 		dup_s_cmds(mish, fds);

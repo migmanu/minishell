@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 16:22:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:50:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void				mish_error(t_data *mish, char *param, int err, int is_exit);
 void				ft_free_matrix(char **matrix);
 
 // init
-void				init_prompt(t_data *mish);
+char				*init_prompt(t_data *mish);
 void				init_mish(t_data *mish, char *envp[]);
 t_hashmap			*env_to_hash(char **env);
 

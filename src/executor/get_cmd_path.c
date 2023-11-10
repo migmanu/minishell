@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 14:02:47 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 14:38:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:01:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*get_cmd_path(char *cmd, char *env[])
 {
-	printf("get_cmd_path init, cmd %s\n", cmd);
 	char	**path_vec;
 	char	*tmp_path;
 	char	*path;
