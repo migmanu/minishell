@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 16:50:39 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
+/*   Updated: 2023/11/10 18:18:42 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void				*input_handler(char *line, t_data *mish);
 
 // exit.c
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
-void				ft_free_matrix(char **matrix);
+void				ft_free_matrix(char ***matrix);
 
 // init
 char				*init_prompt(t_data *mish);
