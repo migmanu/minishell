@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:21:59 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/09 17:23:36 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:28:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_prompt(t_data *mish)
 	char	*prompt;
 	char	*line;
 
-	symbol = " $_> ";
+	symbol = "\033[1;36m $_> \033[0;0m";
 	var = hashmap_search(mish->env, "USER");
 	if (var)
 	{
@@ -33,13 +33,20 @@ void	init_prompt(t_data *mish)
 	{
 		config_signals();
 		line = readline(prompt);
-		add_history(line);
-		if (ft_strncmp(line, "exit", 4) == 0)
+		if (line)
 		{
-			free(prompt);
-			mish_error(mish, NULL, SUCCESS, 1);
+			add_history(line);
+			if (ft_strncmp(line, "exit", 4) == 0)
+			{
+				free(prompt);
+				mish_error(mish, NULL, SUCCESS, 1);
+			}
+			input_handler(line, mish);
 		}
-		input_handler(line, mish);
+		else
+		{
+			exit(SUCCESS);
+		}
 	}
 	free(prompt);
 }

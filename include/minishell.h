@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
+/*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/10 16:22:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
+# include <linux/limits.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -62,9 +64,12 @@ typedef struct s_scmd
 
 typedef struct s_data
 {
-	t_list		*cmds;
+	t_list		*cmds; // WARNING: what is this structure?
+	t_scmd		*scmd;
 	t_hashmap	*env;
 	pid_t		pid;
+	char		*pwd;
+	char		*old_pwd;
 }				t_data;
 
 // hashmap
@@ -95,4 +100,9 @@ t_hashmap			*env_to_hash(char **env);
 // singals.c
 void				config_signals(void);
 
+// get_cmd_path.c
+char				*get_cmd_path(char *cmd, char *env[]);
+
+// executor_router.c
+void				executor_router(t_data *mish);
 #endif
