@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:46:38 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/10 19:49:06 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/11 09:29:28 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	count_words(const char *str, char *set, int cts[2])
 	quote[1] = 0;
 	while (str && str[cts[0]] != '\0')
 	{
-		cts[1]++;
 		if (!ft_strchr(set, str[cts[0]]))
 		{
+			cts[1]++;
 			while ((!ft_strchr(set, str[cts[0]]) || quote[0]) && str[cts[0]])
 			{
 				if (!quote[1] && (str[cts[0]] == '\"' || str[cts[0]] == '\''))
@@ -38,6 +38,34 @@ int	count_words(const char *str, char *set, int cts[2])
 			cts[0]++;
 	}
 	return (cts[1]);
+}
+
+int	ft_count_words(char *s, char *set, int count)
+{
+	int		q[2];
+	int		i;
+
+	i = 0;
+	q[0] = 0;
+	q[1] = 0;
+	while (s && s[i] != '\0')
+	{
+		count++;
+		if (!ft_strchr(set, s[i]))
+		{
+			while ((!ft_strchr(set, s[i]) || q[0] || q[1]) && s[i] != '\0')
+			{
+				q[0] = (q[0] + (!q[1] && s[i] == '\'')) % 2;
+				q[1] = (q[1] + (!q[0] && s[i] == '\"')) % 2;
+				i++;
+			}
+			if (q[0] || q[1])
+				return (-1);
+		}
+		else
+			i++;
+	}
+	return (count);
 }
 
 char	**fill_array(char **words, const char *str, char *set, int i[3])
@@ -61,7 +89,7 @@ char	**fill_array(char **words, const char *str, char *set, int i[3])
 			i[0]++;
 		}
 		if (i[1] >= len)
-			words[i[2]++] = "\0";
+			words[i[2]++] = NULL;
 		else
 			words[i[2]++] = ft_substr(str, i[1], i[0] - i[1]);
 	}
@@ -100,15 +128,15 @@ char	**fill_subwords(char **subwords, char *str, char *set, int i[3])
 	quote[1] = 0;
 	while (str && str[i[0]] != '\0')
 	{
+		i[1] = i[0];
 		if (!ft_strchr(set, str[i[0]]))
 		{
-			i[1] = i[0];
 			while ((!ft_strchr(set, str[i[0]]) || quote[0] || quote[1])
 				&& str[i[0]])
 			{
 				quote[0] = (quote[0] + (!quote[1] && str[i[0]] == '\'')) % 2;
 				quote[1] = (quote[1] + (!quote[0] && str[i[0]] == '\"')) % 2;
-				++i[0];
+				i[0]++;
 			}
 		}
 		else
@@ -122,7 +150,6 @@ char	**split_subwords(const char *str, char *set)
 {
 	char	**subwords;
 	int		len;
-	int		counters[2];
 	int		index[3];
 
 	index[0] = 0;
@@ -130,13 +157,14 @@ char	**split_subwords(const char *str, char *set)
 	index[2] = 0;
 	if (!str)
 		return (NULL);
-	counters[0] = 0;
-	counters[1] = 0;
-	len = count_words(str, set, counters);
+	len = ft_count_words((char *)str, set, 0);
 	if (len == -1)
 		return (NULL);
-	subwords = ft_calloc(len + 1, sizeof(char *));
+	subwords = malloc((len + 1) * sizeof(char *));
+	if (!subwords)
+		return (NULL);
 	subwords = fill_subwords(subwords, (char *)str, set, index);
+	subwords[len] = NULL;
 	return (subwords);
 }
 
@@ -145,7 +173,7 @@ int	ft_matrixlen(char **matrix)
 	int	i;
 
 	i = 0;
-	while (matrix[i])
+	while (matrix && matrix[i])
 		i++;
 	return (i);
 }
@@ -155,12 +183,13 @@ char	**insert_subwords(char ***mtx, char **new_items, int pos)
 	char	**tmp;
 	int		i[3];
 
-	if (!mtx || !*mtx || pos < 0 || ft_matrixlen(*mtx) <= pos)
-		return (NULL);
-	tmp = ft_calloc(ft_matrixlen(*mtx) + ft_matrixlen(*mtx), sizeof(char *));
 	i[0] = -1;
 	i[1] = -1;
 	i[2] = -1;
+	if (!mtx || !*mtx || pos < 0 || pos >= ft_matrixlen(*mtx))
+		return (NULL);
+	tmp = ft_calloc(ft_matrixlen(*mtx) + ft_matrixlen(new_items),
+			sizeof(char *));
 	while (tmp && mtx[0][++i[0]])
 	{
 		if (i[0] != pos)
@@ -185,7 +214,7 @@ char	**split_operators(char **tokens)
 	while (tokens && tokens[++i])
 	{
 		subwords = split_subwords(tokens[i], "<|>");
-		tokens = insert_subwords(&tokens, subwords, i);
+		insert_subwords(&tokens, subwords, i);
 		i += ft_matrixlen(subwords) - 1;
 		ft_free_matrix(&subwords);
 	}
@@ -199,12 +228,12 @@ void	*input_handler(char *line, t_data *mish)
 	int		i;
 
 	tokens = split_in_words(line, " ");
-	free(line);
 	if (!tokens)
 	{
 		mish_error(mish, NULL, UNQUOTE, 0);
 		return ("");
 	}
+	free(line);
 	tokens = split_operators(tokens);
 	i = 0;
 	while (tokens[i])

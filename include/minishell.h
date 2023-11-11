@@ -6,14 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/10 18:18:42 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/10 21:05:10 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
-# include <linux/limits.h>
+// # include <linux/limits.h>
+# include <limits.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
