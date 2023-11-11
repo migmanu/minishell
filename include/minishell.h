@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/10 21:05:10 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/11 16:06:38 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,19 @@ void				hashmap_insert(char *key, char *value, t_hashmap *table);
 char				*hashmap_search(t_hashmap *table, char *key);
 void				hashmap_print_table(t_hashmap *table);
 
-// input_handler.c
+// input_handler
 void				*input_handler(char *line, t_data *mish);
+char				**split_in_words(char *str, char *set);
+char				**split_subwords(const char *str, char *set);
+// utils
+char				**fill_array(char **words, const char *str,
+						char *set, int i[3]);
+int					count_subwords(char *s, char *set, int count);
+int					count_words(const char *str, char *set, int cts[2]);
+int					ft_matrixlen(char **matrix);
+char				**fill_subwords(char **subwords, char *str, char *set,
+						int i[3]);
+char				**insert_subwords(char ***mtx, char **new_items, int pos);
 
 // exit.c
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
