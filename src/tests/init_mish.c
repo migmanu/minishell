@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:51:02 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/10 17:01:46 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:11:58 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern char	**environ; // temp way of getting enviroment variables
 
-static void	get_mish_pid(t_data *mish)
+static void	get_sh_pid(t_data *mish)
 {
 	pid_t	pid;
 
@@ -34,7 +34,7 @@ void	init_mish(t_data *mish, char *envp[])
 
 	mish->cmds = NULL;
 	mish->env = env_to_hash(envp);
-	get_mish_pid(mish);
+	get_sh_pid(mish);
 	// WARNING: rest of function creates mock t_scmd for testing
 	full_cmd = ft_split("ls -l", ' ');
 	if (full_cmd == NULL)
