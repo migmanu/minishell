@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_0.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:36:41 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/11 15:52:41 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/12 19:59:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**fill_subwords(char **subwords, char *str, char *set, int i[3])
+int	find_inset(const char *str, char *set)
 {
-	int	quote[2];
+	int	i;
 
-	quote[0] = 0;
-	quote[1] = 0;
-	while (str && str[i[0]] != '\0')
-	{
-		i[1] = i[0];
-		if (!ft_strchr(set, str[i[0]]))
-		{
-			while ((!ft_strchr(set, str[i[0]]) || quote[0] || quote[1])
-				&& str[i[0]])
-			{
-				quote[0] = (quote[0] + (!quote[1] && str[i[0]] == '\'')) % 2;
-				quote[1] = (quote[1] + (!quote[0] && str[i[0]] == '\"')) % 2;
-				i[0]++;
-			}
-		}
-		else
-			i[0]++;
-		subwords[i[2]++] = ft_substr(str, i[1], i[0] - i[1]);
-	}
-	return (subwords);
+	i = -1;
+	if (!str)
+		return (i);
+	while (str[++i])
+		if (ft_strchr(set, str[i]))
+			return (i);
+	return (-1);
 }
 
 int	ft_matrixlen(char **matrix)
@@ -102,32 +89,4 @@ int	count_subwords(char *s, char *set, int count)
 			i++;
 	}
 	return (count);
-}
-
-char	**fill_array(char **words, const char *str, char *set, int i[3])
-{
-	int	len;
-	int	quote[2];
-
-	quote[0] = 0;
-	quote[1] = 0;
-	len = ft_strlen(str);
-	while (str[i[0]])
-	{
-		while (ft_strchr(set, str[i[0]]) && str[i[0]] != '\0')
-			i[0]++;
-		i[1] = i[0];
-		while ((!ft_strchr(set, str[i[0]]) || quote[0] || quote[1])
-			&& str[i[0]])
-		{
-			quote[0] = (quote[0] + (!quote[1] && str[i[0]] == '\'')) % 2;
-			quote[1] = (quote[1] + (!quote[0] && str[i[0]] == '\"')) % 2;
-			i[0]++;
-		}
-		if (i[1] >= len)
-			words[i[2]++] = NULL;
-		else
-			words[i[2]++] = ft_substr(str, i[1], i[0] - i[1]);
-	}
-	return (words);
 }

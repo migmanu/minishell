@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/11 16:06:38 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/12 20:02:46 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,18 @@ void				hashmap_print_table(t_hashmap *table);
 
 // input_handler
 void				*input_handler(char *line, t_data *mish);
+// tokenizer_utils
 char				**split_in_words(char *str, char *set);
 char				**split_subwords(const char *str, char *set);
+char				**insert_subwords(char ***mtx, char **new_items, int pos);
+// expander_utils
+char				*expand_home(char *str, int i, int quotes[2], char *home);
+char				*expand_vars(t_data *mish, char *str, int quotes[2], int i);
 // utils
-char				**fill_array(char **words, const char *str,
-						char *set, int i[3]);
 int					count_subwords(char *s, char *set, int count);
 int					count_words(const char *str, char *set, int cts[2]);
 int					ft_matrixlen(char **matrix);
-char				**fill_subwords(char **subwords, char *str, char *set,
-						int i[3]);
-char				**insert_subwords(char ***mtx, char **new_items, int pos);
+int					find_inset(const char *str, char *set);
 
 // exit.c
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
