@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/13 17:11:57 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:35:09 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,5 @@ void				create_mock_mish(t_data *mish, char *line);
 // builtins
 int					(*builtins_router(char *str))(t_data *mish, t_scmd cmd);
 int					mish_pwd(t_data *mish, t_scmd cmd);
+int					mish_cd(t_data *mish, t_scmd cmd);
 #endif
