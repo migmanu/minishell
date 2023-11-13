@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 16:50:39 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:32:36 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct s_scmd
 
 typedef struct s_data
 {
-	t_list		*cmds; // WARNING: what is this structure?
+	t_list		*cmds;
 	t_scmd		*scmd;
 	t_hashmap	*env;
 	pid_t		pid;
-	char		*pwd;
+	char		*pwd; // TODO: check if needs to be removed
 	char		*old_pwd;
 }				t_data;
 
