@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/13 15:21:23 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:11:57 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				hashmap_print_table(t_hashmap *table);
 // input_handler.c
 void				*input_handler(char *line, t_data *mish);
 
-// exit.c
+// exit
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
 void				ft_free_matrix(char **matrix);
 
@@ -93,12 +93,14 @@ t_hashmap			*env_to_hash(char **env);
 // singals.c
 void				config_signals(void);
 
-// get_cmd_path.c
-char				*get_cmd_path(char *cmd, char *env[]);
-
-// executor_router.c
+// executor
 void				executor_router(t_data *mish);
+char				*get_cmd_path(char *cmd, char *env[]);
 
 // testing
 void				create_mock_mish(t_data *mish, char *line);
+
+// builtins
+int					(*builtins_router(char *str))(t_data *mish, t_scmd cmd);
+int					mish_pwd(t_data *mish, t_scmd cmd);
 #endif
