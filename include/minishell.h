@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 19:27:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:21:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <errno.h>
-
-// I remplaced them for the enum below, to iteract with the err msg.
-// we leave here if we want to come back.
-/*# define ERROR -1*/
-/*# define FAILURE 1*/
-/*# define SUCCESS 0*/
 
 enum e_mish_err
 {
