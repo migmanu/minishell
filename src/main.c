@@ -24,6 +24,8 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		config_signals();
 		line = init_prompt(&mish);
+    if (line[0] == '\0')
+      continue;
 		//input_handler(line, &mish);
 		create_mock_mish(&mish, line);
 		executor_router(&mish);
