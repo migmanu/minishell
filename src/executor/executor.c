@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 17:11:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:35:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ extern char	**environ; // temp way of getting enviroment variables
 
 void	exec_s_cmds(t_data *mish)
 {
+	t_scmd	*cmd;
+
+	cmd = mish->cmds->content;
 	printf("exec_s_cmds init\n");
-	execve(mish->scmd->path, mish->scmd->full_cmd, environ); // TODO: change environ!
+	execve(cmd->path, cmd->full_cmd, environ); // TODO: change environ!
 }
 
 void	dup_s_cmds(t_data *mish, int fds[])
@@ -42,6 +45,7 @@ void	fork_s_cmds(t_data *mish, int fds[])
 	{
 		dup_s_cmds(mish, fds);
 	}
+	wait(0);
 }
 
 void	executor_router(t_data *mish)
@@ -50,9 +54,9 @@ void	executor_router(t_data *mish)
 	int	fds[2] = {STDIN_FILENO, STDOUT_FILENO};// fixed to stdin and stdout for now
 	if (pipe(fds) == -1)
 		return ; // TODO: handle error
-	while (mish->scmd)
+	while (mish->cmds)
 	{
 		fork_s_cmds(mish, fds);
-		return ; // TODO: add iteration for more than one cmd
+		mish->cmds = mish->cmds->next;
 	}
 }

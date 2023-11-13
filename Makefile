@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/09 18:35:25 by johnavar         ###   ########.fr        #
+#    Updated: 2023/11/13 12:43:08 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ else
 endif
 
 CFLAGS = -Wall -Werror -Wextra -g $(INCLUDE_DIRS)
+TFLAGS = -g $(INCLUDE_DIRS)
 
 # COMPILATION
 NAME = minishell
@@ -49,6 +50,9 @@ WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 
 all: $(NAME)
+
+test: CFLAGS = $(TEST_CFLAGS)
+test: $(NAME)
 
 $(NAME): $(OBJ_FILES) $(LIBFT_PATH)
 	@echo $(CYAN) "Compiling $@...🛠️" $(EOC)
@@ -75,4 +79,4 @@ fclean: clean
 re: fclean all
 	@git submodule update --remote -q
 
-.PHONY: all clean fclean
+.PHONY: all test clean fclean
