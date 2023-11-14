@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/13 19:35:09 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:55:51 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_data
 	t_list		*cmds;
 	t_hashmap	*env;
 	pid_t		pid;
-	char		*pwd;
 	char		*old_pwd;
 }				t_data;
 
@@ -101,7 +100,11 @@ char				*get_cmd_path(char *cmd, char *env[]);
 void				create_mock_mish(t_data *mish, char *line);
 
 // builtins
-int					(*builtins_router(char *str))(t_data *mish, t_scmd cmd);
-int					mish_pwd(t_data *mish, t_scmd cmd);
-int					mish_cd(t_data *mish, t_scmd cmd);
+void				builtins_router(t_data *mish, t_scmd cmd);
+void				mish_pwd(t_data *mish, t_scmd cmd);
+void				mish_cd(t_data *mish, t_scmd cmd);
+void				mish_exit(t_data *mish, t_scmd cmd);
+
+// handle exit
+void				handle_exit(t_data *mish, int err);
 #endif

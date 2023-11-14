@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/14 12:42:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:45:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	free_mish(t_data *mish)
 	}
 }
 
-void	handle_exit(t_data *mish, int errno)
+void	handle_exit(t_data *mish, int err)
 {
 	if (mish)
 		if (mish->env)
 			hashmap_free_table(mish->env);
-	exit(errno);
+	exit(err);
 }
