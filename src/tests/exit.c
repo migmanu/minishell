@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/09 17:30:44 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:22:24 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ void	ft_free_matrix(char **matrix)
 	while (matrix[++i])
 		free(matrix[i]);
 	free(matrix);
+}
+
+void	free_mish(t_data *mish)
+{
+	if (mish->env)
+		hashmap_free_table(mish->env);
+	if (mish->old_pwd)
+	{
+		free(mish->old_pwd);
+		mish->old_pwd = NULL;
+	}
 }
 
 // TODO: the exit code its wrong, maybe we can implement a global with
