@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/13 19:48:34 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:34:29 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 /*# define FAILURE 1*/
 /*# define SUCCESS 0*/
 
+// in Test
+int	g_exit_status;
+
 enum e_mish_err
 {
 	ERROR = -1,
@@ -39,6 +42,8 @@ enum e_mish_err
 	INV_ARGS,
 	FORK_ERR,
 	UNQUOTE
+	NO_PERM = 126,
+	NO_FILE = 127,
 };
 
 typedef struct s_hash_item

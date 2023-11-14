@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/13 19:48:11 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:42:58 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	ft_free_matrix(char ***matrix)
 // the las exit and use here to exit correct.
 void	mish_error(t_data *mish, char *param, int err, int is_exit)
 {
+	if (err == PIPE_ERR || err == FORK_ERR)
+		g_exit_status = 1;
+	else
+		g_exit_status = err;
 	if (err != SUCCESS && err != FAILURE)
 	{
 		ft_putstr_fd("mish: ", STDERR_FILENO);
@@ -42,15 +46,19 @@ void	mish_error(t_data *mish, char *param, int err, int is_exit)
 			perror("fork");
 		else if (err == UNQUOTE)
 			ft_putstr_fd("Unmatch quote", STDERR_FILENO);
+		else if (err == NO_FILE)
+			ft_putstr_fd("No such file or directory: ", STDERR_FILENO);
+		else if (err == NO_PERM)
+			ft_putstr_fd("Permission denied: ", STDERR_FILENO);
+		else if (err == PIPE_ERR)
+			ft_putstr_fd("Error creating pipe\n", 2);
 		if (param)
 			ft_putstr_fd(param, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	if (mish)
+	if (mish && is_exit)
 		if (mish->env)
 			hashmap_free_table(mish->env);
-	if (is_exit && err != FORK_ERR)
-		exit(err);
-	else
-		exit(errno);
+	else if (is_exit)
+		exit(g_exit_status);
 }
