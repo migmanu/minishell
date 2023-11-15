@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
 /*   Updated: 2023/11/15 18:13:16 by sebasnadu        ###   ########.fr       */
+=======
+/*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/13 15:21:23 by jmigoya-         ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +31,7 @@
 # include <errno.h>
 # include <sys/ioctl.h>
 
+<<<<<<< HEAD
 // I remplaced them for the enum below, to iteract with the err msg.
 // we leave here if we want to come back.
 /*# define ERROR -1*/
@@ -37,6 +43,8 @@
 // in Test
 int	g_exit_status;
 
+=======
+>>>>>>> upstream/main
 enum e_mish_err
 {
 	SUCCESS,
@@ -74,8 +82,7 @@ typedef struct s_scmd
 
 typedef struct s_data
 {
-	t_list		*cmds; // WARNING: what is this structure?
-	t_scmd		*scmd;
+	t_list		*cmds;
 	t_hashmap	*env;
 	pid_t		pid;
 	char		*pwd;
@@ -145,4 +152,7 @@ char				*get_cmd_path(char *cmd, char *env[]);
 
 // executor_router.c
 void				executor_router(t_data *mish);
+
+// testing
+void				create_mock_mish(t_data *mish, char *line);
 #endif
