@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/15 18:13:16 by sebasnadu        ###   ########.fr       */
-=======
-/*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/13 15:21:23 by jmigoya-         ###   ########.fr       */
->>>>>>> upstream/main
+/*   Updated: 2023/11/15 18:52:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +26,6 @@
 # include <errno.h>
 # include <sys/ioctl.h>
 
-<<<<<<< HEAD
 // I remplaced them for the enum below, to iteract with the err msg.
 // we leave here if we want to come back.
 /*# define ERROR -1*/
@@ -43,8 +37,6 @@
 // in Test
 int	g_exit_status;
 
-=======
->>>>>>> upstream/main
 enum e_mish_err
 {
 	SUCCESS,
