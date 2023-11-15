@@ -6,12 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:08:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 18:57:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:16:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 void	mish_exit(t_data *mish, t_scmd cmd)
 {
@@ -22,6 +21,7 @@ void	mish_exit(t_data *mish, t_scmd cmd)
 		ft_putstr_fd("exit command takes no input\n", STDERR_FILENO);
 		exit(ERROR);
 	}
+	g_exit = 1;
+	printf("mish_exit set g_exit to %d\n", g_exit);
 	handle_exit(mish, SUCCESS);
-	exit(ERROR); // handle_exit
 }

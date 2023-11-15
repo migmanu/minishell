@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 18:55:51 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:11:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_data
 	pid_t		pid;
 	char		*old_pwd;
 }				t_data;
+
+extern int	g_exit;
 
 // hashmap
 unsigned long int	hash(char *key, unsigned int size);

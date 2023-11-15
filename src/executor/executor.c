@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 18:50:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:17:37 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	exec_s_cmds(t_data *mish, t_scmd *cmd)
 	printf("exec_s_cmds init\n");
 	if (mish->pid)
 		mish->pid++;
-	builtins_router(mish, *cmd);
 	execve(cmd->path, cmd->full_cmd, environ); // TODO: change environ!
 }
 
@@ -30,13 +29,11 @@ void	dup_s_cmds(t_data *mish, t_scmd *cmd, int fds[])
 	// TODO: add check for builtin cmds
 	if (fds[1] != STDOUT_FILENO)
 	{
-		printf("stdout diff\n");
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
 	}
 	if (fds[0] != STDIN_FILENO)
 	{
-		printf("stdin diff\n");
 		dup2(fds[0], STDIN_FILENO);
 		close(fds[0]);
 	}
@@ -47,6 +44,7 @@ void	fork_s_cmds(t_data *mish, t_scmd *cmd, int fds[])
 {
 	int	pid;
 
+	builtins_router(mish, *cmd);
 	pid = fork();
 	if (pid == -1)
 		return ; // TODO: handle error
