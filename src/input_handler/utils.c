@@ -6,11 +6,37 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:36:41 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/13 19:48:14 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:36:36 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	**ft_matrixdup(char **tokens)
+{
+	int		i;
+	int		size;
+	char	**tmp;
+
+	if (!tokens || !tokens[0])
+		return (NULL);
+	size = ft_matrixlen(tokens);
+	tmp = malloc((size + 1) * sizeof(char *));
+	if (!tmp)
+		return (NULL);
+	i = -1;
+	while (tokens[++i])
+	{
+		tmp[i] = ft_strdup(tokens[i]);
+		if (!tmp[i])
+		{
+			ft_matrixfree(&tmp);
+			return (NULL);
+		}
+	}
+	tmp[i] = NULL;
+	return (tmp);
+}
 
 int	find_inset(const char *str, char *set)
 {

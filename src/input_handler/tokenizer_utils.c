@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:35:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/12 19:53:32 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/15 13:54:46 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**insert_subwords(char ***mtx, char **new_items, int pos)
 				tmp[++i[1]] = ft_strdup(new_items[i[2]]);
 		}
 	}
-	ft_free_matrix(mtx);
+	ft_matrixfree(mtx);
 	*mtx = tmp;
 	return (*mtx);
 }
