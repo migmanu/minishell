@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 20:17:37 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:24:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,24 @@ void	exec_s_cmds(t_data *mish, t_scmd *cmd)
 	execve(cmd->path, cmd->full_cmd, environ); // TODO: change environ!
 }
 
-void	dup_s_cmds(t_data *mish, t_scmd *cmd, int fds[])
+void	dup_s_cmds(t_data *mish, t_scmd *cmd)
 {
-	printf("dup_s_cmds init\n");
+	printf("dup_s_cmds init, in: %d | out: %d\n", cmd->in_fd, cmd->out_fd);
 	// TODO: add check for builtin cmds
-	if (fds[1] != STDOUT_FILENO)
+	if (cmd->out_fd != STDOUT_FILENO)
 	{
-		dup2(fds[1], STDOUT_FILENO);
-		close(fds[1]);
+		dup2(cmd->out_fd, STDOUT_FILENO);
+		close(cmd->out_fd);
 	}
-	if (fds[0] != STDIN_FILENO)
+	if (cmd->in_fd != STDIN_FILENO)
 	{
-		dup2(fds[0], STDIN_FILENO);
-		close(fds[0]);
+		dup2(cmd->in_fd, STDIN_FILENO);
+		close(cmd->in_fd);
 	}
 	exec_s_cmds(mish, cmd);
 }
 
-void	fork_s_cmds(t_data *mish, t_scmd *cmd, int fds[])
+void	fork_s_cmds(t_data *mish, t_scmd *cmd)
 {
 	int	pid;
 
@@ -50,7 +50,7 @@ void	fork_s_cmds(t_data *mish, t_scmd *cmd, int fds[])
 		return ; // TODO: handle error
 	if (pid == 0)
 	{
-		dup_s_cmds(mish, cmd, fds);
+		dup_s_cmds(mish, cmd);
 	}
 	else
 	{
@@ -60,11 +60,22 @@ void	fork_s_cmds(t_data *mish, t_scmd *cmd, int fds[])
 
 void	executor_router(t_data *mish)
 {
+	t_scmd	*cmd;
+	t_scmd	*next_cmd;
+	int		fds[2];
+
 	printf("executor_router init\n");
-	int	fds[2] = {STDIN_FILENO, STDOUT_FILENO};// fixed to stdin and stdout for now
 	while (mish->cmds)
 	{
-		fork_s_cmds(mish, mish->cmds->content, fds);
+		cmd = mish->cmds->content;
+		if (mish->cmds->next != NULL)
+		{
+			next_cmd = mish->cmds->next->content;
+			pipe(fds);
+			cmd->out_fd = fds[1];
+			next_cmd->in_fd = fds[0];
+		}
+		fork_s_cmds(mish, cmd);
 		mish->cmds = mish->cmds->next;
 	}
 }

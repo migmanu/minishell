@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/14 19:14:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:42:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char *argv[], char *envp[])
 	init_mish(&mish, envp);
 	while (1 && g_exit == 0)
 	{
-		printf("g_exit is %d", g_exit);
 		config_signals();
 		line = init_prompt(&mish);
 		//input_handler(line, &mish);
