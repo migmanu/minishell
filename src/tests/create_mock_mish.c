@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 18:50:28 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 19:33:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:35:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	create_mock_mish(t_data *mish, char *line)
 		ft_putstr_fd("Error creating fake cmd", STDERR_FILENO);
 		exit(ERROR);
 	}
-	mish->pwd = malloc(sizeof(char) * PATH_MAX);
-	getcwd(mish->pwd, PATH_MAX);
 	cmd->in_fd = 0;
 	cmd->out_fd = 1;
 	cmd->full_cmd = full_cmd;

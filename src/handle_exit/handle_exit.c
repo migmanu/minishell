@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_pwd.c                                         :+:      :+:    :+:   */
+/*   handle_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 13:25:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 18:57:31 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
+/*   Updated: 2023/11/14 12:45:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	mish_pwd(t_data *mish, t_scmd cmd)
+void	free_mish(t_data *mish)
 {
-	printf("mish_pwd init\n");
-	char	*str;
+	if (mish->env)
+		hashmap_free_table(mish->env);
+	if (mish->old_pwd)
+	{
+		free(mish->old_pwd);
+		mish->old_pwd = NULL;
+	}
+}
 
-	str = hashmap_search(mish->env, "PWD");
-	if (str == NULL)
-		exit(ERROR);
-	ft_putstr_fd(str, cmd.out_fd);
-	ft_putstr_fd("\n", cmd.out_fd);
-	exit(SUCCESS);
+void	handle_exit(t_data *mish, int err)
+{
+	if (mish)
+		if (mish->env)
+			hashmap_free_table(mish->env);
+	exit(err);
 }

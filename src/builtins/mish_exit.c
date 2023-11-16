@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_pwd.c                                         :+:      :+:    :+:   */
+/*   mish_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 13:25:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 18:57:31 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/14 12:08:19 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/14 19:16:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	mish_pwd(t_data *mish, t_scmd cmd)
+void	mish_exit(t_data *mish, t_scmd cmd)
 {
-	printf("mish_pwd init\n");
-	char	*str;
-
-	str = hashmap_search(mish->env, "PWD");
-	if (str == NULL)
+	printf("mish_exit init\n");
+	if (cmd.full_cmd[1] != NULL)
+	{
+		// handle error
+		ft_putstr_fd("exit command takes no input\n", STDERR_FILENO);
 		exit(ERROR);
-	ft_putstr_fd(str, cmd.out_fd);
-	ft_putstr_fd("\n", cmd.out_fd);
-	exit(SUCCESS);
+	}
+	g_exit = 1;
+	printf("mish_exit set g_exit to %d\n", g_exit);
+	handle_exit(mish, SUCCESS);
 }

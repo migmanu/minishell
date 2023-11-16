@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_pwd.c                                         :+:      :+:    :+:   */
+/*   mish_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 13:25:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/14 18:57:31 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/14 18:57:40 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	mish_pwd(t_data *mish, t_scmd cmd)
+void	mish_cd(t_data *mish, t_scmd cmd)
 {
-	printf("mish_pwd init\n");
-	char	*str;
-
-	str = hashmap_search(mish->env, "PWD");
-	if (str == NULL)
+	mish->old_pwd = hashmap_search(mish->env, "PWD");
+	if (mish->old_pwd == NULL)
 		exit(ERROR);
-	ft_putstr_fd(str, cmd.out_fd);
-	ft_putstr_fd("\n", cmd.out_fd);
+	hashmap_insert("PWD", cmd.full_cmd[1], mish->env);
 	exit(SUCCESS);
 }

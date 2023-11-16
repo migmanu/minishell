@@ -77,9 +77,10 @@ typedef struct s_data
 	t_list		*cmds;
 	t_hashmap	*env;
 	pid_t		pid;
-	char		*pwd;
 	char		*old_pwd;
 }				t_data;
+
+extern int	g_exit;
 
 // hashmap
 unsigned long int	hash(char *key, unsigned int size);
@@ -126,7 +127,7 @@ t_scmd				*redir_out_append(t_scmd *node, char **cmds, int *i);
 int					get_heredoc_fd(char *limit);
 int					get_fd(int oldfd, char *path, int flags[2]);
 
-// exit.c
+// exit
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
 void				ft_matrixfree(char ***matrix);
 void				free_scmd(void *content);
@@ -139,12 +140,19 @@ t_hashmap			*env_to_hash(char **env);
 // singals.c
 void				config_signals(void);
 
-// get_cmd_path.c
-char				*get_cmd_path(char *cmd, char *env[]);
-
-// executor_router.c
+// executor
 void				executor_router(t_data *mish);
+char				*get_cmd_path(char *cmd, char *env[]);
 
 // testing
 void				create_mock_mish(t_data *mish, char *line);
+
+// builtins
+void				builtins_router(t_data *mish, t_scmd cmd);
+void				mish_pwd(t_data *mish, t_scmd cmd);
+void				mish_cd(t_data *mish, t_scmd cmd);
+void				mish_exit(t_data *mish, t_scmd cmd);
+
+// handle exit
+void				handle_exit(t_data *mish, int err);
 #endif

@@ -12,15 +12,18 @@
 
 #include "../include/minishell.h"
 
+int	g_exit;
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	mish;
 	char	*line;
 
+	g_exit = 0;
 	if (argc != 1)
 		mish_error(NULL, argv[1], INV_ARGS, 1);
 	init_mish(&mish, envp);
-	while (1)
+	while (1 && g_exit == 0)
 	{
 		config_signals();
 		line = init_prompt(&mish);
