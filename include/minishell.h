@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 16:22:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/13 15:21:23 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
+/*   Updated: 2023/11/15 18:52:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
-# include <linux/limits.h>
+// # include <linux/limits.h>
+# include <limits.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -23,15 +24,30 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <sys/ioctl.h>
+
+// I remplaced them for the enum below, to iteract with the err msg.
+// we leave here if we want to come back.
+/*# define ERROR -1*/
+/*# define FAILURE 1*/
+/*# define SUCCESS 0*/
+
+# define WRITE_END 1
+# define READ_END 0
+// in Test
+int	g_exit_status;
 
 enum e_mish_err
 {
-	ERROR = -1,
 	SUCCESS,
 	FAILURE,
+	ERROR,
 	INV_ARGS,
 	FORK_ERR,
-	UNQUOTE
+	PIPE_ERR,
+	UNQUOTE,
+	NO_PERM = 126,
+	NO_FILE = 127,
 };
 
 typedef struct s_hash_item
@@ -78,12 +94,42 @@ void				hashmap_insert(char *key, char *value, t_hashmap *table);
 char				*hashmap_search(t_hashmap *table, char *key);
 void				hashmap_print_table(t_hashmap *table);
 
-// input_handler.c
+// input_handler
 void				*input_handler(char *line, t_data *mish);
+// tokenizer_utils
+char				**split_in_words(char *str, char *set);
+char				**split_subwords(const char *str, char *set);
+char				**insert_subwords(char ***mtx, char **new_items, int pos);
+// expander_utils
+char				*expand_home(char *str, int i, int quotes[2], char *home);
+char				*expand_vars(t_data *mish, char *str, int quotes[2], int i);
+// utils.c
+int					count_subwords(char *s, char *set, int count);
+int					count_words(const char *str, char *set, int cts[2]);
+int					ft_matrixlen(char **matrix);
+int					find_inset(const char *str, char *set);
+char				**ft_matrixdup(char **tokens);
+// syntax_list_utils.c
+char				**trim_all(char **tokens);
+char				*get_trimmed_str(char *str);
+int					len_noquotes(char *str);
+t_scmd				*init_node(void);
+t_list				*clean_fail(t_list *cmds, char **tokens, char **tmp);
+// get_node.c
+t_scmd				*get_node(t_scmd *node, char **cmds[2], int *i);
+// redirections.c
+t_scmd				*redir_in(t_scmd *node, char **cmds, int *i);
+t_scmd				*redir_in_heredoc(t_scmd *node, char **cmds, int *i);
+t_scmd				*redir_out(t_scmd *node, char **cmds, int *i);
+t_scmd				*redir_out_append(t_scmd *node, char **cmds, int *i);
+// redirections_utils.c
+int					get_heredoc_fd(char *limit);
+int					get_fd(int oldfd, char *path, int flags[2]);
 
 // exit.c
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
-void				ft_free_matrix(char **matrix);
+void				ft_matrixfree(char ***matrix);
+void				free_scmd(void *content);
 
 // init
 char				*init_prompt(t_data *mish);
