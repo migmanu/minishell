@@ -6,19 +6,22 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/16 18:08:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:38:40 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 extern char	**environ; // temp way of getting enviroment variables
 
 void	exec_s_cmds(t_scmd *cmd)
 {
 	printf("exec_s_cmds init, path: %s\n", cmd->path);
-	execve(cmd->path, cmd->full_cmd, environ); // TODO: change environ!
+	if (execve(cmd->path, cmd->full_cmd, environ) != 0)
+	{
+		if (execve(cmd->full_cmd[0], cmd->full_cmd, environ) != 0)
+			return ; // handle error
+	}
 }
 
 void	dup_s_cmds(t_scmd *cmd)
