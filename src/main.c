@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/16 16:36:58 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:09:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 		config_signals();
 		line = init_prompt(&mish);
 		input_handler(line, &mish);
-		executor_router(&mish);
+		executor(&mish);
 		// TODO: this clean all the cmds and also close fds of files but, i think
 		// it should be provisional for now, this should be after the executor but
 		// inside your function to have more cleaning main

@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/16 13:20:32 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:09:48 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ t_hashmap			*env_to_hash(char **env);
 void				config_signals(void);
 
 // executor
-void				executor_router(t_data *mish);
+void				executor(t_data *mish);
+char				*get_path(t_data *mish, char *cmd);
 char				*get_cmd_path(char *cmd, char *env[]);
 
 // testing
