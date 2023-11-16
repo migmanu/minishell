@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/13 12:43:08 by jmigoya-         ###   ########.fr        #
+#    Updated: 2023/11/15 18:51:55 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ $(NAME): $(OBJ_FILES) $(LIBFT_PATH)
 	@echo $(GREEN) "OK COMPILED" $(EOC)
 
 $(LIBFT_PATH):
-	@$(MAKE) -C $(LIBFT_DIR) -s
+	@make bonus -C $(LIBFT_DIR) -s
 
 %.o: %.c
 	@git submodule update --init -q

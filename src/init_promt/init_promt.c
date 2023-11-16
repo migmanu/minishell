@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/10 17:10:08 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:14:10 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*create_prompt(t_data mish, char *str)
+char	*create_prompt(t_data *mish, char *str)
 {
 	char	*symbol;
 	char	*var;
@@ -20,7 +20,7 @@ char	*create_prompt(t_data mish, char *str)
 	char	*color;
 
 	symbol = " $_> \033[0;0m";
-	var = hashmap_search(mish.env, str);
+	var = hashmap_search(mish->env, str);
 	if (var)
 	{
 		color = ft_strjoin("\033[1;36m", var);
@@ -39,7 +39,7 @@ char	*init_prompt(t_data *mish)
 	char	*prompt;
 	char	*line;
 
-	prompt = create_prompt(*mish, "USER");
+	prompt = create_prompt(mish, "USER");
 	line = readline(prompt);
 	free(prompt);
 	if (line)
