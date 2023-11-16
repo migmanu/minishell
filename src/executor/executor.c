@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/16 18:05:24 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:08:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,9 @@ void	fork_s_cmds(t_data *mish, t_scmd *cmd)
 	{
 		wait(0);
 		if (cmd->out_fd != STDOUT_FILENO)
-		{
 			close(cmd->out_fd);
-		}
 		if (cmd->in_fd != STDIN_FILENO)
-		{
 			close(cmd->in_fd);
-		}
 	}
 }
 
