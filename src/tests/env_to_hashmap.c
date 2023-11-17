@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:55:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/09 17:56:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:28:32 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ t_hashmap	*env_to_hash(char **env)
 	i = 0;
 	while (env[len])
 		len++;
-	table = hashmap_create_table(len * 2);
+	if (len)
+		table = hashmap_create_table(len * 2);
+	else
+		table = hashmap_create_table(100);
 	if (!table)
 		exit(FAILURE);
 	while (i < len)

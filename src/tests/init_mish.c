@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/16 13:24:07 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:30:40 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,31 @@ static void	get_sh_pid(t_data *mish)
 	mish->pid = pid - 1;
 }
 
+t_data	*check_env(t_data *mish)
+{
+	char	*tmp;
+	int		nbr;
+
+	nbr = 1;
+	if (!hashmap_search(mish->env, "PWD"))
+	{
+		tmp = getcwd(NULL, 0);
+		hashmap_insert("PWD", tmp, mish->env);
+		free(tmp);
+	}
+	tmp = hashmap_search(mish->env, "SHLVL");
+	if (tmp && ft_atoi(tmp) > 0)
+		nbr = ft_atoi(tmp) + 1;
+	hashmap_insert("SHLVL", ft_itoa(nbr), mish->env);
+	return (NULL);
+}
+
 // TODO: Handling not envp
 void	init_mish(t_data *mish, char *envp[])
 {
 	mish->cmds = NULL;
 	mish->env = env_to_hash(envp);
+	check_env(mish);
 	get_sh_pid(mish);
-	// WARNING: rest of function creates mock t_scmd for testing
+	hashmap_print_table(mish->env);
 }
