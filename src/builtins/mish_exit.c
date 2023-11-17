@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:08:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/16 13:26:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:15:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	mish_exit(t_data *mish, t_scmd cmd)
 		ft_putstr_fd("exit command takes no input\n", STDERR_FILENO);
 		exit(ERROR);
 	}
-	handle_exit(mish, SUCCESS);
+	mish_error(mish, NULL, SUCCESS, 1);
 }

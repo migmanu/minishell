@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/16 17:09:48 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:23:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int					get_fd(int oldfd, char *path, int flags[2]);
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
 void				ft_matrixfree(char ***matrix);
 void				free_scmd(void *content);
+void				handle_exit(t_data *mish);
 
 // init
 char				*init_prompt(t_data *mish);
@@ -135,16 +136,17 @@ void				config_signals(void);
 void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
 char				*get_cmd_path(char *cmd, char *env[]);
+void				dup_s_cmds(t_scmd *cmd);
 
 // testing
 void				create_mock_mish(t_data *mish, char *line);
 
 // builtins
-void				builtins_router(t_data *mish, t_scmd cmd);
+int					check_if_builtin(const char *str);
+int					builtins_router(t_data *mish, t_scmd cmd);
 void				mish_pwd(t_data *mish, t_scmd cmd);
 void				mish_cd(t_data *mish, t_scmd cmd);
 void				mish_exit(t_data *mish, t_scmd cmd);
+void				mish_export(t_data *mish, t_scmd cmd);
 
-// handle exit
-void				handle_exit(t_data *mish, int err);
 #endif

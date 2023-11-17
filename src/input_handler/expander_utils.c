@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:46:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/12 20:33:53 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/17 15:20:01 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*get_subvars(char *str, int i, t_data *mish)
 	if (str[i] == '$')
 		var = ft_itoa((int)mish->pid);
 	else if (str[i] == '?')
-		var = ft_itoa(666);
+		var = ft_itoa(g_exit_status);
 	else
 		var = ft_strdup(hashmap_search(mish->env, tmp));
 	free(tmp);
