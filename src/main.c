@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/17 18:23:33 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/18 21:44:47 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (argc != 1)
 		mish_error(NULL, argv[1], INV_ARGS, 1);
-	init_mish(&mish, envp);
+	init_mish(&mish, argv, envp);
 	while (1)
 	{
 		config_signals();

@@ -6,14 +6,14 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/17 18:58:33 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/18 23:40:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "../libft/libft.h"
-// # include <linux/limits.h>
+
+# include "../libft/includes/libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -28,6 +28,16 @@
 
 # define WRITE_END 1
 # define READ_END 0
+
+# define DEFAULT "\001\033[0;39m\002"
+# define GRAY "\001\033[1;90m\002"
+# define RED "\001\033[1;91m\002"
+# define GREEN "\001\033[1;92m\002"
+# define YELLOW "\001\033[1;93m\002"
+# define BLUE "\001\033[1;94m\002"
+# define MAGENTA "\001\033[1;95m\002"
+# define CYAN "\001\033[1;96m\002"
+# define WHITE "\001\033[0;97m\002"
 
 enum e_mish_err
 {
@@ -125,7 +135,7 @@ void				free_scmd(void *content);
 
 // init
 char				*init_prompt(t_data *mish);
-void				init_mish(t_data *mish, char *envp[]);
+void				init_mish(t_data *mish, char *argv[], char *envp[]);
 t_hashmap			*env_to_hash(char **env);
 
 // singals.c
