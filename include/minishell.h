@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/17 19:23:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:12:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 
 # define WRITE_END 1
 # define READ_END 0
+
+# define NOT_EXIT 0
+# define IS_EXIT 1
 
 enum e_mish_err
 {
@@ -119,10 +122,11 @@ int					get_heredoc_fd(char *limit);
 int					get_fd(int oldfd, char *path, int flags[2]);
 
 // exit
-void				mish_error(t_data *mish, char *param, int err, int is_exit);
+void				handle_exit(t_data *mish, char *param, \
+					int err, int is_exit);
+void				clean_and_exit(t_data *mish);
 void				ft_matrixfree(char ***matrix);
 void				free_scmd(void *content);
-void				handle_exit(t_data *mish);
 
 // init
 char				*init_prompt(t_data *mish);
@@ -136,17 +140,17 @@ void				config_signals(void);
 void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
 char				*get_cmd_path(char *cmd, char *env[]);
-void				dup_s_cmds(t_scmd *cmd);
+void				dup_cmd(t_scmd *cmd);
 
 // testing
 void				create_mock_mish(t_data *mish, char *line);
 
 // builtins
 int					check_if_builtin(const char *str);
-int					builtins_router(t_data *mish, t_scmd cmd);
-void				mish_pwd(t_data *mish, t_scmd cmd);
-void				mish_cd(t_data *mish, t_scmd cmd);
+int					builtins_router(t_data *mish, t_scmd cmd, int if_exit);
+void				mish_pwd(t_data *mish, t_scmd cmd, int if_exit);
+void				mish_cd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_exit(t_data *mish, t_scmd cmd);
-void				mish_export(t_data *mish, t_scmd cmd);
+void				mish_export(t_data *mish, t_scmd cmd, int if_exit);
 
 #endif

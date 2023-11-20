@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/17 18:13:53 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:24:28 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ int	ft_chr_pos(const char *str, const char c)
 
 // TODO: check, is there a way to just get the exported vars from the
 // hash map? Needed for export with no arguments
-void	mish_export(t_data *mish, t_scmd cmd)
+void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 {
+	printf("export init\n");
 	char	*key;
 	char	*value;
 	int		i;
 
 	if (cmd.full_cmd[1] == NULL)
 	{
-		hashmap_print_table(mish->env); // TODO: only exported!
+		hashmap_print_table(mish->env); // TODO: show only exported!
+		handle_exit(mish, NULL, SUCCESS, if_exit);
+		return ;
 	}
 	if (ft_strchr(cmd.full_cmd[1], '=') == NULL)
-		mish_error(mish, NULL, SUCCESS, 1);
+		handle_exit(mish, NULL, SUCCESS, if_exit);
 	i = ft_chr_pos(cmd.full_cmd[1], '=');
 	key = ft_substr(cmd.full_cmd[1], 0, i);
 	value = ft_substr(cmd.full_cmd[1], ++i, ft_strlen(cmd.full_cmd[1]));
@@ -53,5 +56,5 @@ void	mish_export(t_data *mish, t_scmd cmd)
 	hashmap_insert(key, value, mish->env); // TODO: mark as custom var
 	free(key);
 	free(value);
-	mish_error(mish, NULL, SUCCESS, 1);
+	handle_exit(mish, NULL, SUCCESS, if_exit);
 }

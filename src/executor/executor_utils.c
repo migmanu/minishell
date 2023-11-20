@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/17 20:26:33 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:35:51 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_path(t_data *mish, char *cmd)
 	return (NULL);
 }
 
-void	dup_s_cmds(t_scmd *cmd)
+void	dup_cmd(t_scmd *cmd)
 {
 	printf("dup_s_cmds init, cmd: %s in: %d | out: %d\n", cmd->full_cmd[0], \
 	cmd->in_fd, cmd->out_fd);

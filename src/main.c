@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/16 17:09:55 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:41:02 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*line;
 
 	if (argc != 1)
-		mish_error(NULL, argv[1], INV_ARGS, 1);
+		handle_exit(NULL, argv[1], INV_ARGS, IS_EXIT);
 	init_mish(&mish, envp);
 	while (1)
 	{
 		config_signals();
 		line = init_prompt(&mish);
+		if (!line)
+		{
+			printf("no line\n");
+			continue ;
+		}
 		input_handler(line, &mish);
 		executor(&mish);
 		// TODO: this clean all the cmds and also close fds of files but, i think
@@ -33,8 +38,6 @@ int	main(int argc, char *argv[], char *envp[])
 		// inside your function to have more cleaning main
 		if (mish.cmds)
 			ft_lstclear(&mish.cmds, free_scmd);
-		// input_handler(line, &mish);
-		//  create_mock_mish(&mish, line);
 	}
 	return (0);
 }
