@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/20 15:18:48 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:57:01 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 		if (err == INV_ARGS)
 			ft_putstr_fd("No arguments needed: ", STDERR_FILENO);
 		else if (err == FORK_ERR)
-			perror("fork");
+			ft_putstr_fd("Fork error.", STDERR_FILENO);
 		else if (err == UNQUOTE)
 			ft_putstr_fd("Unmatch quote", STDERR_FILENO);
 		else if (err == NO_FILE)
