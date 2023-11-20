@@ -6,11 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/18 23:48:46 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/19 00:31:53 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	*get_user(t_data *mish)
+{
+}
 
 char	*create_prompt(t_data *mish, char *str)
 {

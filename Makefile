@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/18 23:53:19 by sebasnadu        ###   ########.fr        #
+#    Updated: 2023/11/19 00:30:21 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ READLINE_MAC_PATH = /opt/homebrew/opt/readline
 
 #LIBRARIES
 ifeq ($(shell uname), Darwin)
-	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR) -I$(READLINE_MAC_PATH)/include
+	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR)/includes -I$(READLINE_MAC_PATH)/include
 	LDFLAGS = -lreadline \
 			  -L$(READLINE_MAC_PATH)/lib -L$(LIBFT_DIR) -lft
 else
-	INCLUDE_DIRS = -I ./include -I $(LIBFT_DIR)
+	INCLUDE_DIRS = -I ./include -I $(LIBFT_DIR)/includes
 	LDFLAGS = -lreadline -lhistory -L$(LIBFT_DIR) -lft
 endif
 
@@ -60,7 +60,7 @@ $(NAME): $(OBJ_FILES) $(LIBFT_PATH)
 	@echo $(GREEN) "OK COMPILED" $(EOC)
 
 $(LIBFT_PATH):
-	@make bonus -C $(LIBFT_DIR) -s
+	@make -C $(LIBFT_DIR) -s
 
 %.o: %.c
 	@git submodule update --init -q
