@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/1/13 14:01:08 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 17:12:30 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:01:20 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_if_builtin(const char *str)
 int	builtins_router(t_data *mish, t_scmd cmd, int if_exit)
 {
 	if (ft_strncmp("echo", cmd.full_cmd[0], 4) == 0)
-		return (0);
+		mish_echo(mish, cmd, if_exit);
 	if (ft_strncmp("cd", cmd.full_cmd[0], 2) == 0)
 		mish_cd(mish, cmd, if_exit);
 	if (ft_strncmp("pwd", cmd.full_cmd[0], 3) == 0)
