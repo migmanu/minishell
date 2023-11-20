@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 17:11:02 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:20:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ extern char	**environ; // temp way of getting enviroment variables
 
 void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
-	printf("exec_s_cmds init, path: %s\n", cmd->path);
 	builtins_router(mish, *cmd, IS_EXIT);
 	cmd->path = get_path(mish, cmd->full_cmd[0]);
+	printf("exec_s_cmds init, cmd: %s, path: %s\n",cmd->full_cmd[0], cmd->path);
 	if (execve(cmd->path, cmd->full_cmd, environ) != 0)
 	{
 		if (execve(cmd->full_cmd[0], cmd->full_cmd, environ) != 0)
