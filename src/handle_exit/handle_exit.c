@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/17 16:38:57 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:18:48 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_scmd(void *content)
 	free(node);
 }
 
-void	handle_exit(t_data *mish)
+void	clean_and_exit(t_data *mish)
 {
 	if (mish)
 	{
@@ -55,10 +55,9 @@ void	handle_exit(t_data *mish)
 	exit(g_exit_status);
 }
 
-// TODO: the exit code its wrong, maybe we can implement a global with
-// the las exit and use here to exit correct.
-// TODO: rename function and posibly file name
-void	mish_error(t_data *mish, char *param, int err, int is_exit)
+// Prints error message. If is_exit is set to true (1), frees the 
+// allocated memory and exits with g_exit_status
+void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 {
 	if (err == FORK_ERR || err == PIPE_ERR)
 		g_exit_status = 1;
@@ -84,5 +83,5 @@ void	mish_error(t_data *mish, char *param, int err, int is_exit)
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
 	if (is_exit)
-		handle_exit(mish);
+		clean_and_exit(mish);
 }
