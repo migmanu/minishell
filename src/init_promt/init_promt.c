@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/12 17:14:10 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/20 16:06:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*init_prompt(t_data *mish)
 	char	*prompt;
 	char	*line;
 
-	prompt = create_prompt(mish, "USER");
+	prompt = create_prompt(mish, "PWD");
 	line = readline(prompt);
 	free(prompt);
 	if (line)
@@ -48,7 +48,7 @@ char	*init_prompt(t_data *mish)
 	}
 	else
 	{
-		exit(SUCCESS);
+		exit(SUCCESS); // TODO: check!
 	}
 	return (line);
 }
