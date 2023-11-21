@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_promt.c                                       :+:      :+:    :+:   */
+/*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 12:54:44 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 15:36:33 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**hashmap_to_matrix(t_hashmap *env, char ***matrix, unsigned int i,
+char	**hashmap_to_matrix(t_hashmap *env, unsigned int i,
 				unsigned int j)
 {
+	char			**matrix;
 	char			*tmp_str;
 	char			*tmp_str2;
 	t_hash_item		*current;
 	t_hash_item		*tmp;
 
-	*matrix = (char **)malloc(sizeof(char *) * (env->size + 1));
+	matrix = ft_calloc(env->count + 1, sizeof(char *));
+	if (!matrix)
+		return (NULL);
 	while (i < env->size)
 	{
 		current = env->items[i];
@@ -32,17 +35,16 @@ char	**hashmap_to_matrix(t_hashmap *env, char ***matrix, unsigned int i,
 			free(tmp_str);
 			tmp_str = ft_strjoin(tmp_str2, current->value);
 			free(tmp_str2);
-			(*matrix)[j] = tmp_str;
+			matrix[j] = tmp_str;
 			current = tmp;
 			j++;
 		}
 		i++;
 	}
-	(*matrix)[j] = NULL;
-	return (*matrix);
+	return (matrix);
 }
 
-char	**get_output(int fd, char ***matrix)
+void	get_output(int fd, char ***matrix)
 {
 	char	*line;
 	char	*tmp;
@@ -50,6 +52,7 @@ char	**get_output(int fd, char ***matrix)
 
 	line = NULL;
 	tmp = NULL;
+	tmp_matrix = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -62,10 +65,9 @@ char	**get_output(int fd, char ***matrix)
 	}
 	ft_matrixfree(matrix);
 	*matrix = tmp_matrix;
-	return (*matrix);
 }
 
-char	**exec(char	***var, char *path, char *cmd, char **env)
+void	exec(char	***var, char *path, char *cmd, char **env)
 {
 	pid_t	pid;
 	int		fd[2];
@@ -87,7 +89,6 @@ char	**exec(char	***var, char *path, char *cmd, char **env)
 	waitpid(pid, NULL, 0);
 	get_output(fd[READ_END], var);
 	close(fd[READ_END]);
-	return (*var);
 }
 
 char	*get_user(t_data *mish)
@@ -97,15 +98,19 @@ char	*get_user(t_data *mish)
 	char	*tmp2;
 	char	**env;
 
-	env = hashmap_to_matrix(mish->env, &env, 0, 0);
-	user = exec(&user, "/usr/bin/whoami", "whoami", env);
+	user = NULL;
+	tmp = NULL;
+	tmp2 = NULL;
+	env = NULL;
+	env = hashmap_to_matrix(mish->env, 0, 0);
+	exec(&user, "/usr/bin/whoami", "whoami", env);
 	if (!user)
 		user = ft_extend_matrix(user, "guest");
 	if (!ft_strncmp(user[0], "root", 4))
 		tmp = ft_strjoin(NULL, RED);
 	else
 		tmp = ft_strjoin(NULL, GREEN);
-	tmp2 = ft_strjoin(tmp, user[0]);
+	tmp2 = ft_strjoin(tmp, *user);
 	free(tmp);
 	ft_matrixfree(&user);
 	return (tmp2);
