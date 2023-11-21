@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:58:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 13:02:05 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:03:20 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ static int	check_flag(char *str)
 	return (0);
 }
 
+// imitates Bash's echo function. If if_exit set to true (1),
+// mish_cd will kill current process. False used for when
+// only one builtin command inputed. Only -n flag accepted
 void	mish_echo(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	i;
