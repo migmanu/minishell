@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/21 16:29:38 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:27:52 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,13 @@ void				create_mock_mish(t_data *mish, char *line);
 // builtins
 int					check_if_builtin(const char *str);
 int					builtins_router(t_data *mish, t_scmd cmd, int if_exit);
+int					ft_chr_pos(const char *str, const char c);
 void				mish_exit(t_data *mish, t_scmd cmd);
 void				mish_pwd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_cd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_export(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
+void				mish_env(t_data *mish, t_scmd cmd, int if_exit);
 
 #endif
