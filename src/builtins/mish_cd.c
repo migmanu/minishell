@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 18:53:58 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:36:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,22 @@ void	mish_cd(t_data *mish, t_scmd cmd, int if_exit)
 	char	*pwd;
 	char	*old_pwd;
 
-	pwd = hashmap_search(mish->env, "PWD");
-	old_pwd = hashmap_search(mish->env, "OLDPWD");
-	if (!pwd)
+	pwd = cmd.full_cmd[1];
+	old_pwd = hashmap_search(mish->env, "PWD");
+	if (pwd == NULL)
 	{
-		handle_exit(mish, NULL, SUCCESS, if_exit);
-		return ;
+		pwd = hashmap_search(mish->env, "HOME");
 	}
-	if (ft_strncmp(cmd.full_cmd[1], "-", 1) == 0)
+	else if (ft_strncmp(cmd.full_cmd[1], "-", 1) == 0)
 	{
-		printf("go back!\n");
 		pwd = hashmap_search(mish->env, "OLDPWD");
 	}
-	hashmap_insert("OLDPWD", pwd, mish->env); // TODO: error handling
-	if (chdir(cmd.full_cmd[1]) != 0)
+	if (chdir(pwd) != 0)
 	{
 		handle_exit(mish, cmd.full_cmd[1], NO_FILE, if_exit);
 		return ;
 	}
+	hashmap_insert("OLDPWD", old_pwd, mish->env); // TODO: error handling
 	hashmap_insert("PWD", getcwd(NULL, PATH_MAX), mish->env);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
