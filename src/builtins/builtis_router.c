@@ -6,12 +6,14 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/1/13 14:01:08 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 19:01:20 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:33:37 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// returns 0 if the str corresponds to the name
+// of a builtin function. 1 otherwise.
 int	check_if_builtin(const char *str)
 {
 	if (ft_strncmp("echo", str, 4) == 0)

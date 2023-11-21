@@ -6,11 +6,12 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 19:20:12 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:08:35 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -19,14 +20,15 @@ extern char	**environ; // temp way of getting enviroment variables
 
 void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
+	printf("exec_cmd init, cmd %s, in %d out %d\n", \
+		cmd->full_cmd[0], cmd->in_fd, cmd->out_fd);
 	builtins_router(mish, *cmd, IS_EXIT);
 	cmd->path = get_path(mish, cmd->full_cmd[0]);
-	printf("exec_s_cmds init, cmd: %s, path: %s\n",cmd->full_cmd[0], cmd->path);
 	if (execve(cmd->path, cmd->full_cmd, environ) != 0)
 	{
 		if (execve(cmd->full_cmd[0], cmd->full_cmd, environ) != 0)
 		{
-			handle_exit(mish, "command executable not found", NO_FILE, IS_EXIT); // check error code
+			handle_exit(mish, "command not found", NO_FILE, IS_EXIT);
 		}
 	}
 }
@@ -45,11 +47,12 @@ void	fork_cmds(t_data *mish, t_scmd *cmd)
 	}
 	else
 	{
+		if (check_if_builtin(cmd->full_cmd[0]) == 0)
+			wait(0);
 		if (cmd->out_fd != STDOUT_FILENO)
 			close(cmd->out_fd);
 		if (cmd->in_fd != STDIN_FILENO)
 			close(cmd->in_fd);
-		return ;
 	}
 }
 
@@ -82,9 +85,28 @@ void	executor_loop(t_data *mish, int fds[2])
 	}
 }
 
+void	wait_loop(t_list *cmds)
+{
+	t_scmd	*curr;
+	int		status;
+
+	while (cmds)
+	{
+		curr = cmds->content;
+		if (check_if_builtin(curr->full_cmd[0]) != 0)
+		{
+			printf("waiting\n");
+			waitpid(-1, &status, 0);
+			if (WIFEXITED(status) == 1)
+				g_exit_status = WEXITSTATUS(status);
+		}
+		printf("g_exit_status %d\n", g_exit_status);
+		cmds = cmds->next;
+	}
+}
+
 void	executor(t_data *mish)
 {
-	int		status;
 	t_scmd	*first;
 	int		fds[2];
 
@@ -98,12 +120,5 @@ void	executor(t_data *mish)
 		return ;
 	}
 	executor_loop(mish, fds);
-	while (mish->cmds)
-	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status) == 1)
-			g_exit_status = WEXITSTATUS(status);
-		printf("g_exit_status %d\n", g_exit_status);
-		mish->cmds = mish->cmds->next;
-	}
+	wait_loop(mish->cmds);
 }
