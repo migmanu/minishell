@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 17:24:28 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:47:56 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 	i = ft_chr_pos(cmd.full_cmd[1], '=');
 	key = ft_substr(cmd.full_cmd[1], 0, i);
 	value = ft_substr(cmd.full_cmd[1], ++i, ft_strlen(cmd.full_cmd[1]));
-	printf("add var key %s, value %s\n", key, value);
+	if (hashmap_search(mish->env, key) != NULL)
+		hashmap_delete(mish->env, key);
 	hashmap_insert(key, value, mish->env); // TODO: mark as custom var
 	free(key);
 	free(value);
