@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 12:30:18 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 12:54:44 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ char	**hashmap_to_matrix(t_hashmap *env, char ***matrix, unsigned int i,
 	return (*matrix);
 }
 
-char	**get_output(int fd, char ***var)
+char	**get_output(int fd, char ***matrix)
 {
 	char	*line;
 	char	*tmp;
-	char	*tmp_matrix;
+	char	**tmp_matrix;
 
 	line = NULL;
 	tmp = NULL;
@@ -100,7 +100,7 @@ char	*get_user(t_data *mish)
 	env = hashmap_to_matrix(mish->env, &env, 0, 0);
 	user = exec(&user, "/usr/bin/whoami", "whoami", env);
 	if (!user)
-		user = ft_extend_matrix(user' "guest");
+		user = ft_extend_matrix(user, "guest");
 	if (!ft_strncmp(user[0], "root", 4))
 		tmp = ft_strjoin(NULL, RED);
 	else
@@ -117,7 +117,7 @@ char	*get_cd(t_data *mish)
 	char	*pwd;
 	char	*tmp;
 
-	pwd = getcwd(NULL, );
+	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		pwd = ft_strdup("/");
 	home = hashmap_search(mish->env, "HOME");
@@ -146,7 +146,7 @@ char	*create_prompt(t_data *mish)
 	char	*tmp3;
 
 	tmp = get_user(mish);
-	tmp2 = ft_strjoin(tmp, "@mish󰄛")
+	tmp2 = ft_strjoin(tmp, "@mish󰄛");
 	free(tmp);
 	tmp3 = get_cd(mish);
 	tmp = ft_strjoin(tmp2, tmp3);
@@ -159,7 +159,7 @@ char	*create_prompt(t_data *mish)
 	free(tmp);
 	tmp = ft_strjoin(tmp2, "$> ");
 	free(tmp2);
-	tmp2 = ft_strjoin(tmp, DEFAULT);	
+	tmp2 = ft_strjoin(tmp, DEFAULT);
 	free(tmp);
 	return (tmp2);
 }
@@ -172,9 +172,12 @@ char	*init_prompt(t_data *mish)
 	prompt = create_prompt(mish);
 	line = readline(prompt);
 	free(prompt);
-	if (line)
+	if (!line)
+	{
+		printf("exit\n");
+		return (NULL);
+	}
+	if (line[0] != '\0')
 		add_history(line);
-	else
-		exit(SUCCESS);
 	return (line);
 }

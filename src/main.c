@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/18 21:44:47 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 12:55:53 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,15 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		config_signals();
 		line = init_prompt(&mish);
+		if (!line)
+			break ;
 		input_handler(line, &mish);
 		// TODO: this clean all the cmds and also close fds of files but, i think
 		// it should be provisional for now, this should be after the executor but
 		// inside your function to have more cleaning main
 		if (mish.cmds)
 			ft_lstclear(&mish.cmds, free_scmd);
-		// if (line[0] == '\0')
-		// continue ;
-		// input_handler(line, &mish);
-		//  create_mock_mish(&mish, line);
-		//  executor_router(&mish);
 	}
+	mish_error(&mish, NULL, SUCCESS, 1);
 	return (0);
 }

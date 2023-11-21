@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/19 00:06:54 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 13:02:08 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,7 @@ char				*expand_vars(t_data *mish, char *str, int quotes[2], int i);
 // utils.c
 int					count_subwords(char *s, char *set, int count);
 int					count_words(const char *str, char *set, int cts[2]);
-int					ft_matrixlen(char **matrix);
 int					find_inset(const char *str, char *set);
-char				**ft_matrixdup(char **tokens);
 // syntax_list_utils.c
 char				**trim_all(char **tokens);
 char				*get_trimmed_str(char *str);
@@ -130,7 +128,6 @@ int					get_fd(int oldfd, char *path, int flags[2]);
 
 // exit
 void				mish_error(t_data *mish, char *param, int err, int is_exit);
-void				ft_matrixfree(char ***matrix);
 void				free_scmd(void *content);
 
 // init

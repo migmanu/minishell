@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:20:01 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/20 20:01:52 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 12:58:20 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,5 @@ void	*input_handler(char *line, t_data *mish)
 	}
 	expander(mish, tokens);
 	mish->cmds = fill_syntax_list(tokens, -1);
+	return (mish);
 }
