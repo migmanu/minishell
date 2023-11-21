@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/1/13 14:01:08 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 13:33:37 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:42:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	builtins_router(t_data *mish, t_scmd cmd, int if_exit)
 	if (ft_strncmp("export", cmd.full_cmd[0], 6) == 0)
 		mish_export(mish, cmd, if_exit);
 	if (ft_strncmp("unset", cmd.full_cmd[0], 5) == 0)
-		return (0);
+		mish_unset(mish, cmd, if_exit);
 	if (ft_strncmp("env", cmd.full_cmd[0], 3) == 0)
 		return (0);
 	if (ft_strncmp("exit", cmd.full_cmd[0], 4) == 0)
