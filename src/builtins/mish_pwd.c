@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:25:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 16:24:33 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:08:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	mish_pwd(t_data *mish, t_scmd cmd, int if_exit)
 	}
 	ft_putstr_fd(str, cmd.out_fd);
 	ft_putstr_fd("\n", cmd.out_fd);
+	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
