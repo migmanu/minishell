@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 15:36:33 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 16:47:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,44 +95,36 @@ char	*get_user(t_data *mish)
 {
 	char	**user;
 	char	*tmp;
-	char	*tmp2;
 	char	**env;
 
 	user = NULL;
-	tmp = NULL;
-	tmp2 = NULL;
-	env = NULL;
+	tmp = NULL; 
 	env = hashmap_to_matrix(mish->env, 0, 0);
 	exec(&user, "/usr/bin/whoami", "whoami", env);
+	ft_matrixfree(&env);
 	if (!user)
 		user = ft_extend_matrix(user, "guest");
 	if (!ft_strncmp(user[0], "root", 4))
-		tmp = ft_strjoin(NULL, RED);
+		tmp = ft_strjoin(RED, *user);
 	else
-		tmp = ft_strjoin(NULL, GREEN);
-	tmp2 = ft_strjoin(tmp, *user);
-	free(tmp);
+		tmp = ft_strjoin(BLUE, *user);
 	ft_matrixfree(&user);
-	return (tmp2);
+	return (tmp);
 }
 
 char	*get_cd(t_data *mish)
 {
 	char	*home;
 	char	*pwd;
-	char	*tmp;
 
-	pwd = getcwd(NULL, 0);
+	pwd = hashmap_search(mish->env, "PWD");
 	if (!pwd)
 		pwd = ft_strdup("/");
 	home = hashmap_search(mish->env, "HOME");
 	if (home && home[0] && ft_strnstr(pwd, home, ft_strlen(pwd)))
 	{
-		tmp = pwd;
 		pwd = ft_strjoin("~", &pwd[ft_strlen(home)]);
-		free(tmp);
 	}
-	free(home);
 	home = ft_strjoin(GRAY, pwd);
 	free(pwd);
 	pwd = ft_strjoin(home, " ");
