@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:08:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 12:08:54 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:23:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char *argv[], char *envp[])
 		line = init_prompt(&mish);
 		if (!line)
 		{
-			printf("no line\n");
 			continue ;
 		}
 		input_handler(line, &mish);
