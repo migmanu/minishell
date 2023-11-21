@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/18 21:53:07 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 11:30:23 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_data	*check_env(t_data *mish, char *argv[])
 	if (!hashmap_search(mish->env, "PATH"))
 		hashmap_insert("PATH", "/usr/local/sbin:/usr/local/bin:/usr/bin:/bin",
 			mish->env);
-	if (!hashmap_search(mish->env, "HOME"))
+	if (!hashmap_search(mish->env, "_"))
 		hashmap_insert("_", argv[0], mish->env);
 	return (mish);
 }
@@ -62,5 +62,4 @@ void	init_mish(t_data *mish, char *argv[], char *envp[])
 	mish->env = env_to_hash(envp);
 	check_env(mish, argv);
 	get_sh_pid(mish);
-	hashmap_print_table(mish->env);
 }

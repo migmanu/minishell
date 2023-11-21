@@ -6,28 +6,11 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/15 13:37:47 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/21 12:26:17 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	ft_matrixfree(char ***matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix && matrix[0] && matrix[0][i])
-	{
-		free(matrix[0][i]);
-		i++;
-	}
-	if (matrix)
-	{
-		free(matrix[0]);
-		*matrix = NULL;
-	}
-}
 
 void	free_scmd(void *content)
 {
