@@ -6,12 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:58:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 19:54:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:02:05 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// checks if the -n flag is used un any form, even
+// incorrectly used like -nnnn. Returns 1 if str
+// is not flag
 static int	check_flag(char *str)
 {
 	int	i;
@@ -33,13 +36,16 @@ static int	check_flag(char *str)
 void	mish_echo(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	i;
+	int	f;
 
 	printf("echo init, out %d\n", cmd.out_fd);
 	i = 1;
+	f = 0;
 	while (cmd.full_cmd[i] != NULL)
 	{
-		if (check_flag(cmd.full_cmd[i]) != 0)
+		if (check_flag(cmd.full_cmd[i]) != 0 || f == 1)
 		{
+			f = 1;
 			ft_putstr_fd(cmd.full_cmd[i], cmd.out_fd);
 			if (cmd.full_cmd[i + 1] != NULL)
 				ft_putstr_fd(" ", cmd.out_fd);
