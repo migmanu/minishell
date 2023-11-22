@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/22 20:02:27 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:06:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	executor(t_data *mish)
 	set_file_descriptors(mish, fds, &c);
 	pids = malloc(sizeof(int) * c);
 	if (!pids)
-		handle_exit(mish, "malloc failed!\n", FAILURE, IS_EXIT);
+		handle_exit(mish, "malloc failed!", FAILURE, NOT_EXIT);
 	executor_loop(mish, pids, c);
 	wait_loop(pids, c);
 	free(pids);
