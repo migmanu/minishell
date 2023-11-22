@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/22 15:52:39 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:05:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void				config_signals(void);
 // executor
 void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
+void				set_file_descriptors(t_data *mish, int fds[2], int *c);
 char				*get_cmd_path(char *cmd, char *env[]);
 void				dup_cmd(t_scmd *cmd);
 

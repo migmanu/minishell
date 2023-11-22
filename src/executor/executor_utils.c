@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 14:09:56 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:59:08 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*get_path(t_data *mish, char *cmd)
 
 void	dup_cmd(t_scmd *cmd)
 {
-	printf("dup_s_cmds init, cmd: %s in: %d | out: %d\n", cmd->full_cmd[0], \
-	cmd->in_fd, cmd->out_fd);
 	if (cmd->out_fd != STDOUT_FILENO)
 	{
 		dup2(cmd->out_fd, STDOUT_FILENO);
@@ -51,5 +49,32 @@ void	dup_cmd(t_scmd *cmd)
 	{
 		dup2(cmd->in_fd, STDIN_FILENO);
 	}
-	printf("end dup\n");
+}
+
+void	set_file_descriptors(t_data *mish, int fds[2], int *c)
+{
+	t_scmd	*cmd;
+	t_list	*curr;
+	t_scmd	*next_cmd;
+
+	curr = mish->cmds;
+	while (curr)
+	{
+		(*c)++;
+		cmd = curr->content;
+		if (curr->next != NULL)
+		{
+			next_cmd = curr->next->content;
+			pipe(fds);
+			if (cmd->out_fd == STDOUT_FILENO)
+			{
+				cmd->out_fd = fds[1];
+			}
+			if (next_cmd->in_fd == STDIN_FILENO)
+			{
+				next_cmd->in_fd = fds[0];
+			}
+		}
+		curr = curr->next;
+	}
 }
