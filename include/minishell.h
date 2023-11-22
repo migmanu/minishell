@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/21 15:32:10 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/22 15:43:50 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,25 @@
 
 # define DEFAULT "\001\033[0;39m\002"
 # define GRAY "\001\033[1;90m\002"
+# define BLACK "\001\033[0;30m\002"
 # define RED "\001\033[1;91m\002"
 # define GREEN "\001\033[1;92m\002"
 # define YELLOW "\001\033[1;93m\002"
 # define BLUE "\001\033[1;94m\002"
 # define MAGENTA "\001\033[1;95m\002"
 # define CYAN "\001\033[1;96m\002"
-# define WHITE "\001\033[0;97m\002"
+# define WHITE "\001\033[1;97m\002"
+
+# define RESET "\001\033[0m\002"
+# define BGRAY "\001\033[0;100m\002"
+# define BBLACK "\001\033[40m\002"
+# define BRED "\001\033[0;101m\002"
+# define BGREEN "\001\033[0;102m\002"
+# define BYELLOW "\001\033[0;103m\002"
+# define BBLUE "\001\033[0;104m\002"
+# define BMAGENTA "\001\033[0;105m\002"
+# define BCYAN "\001\033[0;9106m\002"
+# define BWHITE "\001\033[0;107m\002"
 
 enum e_mish_err
 {
@@ -84,6 +96,12 @@ typedef struct s_data {
 
 extern int	g_exit_status;
 
+// MISH
+// utils.c
+char				*ft_strjoin_var(unsigned int arg_size, ...);
+char				**hashmap_to_matrix(t_hashmap *env, char ***matrix,
+						unsigned int i, unsigned int j);
+void				exec(char	***var, char *path, char *cmd, char **env);
 // hashmap
 unsigned long int	hash(char *key, unsigned int size);
 t_hash_item			*hashmap_create_item(char *key, char *value);
