@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/16 13:24:07 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:22:38 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	get_sh_pid(t_data *mish)
 
 	pid = fork();
 	if (pid < 0)
-		mish_error(mish, NULL, FORK_ERR, 1);
+		handle_exit(mish, NULL, FORK_ERR, IS_EXIT);
 	if (pid == 0)
-		mish_error(mish, NULL, FAILURE, 1);
+		handle_exit(mish, NULL, FAILURE, IS_EXIT);
 	waitpid(pid, NULL, 0);
 	mish->pid = pid - 1;
 }

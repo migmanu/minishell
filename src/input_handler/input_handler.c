@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:20:01 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/15 17:55:19 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/20 15:43:25 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static t_list	*fill_syntax_list(char **tokens, int i)
 }
 
 //TODO: continue with parse_and_expand function
+//TODO: add check for empty line
 void	*input_handler(char *line, t_data *mish)
 {
 	char	**tokens;
@@ -82,7 +83,7 @@ void	*input_handler(char *line, t_data *mish)
 	free(line);
 	if (!tokens)
 	{
-		mish_error(mish, NULL, UNQUOTE, 0);
+		handle_exit(mish, NULL, UNQUOTE, NOT_EXIT);
 		return ("");
 	}
 	expander(mish, tokens);
