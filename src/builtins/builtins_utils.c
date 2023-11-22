@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_exit.c                                        :+:      :+:    :+:   */
+/*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 12:08:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/20 17:12:11 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/21 22:12:58 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/21 22:13:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	mish_exit(t_data *mish, t_scmd cmd)
+// Returns the index of the first occurance of c 
+// in string str. Returns -1 if no c or error
+int	ft_chr_pos(const char *str, const char c)
 {
-	printf("mish_exit init\n");
-	if (cmd.full_cmd[1] != NULL)
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] != '\0')
 	{
-		// handle error
-		ft_putstr_fd("exit command takes no input\n", STDERR_FILENO);
-		exit(ERROR);
+		if (str[i] == c)
+		{
+			return (i);
+		}
+		i++;
 	}
-	handle_exit(mish, NULL, SUCCESS, IS_EXIT);
+	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/21 14:04:31 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/22 16:00:39 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*line;
 
 	if (argc != 1)
-		mish_error(NULL, argv[1], INV_ARGS, 1);
+		handle_exit(NULL, argv[1], INV_ARGS, IS_EXIT);
 	init_mish(&mish, argv, envp);
 	while (1)
 	{
 		config_signals();
 		line = init_prompt(&mish);
 		if (!line)
-			break ;
+			continue ;
 		input_handler(line, &mish);
+		executor(&mish);
 		// TODO: this clean all the cmds and also close fds of files but, i think
 		// it should be provisional for now, this should be after the executor but
 		// inside your function to have more cleaning main

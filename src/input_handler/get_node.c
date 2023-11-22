@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:45:06 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/15 17:59:37 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/20 15:29:30 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ t_scmd	*get_node(t_scmd *node, char **cmds[2], int *i)
 			node->full_cmd = push_token(node->full_cmd, cmds[0][*i], -1);
 		else
 		{
-			mish_error(NULL, NULL, PIPE_ERR, 0);
+			handle_exit(NULL, NULL, PIPE_ERR, NOT_EXIT);
 			*i = -2;
 		}
 		return (node);
 	}
-	mish_error(NULL, NULL, PIPE_ERR, 0);
+	handle_exit(NULL, NULL, PIPE_ERR, NOT_EXIT);
 	*i = -2;
 	return (node);
 }
