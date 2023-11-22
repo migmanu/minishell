@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 12:08:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 20:23:53 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
+/*   Updated: 2023/11/22 16:00:39 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (argc != 1)
 		handle_exit(NULL, argv[1], INV_ARGS, IS_EXIT);
-	init_mish(&mish, envp);
+	init_mish(&mish, argv, envp);
 	while (1)
 	{
 		config_signals();
 		line = init_prompt(&mish);
 		if (!line)
-		{
 			continue ;
-		}
 		input_handler(line, &mish);
 		executor(&mish);
 		// TODO: this clean all the cmds and also close fds of files but, i think
@@ -38,5 +36,6 @@ int	main(int argc, char *argv[], char *envp[])
 		if (mish.cmds)
 			ft_lstclear(&mish.cmds, free_scmd);
 	}
+	mish_error(&mish, NULL, SUCCESS, 1);
 	return (0);
 }

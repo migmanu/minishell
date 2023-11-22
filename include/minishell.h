@@ -6,14 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/21 22:27:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:52:39 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "../libft/libft.h"
-// # include <linux/limits.h>
+
+# include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -28,6 +29,28 @@
 
 # define WRITE_END 1
 # define READ_END 0
+
+# define DEFAULT "\001\033[0;39m\002"
+# define GRAY "\001\033[1;90m\002"
+# define BLACK "\001\033[0;30m\002"
+# define RED "\001\033[1;91m\002"
+# define GREEN "\001\033[1;92m\002"
+# define YELLOW "\001\033[1;93m\002"
+# define BLUE "\001\033[1;94m\002"
+# define MAGENTA "\001\033[1;95m\002"
+# define CYAN "\001\033[1;96m\002"
+# define WHITE "\001\033[1;97m\002"
+
+# define RESET "\001\033[0m\002"
+# define BGRAY "\001\033[0;100m\002"
+# define BBLACK "\001\033[40m\002"
+# define BRED "\001\033[0;101m\002"
+# define BGREEN "\001\033[0;102m\002"
+# define BYELLOW "\001\033[0;103m\002"
+# define BBLUE "\001\033[0;104m\002"
+# define BMAGENTA "\001\033[0;105m\002"
+# define BCYAN "\001\033[0;9106m\002"
+# define BWHITE "\001\033[0;107m\002"
 
 # define NOT_EXIT 0
 # define IS_EXIT 1
@@ -76,6 +99,12 @@ typedef struct s_data {
 
 extern int	g_exit_status;
 
+// MISH
+// utils.c
+char				*ft_strjoin_var(unsigned int arg_size, ...);
+char				**hashmap_to_matrix(t_hashmap *env, char ***matrix,
+						unsigned int i, unsigned int j);
+void				exec(char	***var, char *path, char *cmd, char **env);
 // hashmap
 unsigned long int	hash(char *key, unsigned int size);
 t_hash_item			*hashmap_create_item(char *key, char *value);
@@ -101,9 +130,7 @@ char				*expand_vars(t_data *mish, char *str, int quotes[2], int i);
 // utils.c
 int					count_subwords(char *s, char *set, int count);
 int					count_words(const char *str, char *set, int cts[2]);
-int					ft_matrixlen(char **matrix);
 int					find_inset(const char *str, char *set);
-char				**ft_matrixdup(char **tokens);
 // syntax_list_utils.c
 char				**trim_all(char **tokens);
 char				*get_trimmed_str(char *str);
@@ -122,6 +149,7 @@ int					get_heredoc_fd(char *limit);
 int					get_fd(int oldfd, char *path, int flags[2]);
 
 // exit
+void				mish_error(t_data *mish, char *param, int err, int is_exit);
 void				handle_exit(t_data *mish, char *param, \
 					int err, int is_exit);
 void				clean_and_exit(t_data *mish);
@@ -130,7 +158,7 @@ void				free_scmd(void *content);
 
 // init
 char				*init_prompt(t_data *mish);
-void				init_mish(t_data *mish, char *envp[]);
+void				init_mish(t_data *mish, char *argv[], char *envp[]);
 t_hashmap			*env_to_hash(char **env);
 
 // singals.c
