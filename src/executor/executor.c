@@ -6,15 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/22 20:06:55 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:08:29 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 extern char	**environ; // temp way of getting enviroment variables
 
