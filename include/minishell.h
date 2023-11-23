@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/22 19:05:12 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:17:30 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_data {
 	t_list		*cmds;
 	t_hashmap	*env;
 	pid_t		pid;
+	pid_t		*pids;
 	char		*old_pwd;
 }	t_data;
 

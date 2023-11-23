@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/22 20:08:29 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:25:18 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fork_cmds(t_data *mish, t_scmd *cmd, int pids[], int c)
 	}
 }
 
-void	executor_loop(t_data *mish, int pids[], int c)
+void	executor_loop(t_data *mish, int c)
 {
 	int		i;
 	t_list	*curr;
@@ -55,13 +55,13 @@ void	executor_loop(t_data *mish, int pids[], int c)
 	i = 0;
 	while (curr && i < c)
 	{
-		fork_cmds(mish, curr->content, pids, i);
+		fork_cmds(mish, curr->content, mish->pids, i);
 		curr = curr->next;
 		i++;
 	}
 }
 
-void	wait_loop(int pids[], int c)
+void	wait_loop(t_data *mish, int c)
 {
 	int		status;
 	int		i;
@@ -69,10 +69,10 @@ void	wait_loop(int pids[], int c)
 	i = 0;
 	while (i < c - 1)
 	{
-		waitpid(pids[i], &status, 0);
+		waitpid(mish->pids[i], &status, 0);
 		i++;
 	}
-	waitpid(pids[i], &status, 0);
+	waitpid(mish->pids[i], &status, 0);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
 }
@@ -81,7 +81,6 @@ void	executor(t_data *mish)
 {
 	t_scmd	*first;
 	int		fds[2];
-	int		*pids;
 	int		c;
 
 	c = 0;
@@ -94,10 +93,9 @@ void	executor(t_data *mish)
 		return ;
 	}
 	set_file_descriptors(mish, fds, &c);
-	pids = malloc(sizeof(int) * c);
-	if (!pids)
+	mish->pids = malloc(sizeof(int) * c);
+	if (!mish->pids)
 		handle_exit(mish, "malloc failed!", FAILURE, NOT_EXIT);
-	executor_loop(mish, pids, c);
-	wait_loop(pids, c);
-	free(pids);
+	executor_loop(mish, c);
+	wait_loop(mish, c);
 }

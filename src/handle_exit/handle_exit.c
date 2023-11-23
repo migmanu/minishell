@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/20 18:57:01 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:26:04 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	clean_and_exit(t_data *mish)
 			hashmap_free_table(mish->env);
 		if (mish->cmds)
 			ft_lstclear(&mish->cmds, free_scmd);
+		if (mish->pids)
+			free(mish->pids);
 	}
 	exit(g_exit_status);
 }
