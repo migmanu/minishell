@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/23 19:26:43 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/23 19:29:18 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_data	*check_env(t_data *mish, char *argv[])
 	return (mish);
 }
 
-// TODO: Handling not envp
 void	init_mish(t_data *mish, char *argv[], char *envp[])
 {
 	g_exit_status = 0;
