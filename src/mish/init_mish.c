@@ -6,13 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/22 16:00:42 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:20:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-extern char	**environ; // temp way of getting enviroment variables
 
 static void	get_sh_pid(t_data *mish)
 {
@@ -60,6 +58,7 @@ void	init_mish(t_data *mish, char *argv[], char *envp[])
 	g_exit_status = 0;
 	mish->cmds = NULL;
 	mish->env = env_to_hash(envp);
+	mish->pids = NULL;
 	// check_env(mish, argv);
 	(void)argv;
 	get_sh_pid(mish);

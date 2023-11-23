@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/22 15:52:39 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:17:30 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_data {
 	t_list		*cmds;
 	t_hashmap	*env;
 	pid_t		pid;
+	pid_t		*pids;
 	char		*old_pwd;
 }	t_data;
 
@@ -167,6 +168,7 @@ void				config_signals(void);
 // executor
 void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
+void				set_file_descriptors(t_data *mish, int fds[2], int *c);
 char				*get_cmd_path(char *cmd, char *env[]);
 void				dup_cmd(t_scmd *cmd);
 
