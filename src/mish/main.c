@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/22 16:00:39 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:56:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 		config_signals();
 		line = init_prompt(&mish);
 		if (!line)
-			continue ;
+			break ;
 		input_handler(line, &mish);
 		executor(&mish);
 		// TODO: this clean all the cmds and also close fds of files but, i think
