@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/22 15:46:06 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:43:13 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*get_user(t_data *mish)
+static char	*get_user(t_data *mish)
 {
 	char	**user;
 	char	*tmp;
@@ -33,7 +33,7 @@ char	*get_user(t_data *mish)
 	return (tmp);
 }
 
-char	*get_os(t_data *mish)
+static char	*get_os(t_data *mish)
 {
 	char	**os;
 	char	*tmp;
@@ -56,7 +56,7 @@ char	*get_os(t_data *mish)
 	return (tmp);
 }
 
-char	*get_cd(t_data *mish)
+static char	*get_cd(t_data *mish)
 {
 	char	*home;
 	char	*pwd;
@@ -74,7 +74,7 @@ char	*get_cd(t_data *mish)
 	return (home);
 }
 
-char	*create_prompt(t_data *mish)
+static char	*create_prompt(t_data *mish)
 {
 	char	*tmp;
 	char	*tmp2;

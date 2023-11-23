@@ -6,13 +6,13 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:55:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/18 21:50:52 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/23 20:45:34 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*dup_key(char *env_line)
+static char	*dup_key(char *env_line)
 {
 	char	*key;
 	int		i;
@@ -24,7 +24,7 @@ char	*dup_key(char *env_line)
 	return (key);
 }
 
-char	*dup_value(char *env_line)
+static char	*dup_value(char *env_line)
 {
 	char	*value;
 	int		i;
@@ -40,8 +40,6 @@ char	*dup_value(char *env_line)
 	return (value);
 }
 
-// TODO: Add error handling
-// TODO: Handling not envp
 t_hashmap	*env_to_hash(char **env)
 {
 	t_hashmap	*table;

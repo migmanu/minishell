@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/23 19:29:18 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/23 20:44:24 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	get_sh_pid(t_data *mish)
 	mish->pid = pid - 1;
 }
 
-t_data	*check_env(t_data *mish, char *argv[])
+static t_data	*check_env(t_data *mish, char *argv[])
 {
 	char	*tmp;
 	int		nbr;
