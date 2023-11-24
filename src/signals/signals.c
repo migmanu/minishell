@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/23 20:53:47 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 12:27:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static void	handle_sigint(int signum)
 	if (signum == SIGINT)
 	{
 		g_exit_status = 128 + signum;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		// ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
