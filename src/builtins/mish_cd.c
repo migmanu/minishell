@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 12:36:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:50:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	mish_cd(t_data *mish, t_scmd cmd, int if_exit)
 	}
 	if (chdir(pwd) != 0)
 	{
-		handle_exit(mish, cmd.full_cmd[1], NO_FILE, if_exit);
+		handle_exit(mish, "mish : no such file or directory", FAILURE, if_exit);
 		return ;
 	}
 	hashmap_insert("OLDPWD", old_pwd, mish->env); // TODO: error handling
