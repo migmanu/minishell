@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:58:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 16:24:58 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:45:22 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	mish_echo(t_data *mish, t_scmd cmd, int if_exit)
 	int	i;
 	int	f;
 
-	printf("echo init, out %d\n", cmd.out_fd);
 	i = 1;
 	f = 0;
 	while (cmd.full_cmd[i] != NULL)

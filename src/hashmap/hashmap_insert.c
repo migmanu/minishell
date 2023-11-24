@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 void	hashmap_replace_item(t_hash_item *current, char *value,
-					t_hash_item *new_item)
+					t_hash_item *new_item, int custom)
 {
 	free(current->value);
 	current->value = ft_strdup(value);
+  current->custom = custom;
 	hashmap_free_item(new_item);
 }
 
@@ -34,7 +36,7 @@ int	hashmap_insert_item(t_hashmap *table, t_hash_item *new_item,
 	return (1);
 }
 
-t_hash_item	*hashmap_insert(char *key, char *value, t_hashmap *table)
+void	hashmap_insert(char *key, char *value, t_hashmap *table, int custom)
 {
 	unsigned long int	index;
 	t_hash_item			*new_item;
@@ -43,7 +45,7 @@ t_hash_item	*hashmap_insert(char *key, char *value, t_hashmap *table)
 	if (!key)
 		return (NULL);
 	index = hash(key, table->size);
-	new_item = hashmap_create_item(key, value);
+	new_item = hashmap_create_item(key, value, custom);
 	current = table->items[index];
 	if (current == NULL)
 	{

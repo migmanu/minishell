@@ -6,13 +6,13 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:26 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/08 15:58:26 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 14:39:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	hashmap_print_table(t_hashmap *table)
+void	hashmap_print_table(t_hashmap *table, int only_customs)
 {
 	unsigned int	i;
 	t_hash_item		*current;
@@ -24,6 +24,8 @@ void	hashmap_print_table(t_hashmap *table)
 		current = table->items[i];
 		while (current != NULL)
 		{
+			if (only_customs == 1 && current->custom != 1)
+				break ;
 			tmp = current->next;
 			ft_putendl_fd("----------------------------", 1);
 			ft_putstr_fd("| ", 1);

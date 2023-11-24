@@ -62,7 +62,7 @@ t_hashmap	*env_to_hash(char **env)
 	{
 		key = dup_key(env[i]);
 		value = dup_value(env[i]);
-		hashmap_insert(key, value, table);
+		hashmap_insert(key, value, table, 0);
 		free(key);
 		free(value);
 	}

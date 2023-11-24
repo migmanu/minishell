@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:25:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 13:09:36 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:49:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	mish_pwd(t_data *mish, t_scmd cmd, int if_exit)
 {
-	printf("pwd init\n");
 	char	*str;
 
 	str = hashmap_search(mish->env, "PWD");

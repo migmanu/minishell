@@ -34,20 +34,20 @@ static t_data	*check_env(t_data *mish, char *argv[])
 	if (!hashmap_search(mish->env, "PWD"))
 	{
 		tmp = getcwd(NULL, 0);
-		hashmap_insert("PWD", tmp, mish->env);
+		hashmap_insert("PWD", tmp, mish->env, 0);
 		free(tmp);
 	}
 	tmp = hashmap_search(mish->env, "SHLVL");
 	if (tmp && ft_atoi(tmp) > 0)
 		nbr = ft_atoi(tmp) + 1;
 	tmp = ft_itoa(nbr);
-	hashmap_insert("SHLVL", tmp, mish->env);
+	hashmap_insert("SHLVL", tmp, mish->env, 0);
 	free(tmp);
 	if (!hashmap_search(mish->env, "PATH"))
 		hashmap_insert("PATH", "/usr/local/sbin:/usr/local/bin:/usr/bin:/bin",
-			mish->env);
+			mish->env, 0);
 	if (!hashmap_search(mish->env, "_"))
-		hashmap_insert("_", argv[0], mish->env);
+		hashmap_insert("_", argv[0], mish->env, 0);
 	return (mish);
 }
 
