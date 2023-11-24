@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:26 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 14:39:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:30:21 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	hashmap_print_table(t_hashmap *table, int only_customs)
 		while (current != NULL)
 		{
 			if (only_customs == 1 && current->custom != 1)
-				break ;
+			{
+				current = current->next;
+				continue ;
+			}
 			tmp = current->next;
 			ft_putendl_fd("----------------------------", 1);
 			ft_putstr_fd("| ", 1);
