@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/23 13:17:30 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:52:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_hash_item
 {
 	char				*key;
 	char				*value;
+	int					custom;
 	struct s_hash_item	*next;
 }	t_hash_item;
 
@@ -108,16 +109,17 @@ char				**hashmap_to_matrix(t_hashmap *env, char ***matrix,
 void				exec(char	***var, char *path, char *cmd, char **env);
 // hashmap
 unsigned long int	hash(char *key, unsigned int size);
-t_hash_item			*hashmap_create_item(char *key, char *value);
+t_hash_item			*hashmap_create_item(char *key, char *value, int custom);
 t_hashmap			*hashmap_create_table(unsigned int size);
 void				hashmap_free_item(t_hash_item *item);
 void				hashmap_delete(t_hashmap *table, char *key);
 void				hashmap_free_table(t_hashmap *table);
 void				hashmap_handle_collision(t_hashmap *table, \
 		unsigned long int index, t_hash_item *new_item);
-void				hashmap_insert(char *key, char *value, t_hashmap *table);
+void				hashmap_insert(char *key, char *value, \
+					t_hashmap *table, int custom);
 char				*hashmap_search(t_hashmap *table, char *key);
-void				hashmap_print_table(t_hashmap *table);
+void				hashmap_print_table(t_hashmap *table, int only_customs);
 
 // input_handler
 void				*input_handler(char *line, t_data *mish);

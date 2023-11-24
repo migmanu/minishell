@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:55:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/18 21:50:52 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 13:45:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_hashmap	*env_to_hash(char **env)
 	{
 		key = dup_key(env[i]);
 		value = dup_value(env[i]);
-		hashmap_insert(key, value, table);
+		hashmap_insert(key, value, table, 0);
 		free(key);
 		free(value);
 	}

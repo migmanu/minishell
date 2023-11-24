@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:28:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 16:41:25 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:20:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	mish_unset(t_data *mish, t_scmd cmd, int if_exit)
 	int	i;
 
 	printf("mish_unset init\n");
-	i = 0;
+	i = 1;
 	if (cmd.full_cmd[1] == NULL)
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 	while (cmd.full_cmd[i] != NULL)

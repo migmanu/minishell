@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:08:00 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/24 11:16:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:53:24 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	add_envp(t_hashmap *envs, char *str)
 	value = ft_substr(str, ++e, ft_strlen(str));
 	if (hashmap_search(envs, key) != NULL)
 		hashmap_delete(envs, key);
-	hashmap_insert(key, value, envs);
+	hashmap_insert(key, value, envs, 0);
 	free(key);
 	free(value);
 }
@@ -69,7 +69,8 @@ static void	exit_mish_env(t_data *mish, t_hashmap *env_cpy, int is_exit)
 	handle_exit(mish, NULL, NO_FILE, is_exit);
 }
 
-// TODO: make copy of envp for this function
+// Imitates the bash funciuon env. Works with no flags.
+// Makes a copy of the mish envp and works with that.
 void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 {
 	t_hashmap	*env_cpy;
@@ -90,7 +91,7 @@ void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 		}
 		i++;
 	}
-	hashmap_print_table(env_cpy);
+	hashmap_print_table(env_cpy, 0);
 	hashmap_free_table(env_cpy);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }

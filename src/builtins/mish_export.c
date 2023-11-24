@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 22:19:00 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:54:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 
 	if (cmd.full_cmd[1] == NULL)
 	{
-		hashmap_print_table(mish->env); // TODO: show only exported!
+		hashmap_print_table(mish->env, 1);
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 		return ;
 	}
@@ -35,7 +35,7 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 	value = ft_substr(cmd.full_cmd[1], ++i, ft_strlen(cmd.full_cmd[1]));
 	if (hashmap_search(mish->env, key) != NULL)
 		hashmap_delete(mish->env, key);
-	hashmap_insert(key, value, mish->env); // TODO: mark as custom var
+	hashmap_insert(key, value, mish->env, 1);
 	free(key);
 	free(value);
 	handle_exit(mish, NULL, SUCCESS, if_exit);

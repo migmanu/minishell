@@ -6,13 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/23 18:50:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:43:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <linux/limits.h>
-#include <unistd.h>
 
 // imitates Bash's cd function. If if_exit set to true (1),
 // mish_cd will kill current process. False used for when
@@ -37,7 +35,7 @@ void	mish_cd(t_data *mish, t_scmd cmd, int if_exit)
 		handle_exit(mish, "mish : no such file or directory", FAILURE, if_exit);
 		return ;
 	}
-	hashmap_insert("OLDPWD", old_pwd, mish->env); // TODO: error handling
-	hashmap_insert("PWD", getcwd(NULL, PATH_MAX), mish->env);
+	hashmap_insert("OLDPWD", old_pwd, mish->env, 0); // TODO: error handling
+	hashmap_insert("PWD", getcwd(NULL, PATH_MAX), mish->env, 0);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
