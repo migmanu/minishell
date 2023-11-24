@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/22 16:01:02 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:27:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 #include <readline/readline.h>
 #include <signal.h>
 
-void	handle_sigint(int signum)
+static void	handle_sigint(int signum)
 {
 	if (signum == SIGINT)
 	{
-		g_exit_status = 130;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		g_exit_status = 128 + signum;
+		// ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
