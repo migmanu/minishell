@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:26:34 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 13:40:20 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:06:05 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_hash_item	*hashmap_create_item(char *key, char *value, int custom)
 {
+	printf("create init. custom %d\n", custom);
 	t_hash_item	*new_item;
 
 	new_item = (t_hash_item *)ft_calloc(sizeof(t_hash_item), 1);

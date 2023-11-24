@@ -6,15 +6,17 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:44 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 13:42:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:05:51 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 // TODO: Add error handling
 void	hashmap_insert(char *key, char *value, t_hashmap *table, int custom)
 {
+	printf("insert init. custom %d\n", custom);
 	unsigned long int	index;
 	t_hash_item			*new_item;
 	t_hash_item			*current;
