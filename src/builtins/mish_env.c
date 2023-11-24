@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:08:00 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 22:36:53 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:16:22 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	add_envp(t_data *mish, char *str)
+static void	add_envp(t_hashmap *envs, char *str)
 {
 	char	*key;
 	char	*value;
@@ -21,39 +21,76 @@ void	add_envp(t_data *mish, char *str)
 	e = ft_chr_pos(str, '=');
 	key = ft_substr(str, 0, e);
 	value = ft_substr(str, ++e, ft_strlen(str));
-	if (hashmap_search(mish->env, key) != NULL)
-		hashmap_delete(mish->env, key);
-	hashmap_insert(key, value, mish->env); // TODO: mark as custom var
+	if (hashmap_search(envs, key) != NULL)
+		hashmap_delete(envs, key);
+	hashmap_insert(key, value, envs);
 	free(key);
 	free(value);
+}
+
+static int	check_var_format(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			return (1);
+		if (str[i] == '=')
+			break ;
+		i++;
+	}
+	if (ft_strlen(str) == i)
+		return (1);
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static t_hashmap	*copy_envs(t_hashmap *src)
+{
+	char		**matrix;
+	t_hashmap	*dest;
+
+	hashmap_to_matrix(src, &matrix, 0, 0);
+	dest = env_to_hash(matrix);
+	ft_matrixfree(&matrix);
+	return (dest);
+}
+
+static void	exit_mish_env(t_data *mish, t_hashmap *env_cpy, int is_exit)
+{
+	hashmap_free_table(env_cpy);
+	handle_exit(mish, NULL, NO_FILE, is_exit);
 }
 
 // TODO: make copy of envp for this function
 void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 {
-	int		i;
+	t_hashmap	*env_cpy;
+	int			i;
 
-	printf("mish_env init\n");
-	if (cmd.full_cmd[1] == NULL)
-	{
-		hashmap_print_table(mish->env);
-		handle_exit(mish, NULL, SUCCESS, if_exit);
+	env_cpy = copy_envs(mish->env);
+	if (!env_cpy)
 		return ;
-	}
 	i = 1;
 	while (cmd.full_cmd[i] != NULL)
 	{
-		if (ft_strchr(cmd.full_cmd[i], '=') == NULL)
+		if (check_var_format(cmd.full_cmd[i]) == 0)
+			add_envp(env_cpy, cmd.full_cmd[i]);
+		if (check_var_format(cmd.full_cmd[i]) != 0)
 		{
-			handle_exit(mish, cmd.full_cmd[i], NO_FILE, if_exit);
+			exit_mish_env(mish, env_cpy, if_exit);
 			return ;
-		}
-		else
-		{
-			add_envp(mish, cmd.full_cmd[i]);
 		}
 		i++;
 	}
-	hashmap_print_table(mish->env);
+	hashmap_print_table(env_cpy);
+	hashmap_free_table(env_cpy);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
