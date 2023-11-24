@@ -6,28 +6,11 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/23 13:26:04 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:52:27 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	ft_matrixfree(char ***matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix && matrix[0] && matrix[0][i])
-	{
-		free(matrix[0][i]);
-		i++;
-	}
-	if (matrix)
-	{
-		free(matrix[0]);
-		*matrix = NULL;
-	}
-}
 
 void	free_scmd(void *content)
 {
@@ -43,7 +26,7 @@ void	free_scmd(void *content)
 	free(node);
 }
 
-void	clean_and_exit(t_data *mish)
+static void	clean_and_exit(t_data *mish)
 {
 	if (mish)
 	{

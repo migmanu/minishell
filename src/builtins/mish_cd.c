@@ -6,12 +6,12 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/21 12:36:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:47:53 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <linux/limits.h>
+// #include <linux/limits.h>
 #include <unistd.h>
 
 // imitates Bash's cd function. If if_exit set to true (1),
