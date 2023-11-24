@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/23 20:36:49 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 12:33:01 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ enum e_mish_err
 	FORK_ERR,
 	PIPE_ERR,
 	UNQUOTE,
+	HASH_FULL,
 	NO_PERM = 126,
 	NO_FILE = 127,
 };

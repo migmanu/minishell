@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/23 20:52:27 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 12:53:48 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 		else if (err == NO_PERM)
 			ft_putstr_fd("Permission denied: ", STDERR_FILENO);
 		else if (err == PIPE_ERR)
-			ft_putstr_fd("Error creating pipe\n", 2);
+			ft_putstr_fd("Error creating pipe", STDERR_FILENO);
+		else if (err == HASH_FULL)
+			ft_putstr_fd("Insert Error: Hash Table is full", STDERR_FILENO);
 		if (param)
 			ft_putstr_fd(param, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
