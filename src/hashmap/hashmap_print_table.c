@@ -6,11 +6,23 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:26 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 16:30:21 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:53:07 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static void	print_env(t_hash_item *env, int only_customs)
+{
+	ft_putendl_fd("----------------------------", 1);
+	ft_putstr_fd("| ", 1);
+	if (only_customs == 1)
+		ft_putstr_fd("declare -x ", 1);
+	ft_putstr_fd(env->key, 1);
+	ft_putstr_fd(" | = | ", 1);
+	ft_putstr_fd(env->value, 1);
+	ft_putendl_fd(" |", 1);
+}
 
 void	hashmap_print_table(t_hashmap *table, int only_customs)
 {
@@ -30,12 +42,7 @@ void	hashmap_print_table(t_hashmap *table, int only_customs)
 				continue ;
 			}
 			tmp = current->next;
-			ft_putendl_fd("----------------------------", 1);
-			ft_putstr_fd("| ", 1);
-			ft_putstr_fd(current->key, 1);
-			ft_putstr_fd(" | = | ", 1);
-			ft_putstr_fd(current->value, 1);
-			ft_putendl_fd(" |", 1);
+			print_env(current, only_customs);
 			current = tmp;
 		}
 		i++;
