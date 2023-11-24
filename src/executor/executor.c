@@ -6,21 +6,22 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/23 13:25:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:56:18 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-extern char	**environ; // temp way of getting enviroment variables
-
 void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
+	char	**env;
+
 	builtins_router(mish, *cmd, IS_EXIT);
 	cmd->path = get_path(mish, cmd->full_cmd[0]);
-	if (execve(cmd->path, cmd->full_cmd, environ) != 0)
+	hashmap_to_matrix(mish->env, &env, 0, 0);
+	if (execve(cmd->path, cmd->full_cmd, env) != 0)
 	{
-		if (execve(cmd->full_cmd[0], cmd->full_cmd, environ) != 0)
+		if (execve(cmd->full_cmd[0], cmd->full_cmd, env) != 0)
 		{
 			handle_exit(mish, "command not found", NO_FILE, IS_EXIT);
 		}
