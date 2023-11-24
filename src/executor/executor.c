@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/23 15:56:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:29:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,6 @@ void	executor(t_data *mish)
 		handle_exit(mish, "malloc failed!", FAILURE, NOT_EXIT);
 	executor_loop(mish, c);
 	wait_loop(mish, c);
+	if (mish->cmds)
+		ft_lstclear(&mish->cmds, free_scmd);
 }
