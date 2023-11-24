@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/23 20:41:02 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:25:32 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@
 
 # define NOT_EXIT 0
 # define IS_EXIT 1
+
+extern int	g_exit_status;
 
 #endif

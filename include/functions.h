@@ -6,15 +6,15 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 13:15:02 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:21:31 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-// MISH
-// init_prompt.c
+# include "structs.h"
+
 char				*init_prompt(t_data *mish);
 // init_mish.c
 void				init_mish(t_data *mish, char *argv[], char *envp[]);
@@ -28,16 +28,17 @@ void				exec(char	***var, char *path, char *cmd, char **env);
 
 // HASHMAP
 unsigned long int	hash(char *key, unsigned int size);
-t_hash_item			*hashmap_create_item(char *key, char *value);
+t_hash_item			*hashmap_create_item(char *key, char *value, int custom);
 t_hashmap			*hashmap_create_table(unsigned int size);
 void				hashmap_free_item(t_hash_item *item);
 int					hashmap_delete(t_hashmap *table, char *key);
 void				hashmap_free_table(t_hashmap *table);
 void				hashmap_handle_collision(t_hashmap *table, \
 		unsigned long int index, t_hash_item *new_item);
-t_hash_item			*hashmap_insert(char *key, char *value, t_hashmap *table);
+t_hash_item			*hashmap_insert(char *key, char *value, \
+					   t_hashmap *table, int custom);
 char				*hashmap_search(t_hashmap *table, char *key);
-void				hashmap_print_table(t_hashmap *table);
+void				hashmap_print_table(t_hashmap *table, int only_customs);
 
 // INPUT_HANDLER
 // input_handler.c

@@ -6,12 +6,14 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 12:33:01 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:25:25 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include "../libft/includes/libft.h"
 
 enum e_mish_err
 {
@@ -31,6 +33,7 @@ typedef struct s_hash_item
 {
 	char				*key;
 	char				*value;
+	int					custom;
 	struct s_hash_item	*next;
 }	t_hash_item;
 
@@ -56,7 +59,5 @@ typedef struct s_data {
 	pid_t		*pids;
 	char		*old_pwd;
 }	t_data;
-
-int	g_exit_status;
 
 #endif

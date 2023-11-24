@@ -6,13 +6,11 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/24 12:27:26 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:27:31 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <readline/readline.h>
-#include <signal.h>
 
 static void	handle_sigint(int signum)
 {

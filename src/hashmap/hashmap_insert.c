@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:44 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 12:56:52 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:17:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	hashmap_replace_item(t_hash_item *current, char *value,
 {
 	free(current->value);
 	current->value = ft_strdup(value);
-  current->custom = custom;
+	current->custom = custom;
 	hashmap_free_item(new_item);
 }
 
@@ -36,7 +36,7 @@ int	hashmap_insert_item(t_hashmap *table, t_hash_item *new_item,
 	return (1);
 }
 
-void	hashmap_insert(char *key, char *value, t_hashmap *table, int custom)
+t_hash_item	*hashmap_insert(char *key, char *value, t_hashmap *table, int custom)
 {
 	unsigned long int	index;
 	t_hash_item			*new_item;
@@ -55,7 +55,7 @@ void	hashmap_insert(char *key, char *value, t_hashmap *table, int custom)
 	else
 	{
 		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
-			hashmap_replace_item(current, value, new_item);
+			hashmap_replace_item(current, value, new_item, custom);
 		else
 			hashmap_handle_collision(table, index, new_item);
 	}

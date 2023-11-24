@@ -6,11 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/23 20:06:40 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:29:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	g_exit_status;
 
 int	main(int argc, char *argv[], char *envp[])
 {
