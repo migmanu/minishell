@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:08:00 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/25 17:22:47 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:56:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 		}
 		i++;
 	}
-	hashmap_print_table(env_cpy, 0);
+	hashmap_print_table(env_cpy, PRT_ENV);
 	hashmap_free_table(env_cpy);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }

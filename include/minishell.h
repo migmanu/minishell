@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/24 15:25:32 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:48:54 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 
 # define NOT_EXIT 0
 # define IS_EXIT 1
+
+# define PRT_DEF 0
+# define PRT_EXP 1
+# define PRT_ENV 2
 
 extern int	g_exit_status;
 
