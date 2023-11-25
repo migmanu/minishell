@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/24 16:30:49 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:00:47 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static void	add_custom_vars(t_data *mish, char **vars)
 		c = ft_chr_pos(vars[i], '=');
 		key = ft_substr(vars[i], 0, c);
 		value = ft_substr(vars[i], ++c, ft_strlen(vars[i]));
-		/*if (hashmap_search(mish->env, key) != NULL)*/
-			/*hashmap_delete(mish->env, key);*/
+		printf("gonna add key %s, value %s\n", key, value);
 		hashmap_insert(key, value, mish->env, 1);
 		free(key);
 		free(value);
