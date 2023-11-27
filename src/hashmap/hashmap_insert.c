@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:44 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 16:31:53 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:52:48 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_hash_item	*hashmap_insert(char *key, char *value, t_hashmap *table,
 		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
 			hashmap_replace_item(current, value, new_item, custom);
 		else
-			hashmap_handle_collision(table, index, new_item);
+			hashmap_handle_collision(table, index, new_item, custom);
 	}
 	return (new_item);
 }
