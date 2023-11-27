@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/27 20:00:32 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:06:10 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 	}
 	if (add_custom_vars(mish, cmd.full_cmd, c) == 0)
 	{
-		handle_exit(mish, "mish: export: hashmap insert failed", \
-		FAILURE, if_exit);
+		handle_exit(mish, NULL, HASH_FULL, if_exit);
 		return ;
 	}
 	handle_exit(mish, NULL, SUCCESS, if_exit);
