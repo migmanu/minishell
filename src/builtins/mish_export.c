@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/27 18:45:11 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:00:32 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	add_custom_vars(t_data *mish, char **vars, int c[])
 			c[0]++;
 			continue ;
 		}
-		c[1] = ft_chr_pos(vars[c[0]], '='); // TODO: replace with split?
+		c[1] = ft_chr_pos(vars[c[0]], '=');
 		key = ft_substr(vars[c[0]], 0, c[1]);
 		value = ft_substr(vars[c[0]], ++c[1], ft_strlen(vars[c[0]]));
 		search_and_delete(mish, key);
