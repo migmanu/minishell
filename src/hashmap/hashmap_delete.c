@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:32:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 13:18:46 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/27 10:53:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ static void	free_and_set_null(t_hashmap *table, t_hash_item *current,
 	table->count--;
 }
 
+// Returns SUCCES (0) if correctly deleted
 int	hashmap_delete(t_hashmap *table, char *key)
 {
 	unsigned long int	index;
 	t_hash_item			*current;
 
 	if (!key)
-		return (0);
+		return (0); // TODO: shouldnt it return 1 here?
 	index = hash(key, table->size);
 	current = table->items[index];
 	if (current == NULL)
@@ -64,6 +65,6 @@ int	hashmap_delete(t_hashmap *table, char *key)
 	else
 		find_free_and_relink(table, current, key);
 	if (hashmap_search(table, key))
-		return (0);
-	return (1);
+		return (FAILURE);
+	return (SUCCESS);
 }
