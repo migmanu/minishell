@@ -6,21 +6,22 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:44 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/28 19:36:22 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/28 23:06:53 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <stdio.h>
 
-static void	hashmap_replace_item(t_hash_item *current, char *value,
-					t_hash_item *new_item, int custom)
-{
-	free(current->value);
-	current->value = ft_strdup(value);
-	current->custom = custom;
-	hashmap_free_item(new_item);
-}
+// static void	hashmap_replace_item(t_hash_item *current, char *value,
+// 					t_hash_item *new_item, int custom)
+// {
+// 	free(current->value);
+// 	current->value = NULL;
+// 	current->value = ft_strdup(value);
+// 	current->custom = custom;
+// 	hashmap_free_item(new_item);
+// }
 
 static int	hashmap_insert_item(t_hashmap *table, t_hash_item *new_item,
 						unsigned long int index)
@@ -55,8 +56,13 @@ t_hash_item	*hashmap_insert(char *key, char *value, t_hashmap *table,
 	}
 	else
 	{
-		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
-			hashmap_replace_item(current, value, new_item, custom);
+		if (ft_strncmp(current->key, key, ft_strlen(key)) == 0)
+		{
+			hashmap_delete(table, key);
+			if (!hashmap_insert_item(table, new_item, index))
+				return (NULL);
+		}
+			// hashmap_replace_item(current, value, new_item, custom);
 		else
 			hashmap_handle_collision(table, index, new_item);
 	}

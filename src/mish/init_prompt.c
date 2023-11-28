@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/28 19:15:46 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/28 22:30:55 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ char	*init_prompt(t_data *mish)
 	}
 	if (line[0] != '\0')
 		add_history(line);
+	printf("pwd: %s\n", hashmap_search(mish->env, "PWD"));
 	return (line);
 }

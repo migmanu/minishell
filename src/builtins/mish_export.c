@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/28 19:16:42 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/28 22:10:16 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	add_custom_vars(t_data *mish, char **vars, int i)
 	char	*key;
 	char	*value;
 	int		c;
+	int		custom;
 
 	while (vars[++i] != NULL)
 	{
@@ -50,8 +51,11 @@ static void	add_custom_vars(t_data *mish, char **vars, int i)
 			key = ft_strdup(vars[i]);
 			value = ft_strdup("");
 		}
-		hashmap_insert(key, value, mish->env,
-			get_hashmap_custom(mish->env, key));
+		custom = get_hashmap_custom(mish->env, key);
+		if (hashmap_search(mish->env, key))
+			hashmap_delete(mish->env, key);
+		hashmap_insert(key, value, mish->env, custom);
+		// hashmap_delete(mish->env, key);
 		free(key);
 		free(value);
 	}
