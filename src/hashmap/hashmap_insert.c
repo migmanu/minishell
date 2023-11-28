@@ -6,14 +6,14 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:44 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 16:31:53 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:15:00 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <stdio.h>
 
-void	hashmap_replace_item(t_hash_item *current, char *value,
+static void	hashmap_replace_item(t_hash_item *current, char *value,
 					t_hash_item *new_item, int custom)
 {
 	free(current->value);
@@ -22,7 +22,7 @@ void	hashmap_replace_item(t_hash_item *current, char *value,
 	hashmap_free_item(new_item);
 }
 
-int	hashmap_insert_item(t_hashmap *table, t_hash_item *new_item,
+static int	hashmap_insert_item(t_hashmap *table, t_hash_item *new_item,
 						unsigned long int index)
 {
 	if (table->count == table->size)

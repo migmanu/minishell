@@ -6,31 +6,54 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/24 16:30:49 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:16:42 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	add_custom_vars(t_data *mish, char **vars)
+int	get_hashmap_custom(t_hashmap *env, char *key)
+{
+	unsigned long int	index;
+	t_hash_item			*current;
+
+	index = hash(key, env->size);
+	current = env->items[index];
+	while (current != NULL)
+	{
+		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
+			return (current->custom);
+		current = current->next;
+	}
+	return (1);
+}
+
+static void	add_custom_vars(t_data *mish, char **vars, int i)
 {
 	char	*key;
 	char	*value;
-	int		i;
 	int		c;
 
-	i = 1;
-	while (vars[i] != NULL)
+	while (vars[++i] != NULL)
 	{
-		c = ft_chr_pos(vars[i], '=');
-		key = ft_substr(vars[i], 0, c);
-		value = ft_substr(vars[i], ++c, ft_strlen(vars[i]));
-		/*if (hashmap_search(mish->env, key) != NULL)*/
-			/*hashmap_delete(mish->env, key);*/
-		hashmap_insert(key, value, mish->env, 1);
+		if (ft_strchr(vars[i], '='))
+		{
+			c = ft_chr_pos(vars[i], '=');
+			key = ft_substr(vars[i], 0, c);
+			if (c == -1)
+				value = ft_strdup("");
+			else
+				value = ft_substr(vars[i], ++c, ft_strlen(vars[i]));
+		}
+		else
+		{
+			key = ft_strdup(vars[i]);
+			value = ft_strdup("");
+		}
+		hashmap_insert(key, value, mish->env,
+			get_hashmap_custom(mish->env, key));
 		free(key);
 		free(value);
-		i++;
 	}
 }
 
@@ -42,11 +65,6 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 		return ;
 	}
-	if (ft_strchr(cmd.full_cmd[1], '=') == NULL)
-	{
-		handle_exit(mish, NULL, SUCCESS, if_exit);
-		return ;
-	}
-	add_custom_vars(mish, cmd.full_cmd);
+	add_custom_vars(mish, cmd.full_cmd, 0);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
