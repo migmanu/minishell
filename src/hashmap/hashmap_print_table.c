@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:26 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 16:30:21 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:31:53 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	hashmap_print_table(t_hashmap *table, int only_customs)
 		current = table->items[i];
 		while (current != NULL)
 		{
-			if (only_customs == 1 && current->custom != 1)
+			if ((only_customs == 1 && current->custom != 1)
+				|| (only_customs == 0 && current->custom == 1))
 			{
 				current = current->next;
 				continue ;
