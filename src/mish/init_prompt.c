@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/28 22:30:55 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:30 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*get_cd(t_data *mish)
 	char	*home;
 	char	*pwd;
 
-	pwd = hashmap_search(mish->env, "PWD");
+	pwd = ft_strdup(hashmap_search(mish->env, "PWD"));
 	if (!pwd)
 		pwd = ft_strdup("/");
 	home = hashmap_search(mish->env, "HOME");
@@ -113,6 +113,5 @@ char	*init_prompt(t_data *mish)
 	}
 	if (line[0] != '\0')
 		add_history(line);
-	printf("pwd: %s\n", hashmap_search(mish->env, "PWD"));
 	return (line);
 }

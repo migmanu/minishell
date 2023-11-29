@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/29 11:54:33 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:27 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,58 @@ t_hash_item	*hashmap_search_key(t_hashmap *table, char *key)
 	return (NULL);
 }
 
-static void	search_and_delete(t_data *mish, char *key)
+int	get_hashmap_custom(t_hashmap *env, char *key)
 {
-	if (hashmap_search_key(mish->env, key) == NULL)
-		return ;
-	if (hashmap_delete(mish->env, key) == FAILURE)
+	unsigned long int	index;
+	t_hash_item			*current;
+
+	index = hash(key, env->size);
+	current = env->items[index];
+	while (current != NULL)
 	{
-		ft_putstr_fd("mish: export: hashmap_delete error\n", STDERR_FILENO);
-		return ;
+		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
+			return (current->custom);
+		current = current->next;
 	}
+	return (1);
 }
+
+/*static void	search_and_delete(t_data *mish, char *key)*/
+/*{*/
+	/*if (hashmap_search_key(mish->env, key) == NULL)*/
+		/*return ;*/
+	/*if (hashmap_delete(mish->env, key) == FAILURE)*/
+	/*{*/
+		/*ft_putstr_fd("mish: export: hashmap_delete error\n", STDERR_FILENO);*/
+		/*return ;*/
+	/*}*/
+/*}*/
 
 // WARNING: this function returns 0 when error
 static int	add_custom_vars(t_data *mish, char **vars, int c[])
 {
 	char	*key;
 	char	*value;
+	int		custom;
 
 	while (vars[c[0]] != NULL && c[2] == 1)
 	{
 		if (ft_strchr(vars[c[0]], '=') == NULL)
 		{
-			search_and_delete(mish, vars[c[0]]);
-			if (hashmap_insert(vars[c[0]], NULL, mish->env, 1) == NULL)
-				return (0);
-			c[0]++;
-			continue ;
+			key = ft_strdup(vars[c[0]]);
+			value = ft_strdup("");
 		}
-		c[1] = ft_chr_pos(vars[c[0]], '=');
-		key = ft_substr(vars[c[0]], 0, c[1]);
-		value = ft_substr(vars[c[0]], ++c[1], ft_strlen(vars[c[0]]));
-		search_and_delete(mish, key);
-		c[2] = (hashmap_insert(key, value, mish->env, 1) != NULL);
+		else
+		{
+			c[1] = ft_chr_pos(vars[c[0]], '=');
+			key = ft_substr(vars[c[0]], 0, c[1]);
+			if (c[1] == -1)
+				value = ft_strdup("");
+			else
+				value = ft_substr(vars[c[0]], ++c[1], ft_strlen(vars[c[0]]));
+		}
+		custom = get_hashmap_custom(mish->env, key);
+		c[2] = (hashmap_insert(key, value, mish->env, custom) != NULL);
 		free(key);
 		free(value);
 		c[0]++;
