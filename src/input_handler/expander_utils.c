@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:46:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/17 15:20:01 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:50:34 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*get_subvars(char *str, int i, t_data *mish)
 	char	*path;
 	char	*var;
 
-	end = find_inset(&str[i], "|\"\'$?<> ") + (ft_strchr("$?", str[i]) != 0);
+	end = find_inset(&str[i], "!@#%^&|\"\'$?<> ") + (ft_strchr("$?", str[i]) != 0);
 	if (end == -1)
 		end = ft_strlen(str) - 1;
 	tmp = ft_substr(str, i, end);
