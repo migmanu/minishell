@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:08:00 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/24 13:53:24 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:01:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	add_envp(t_hashmap *envs, char *str)
+static int	add_envp(t_hashmap *envs, char *str)
 {
 	char	*key;
 	char	*value;
@@ -22,10 +22,15 @@ static void	add_envp(t_hashmap *envs, char *str)
 	key = ft_substr(str, 0, e);
 	value = ft_substr(str, ++e, ft_strlen(str));
 	if (hashmap_search(envs, key) != NULL)
-		hashmap_delete(envs, key);
-	hashmap_insert(key, value, envs, 0);
+	{
+		if (hashmap_delete(envs, key) == FAILURE)
+			return (FAILURE);
+	}
+	if (hashmap_insert(key, value, envs, 0) == NULL)
+		return (FAILURE);
 	free(key);
 	free(value);
+	return (SUCCESS);
 }
 
 static int	check_var_format(char *str)
@@ -69,7 +74,7 @@ static void	exit_mish_env(t_data *mish, t_hashmap *env_cpy, int is_exit)
 	handle_exit(mish, NULL, NO_FILE, is_exit);
 }
 
-// Imitates the bash funciuon env. Works with no flags.
+// Imitates the bash function env. Works with no flags.
 // Makes a copy of the mish envp and works with that.
 void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 {
@@ -82,8 +87,12 @@ void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 	i = 1;
 	while (cmd.full_cmd[i] != NULL)
 	{
-		if (check_var_format(cmd.full_cmd[i]) == 0)
-			add_envp(env_cpy, cmd.full_cmd[i]);
+		if (check_var_format(cmd.full_cmd[i]) == 0 && \
+			add_envp(env_cpy, cmd.full_cmd[i]) == FAILURE)
+		{
+			exit_mish_env(mish, env_cpy, if_exit);
+			return ;
+		}
 		if (check_var_format(cmd.full_cmd[i]) != 0)
 		{
 			exit_mish_env(mish, env_cpy, if_exit);
@@ -91,7 +100,7 @@ void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 		}
 		i++;
 	}
-	hashmap_print_table(env_cpy, 0);
+	hashmap_print_table(env_cpy, PRT_ENV);
 	hashmap_free_table(env_cpy);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
