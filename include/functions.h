@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/24 16:48:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/26 00:53:49 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				hashmap_free_table(t_hashmap *table);
 void				hashmap_handle_collision(t_hashmap *table, \
 		unsigned long int index, t_hash_item *new_item, int custom);
 t_hash_item			*hashmap_insert(char *key, char *value, \
-					   t_hashmap *table, int custom);
+					t_hashmap *table, int custom);
 char				*hashmap_search(t_hashmap *table, char *key);
 void				hashmap_print_table(t_hashmap *table, int only_customs);
 
