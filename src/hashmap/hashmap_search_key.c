@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hashmap_create_item.c                              :+:      :+:    :+:   */
+/*   hashmap_search_key.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:26:34 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/28 16:30:43 by sebasnadu        ###   ########.fr       */
+/*   Created: 2023/11/30 11:39:00 by sebasnadu         #+#    #+#             */
+/*   Updated: 2023/11/30 11:39:15 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_hash_item	*hashmap_create_item(char *key, char *value, int custom)
+t_hash_item	*hashmap_search_key(t_hashmap *table, char *key)
 {
-	t_hash_item	*new_item;
+	unsigned long int	index;
+	t_hash_item			*current;
 
-	new_item = (t_hash_item *)ft_calloc(sizeof(t_hash_item), 1);
-	new_item->key = ft_strdup(key);
-	new_item->value = ft_strdup(value);
-	new_item->custom = custom;
-	new_item->next = NULL;
-	return (new_item);
+	index = hash(key, table->size);
+	current = table->items[index];
+	while (current != NULL)
+	{
+		if (ft_strncmp(current->key, key, ft_strlen(key) + 1) == 0)
+			return (current);
+		current = current->next;
+	}
+	return (NULL);
 }

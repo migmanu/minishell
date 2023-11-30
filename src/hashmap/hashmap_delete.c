@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:32:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/27 10:53:42 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:33:29 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	hashmap_delete(t_hashmap *table, char *key)
 	t_hash_item			*current;
 
 	if (!key)
-		return (0); // TODO: shouldnt it return 1 here?
+		return (FAILURE);
 	index = hash(key, table->size);
 	current = table->items[index];
 	if (current == NULL)

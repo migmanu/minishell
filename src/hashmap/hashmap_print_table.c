@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:26 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/25 18:20:47 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:09:05 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	hashmap_print_table(t_hashmap *table, int options)
 		current = table->items[i];
 		while (current != NULL)
 		{
-			if ((options == PRT_EXP && current->custom != 1) || \
-			(options == PRT_ENV && current->value == NULL))
+			if ((options == PRT_EXP && current->custom != 1)
+				|| (options == PRT_ENV && current->custom == 1))
 			{
 				current = current->next;
 				continue ;
