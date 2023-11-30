@@ -6,11 +6,22 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:36:20 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/22 15:46:04 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:36:25 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	search_and_delete(t_data *mish, char *key)
+{
+	if (hashmap_search_key(mish->env, key) == NULL)
+		return ;
+	if (hashmap_delete(mish->env, key) == FAILURE)
+	{
+		ft_putstr_fd("mish: export: hashmap_delete error\n", STDERR_FILENO);
+		return ;
+	}
+}
 
 char	*ft_strjoin_var(unsigned int arg_size, ...)
 {

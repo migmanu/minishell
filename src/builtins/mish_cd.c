@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/29 11:46:59 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:52:55 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,16 @@ static int	change_dir(t_data *mish, char *pwd, char *old_pwd, int if_exit)
 		handle_exit(mish, "mish: no such file or directory", FAILURE, if_exit);
 		return (FAILURE);
 	}
-	if (hashmap_insert("OLDPWD", old_pwd, mish->env, 0) == NULL)
-	{
-		handle_exit(mish, "mish: cd: hashmap insert failed", FAILURE, if_exit);
-		return (FAILURE);
-	}
 	curr = getcwd(NULL, PATH_MAX);
 	if (curr == NULL)
 	{
 		handle_exit(mish, "mish: cd: hashmap insert failed", FAILURE, if_exit);
 		return (FAILURE);
 	}
-	if (hashmap_insert("PWD", curr, mish->env, 0) == NULL)
+	search_and_delete(mish, "OLDPWD");
+	search_and_delete(mish, "PWD");
+	if (hashmap_insert("PWD", curr, mish->env, 0) == NULL
+		|| hashmap_insert("OLDPWD", old_pwd, mish->env, 0) == NULL)
 	{
 		handle_exit(mish, "mish: cd: hashmap insert failed", FAILURE, if_exit);
 		return (FAILURE);
@@ -73,7 +71,7 @@ void	mish_cd(t_data *mish, t_scmd cmd, int if_exit)
 	char	*old_pwd;
 
 	pwd = cmd.full_cmd[1];
-	old_pwd = hashmap_search(mish->env, "PWD");
+	old_pwd = ft_strdup(hashmap_search(mish->env, "PWD"));
 	if (expand_pwd(mish, &pwd, cmd.full_cmd[1], if_exit) == FAILURE)
 		return ;
 	if (change_dir(mish, pwd, old_pwd, if_exit) == FAILURE)

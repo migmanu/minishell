@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/26 00:53:49 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:39:40 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_hash_item			*hashmap_insert(char *key, char *value, \
 					t_hashmap *table, int custom);
 char				*hashmap_search(t_hashmap *table, char *key);
 void				hashmap_print_table(t_hashmap *table, int only_customs);
+t_hash_item			*hashmap_search_key(t_hashmap *table, char *key);
 
 // INPUT_HANDLER
 // input_handler.c
@@ -103,4 +104,5 @@ void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_env(t_data *mish, t_scmd cmd, int if_exit);
 
+void				search_and_delete(t_data *mish, char *key);
 #endif
