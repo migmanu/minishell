@@ -6,11 +6,24 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:46:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/29 17:50:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:08:58 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static char	*get_var(char *str, int i, t_data *mish, char *tmp)
+{
+	char	*var;
+
+	if (str[i] == '$')
+		var = ft_itoa((int)mish->pid);
+	else if (str[i] == '?')
+		var = ft_itoa(g_exit_status);
+	else
+		var = ft_strdup(hashmap_search(mish->env, tmp));
+	return (var);
+}
 
 static char	*get_subvars(char *str, int i, t_data *mish)
 {
@@ -19,16 +32,12 @@ static char	*get_subvars(char *str, int i, t_data *mish)
 	char	*path;
 	char	*var;
 
-	end = find_inset(&str[i], "!@#%^&|\"\'$?<> ") + (ft_strchr("$?", str[i]) != 0);
+	end = find_inset(&str[i], "!@#%^&|\"\'$?<> ") + (ft_strchr("$?",
+				str[i]) != 0);
 	if (end == -1)
 		end = ft_strlen(str) - 1;
 	tmp = ft_substr(str, i, end);
-	if (str[i] == '$')
-		var = ft_itoa((int)mish->pid);
-	else if (str[i] == '?')
-		var = ft_itoa(g_exit_status);
-	else
-		var = ft_strdup(hashmap_search(mish->env, tmp));
+	var = get_var(str, i, mish, tmp);
 	free(tmp);
 	tmp = ft_substr(str, 0, i - 1);
 	path = ft_strjoin(tmp, var);
