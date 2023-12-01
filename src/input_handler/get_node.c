@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:45:06 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/20 15:29:30 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:16:39 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,18 @@ static char	**push_token(char **cmds, char *token, int i)
 	return (new);
 }
 
+static void	get_node_err(char **cmds[2], int *i)
+{
+	if (cmds[1][*i] && cmds[1][*i][0] == '|')
+		handle_exit(NULL, "`||'", SYNTAX_ERR, NOT_EXIT);
+	else
+		handle_exit(NULL, "`|'", SYNTAX_ERR, NOT_EXIT);
+	*i = -2;
+}
+
 t_scmd	*get_node(t_scmd *node, char **cmds[2], int *i)
 {
-	if (cmds[1][*i])
+	if (cmds[1][*i] && !(*i == 1 && cmds[1][*i - 1][0] == '|'))
 	{
 		if (cmds[1][*i][0] == '>' && cmds[1][*i + 1]
 			&& cmds[1][*i + 1][0] == '>')
@@ -58,13 +67,9 @@ t_scmd	*get_node(t_scmd *node, char **cmds[2], int *i)
 		else if (cmds[1][*i][0] != '|')
 			node->full_cmd = push_token(node->full_cmd, cmds[0][*i], -1);
 		else
-		{
-			handle_exit(NULL, NULL, PIPE_ERR, NOT_EXIT);
-			*i = -2;
-		}
+			get_node_err(cmds, i);
 		return (node);
 	}
-	handle_exit(NULL, NULL, PIPE_ERR, NOT_EXIT);
-	*i = -2;
+	get_node_err(cmds, i);
 	return (node);
 }

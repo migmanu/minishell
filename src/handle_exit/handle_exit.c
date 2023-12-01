@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/24 12:53:48 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/01 17:30:10 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,42 @@ static void	clean_and_exit(t_data *mish)
 	exit(g_exit_status);
 }
 
-// Prints error message. If is_exit is set to true (1), frees the 
+void	print_error(char *param, int err)
+{
+	ft_putstr_fd("mish: ", STDERR_FILENO);
+	if (err == INV_ARGS)
+		ft_putstr_fd("No arguments needed: ", STDERR_FILENO);
+	else if (err == FORK_ERR)
+		ft_putstr_fd("Fork error.", STDERR_FILENO);
+	else if (err == UNQUOTE)
+		ft_putstr_fd("Unmatch quote", STDERR_FILENO);
+	else if (err == NO_FILE)
+		ft_putstr_fd("No such file or directory: ", STDERR_FILENO);
+	else if (err == NO_PERM)
+		ft_putstr_fd("Permission denied: ", STDERR_FILENO);
+	else if (err == PIPE_ERR)
+		ft_putstr_fd("syntax error near unexpected token ", STDERR_FILENO);
+	else if (err == SYNTAX_ERR)
+		ft_putstr_fd("syntax error near unexpected token ", STDERR_FILENO);
+	else if (err == HASH_FULL)
+		ft_putstr_fd("Insert Error: Hash Table is full", STDERR_FILENO);
+	if (param)
+		ft_putstr_fd(param, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
+
+// Prints error message. If is_exit is set tottrue (1), frees the 
 // allocated memory and exits with g_exit_status
 void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 {
 	if (err == FORK_ERR || err == PIPE_ERR)
 		g_exit_status = 1;
+	else if (err == SYNTAX_ERR)
+		g_exit_status = 2;
 	else
 		g_exit_status = err;
 	if (err != SUCCESS && err != FAILURE && err != ERROR)
-	{
-		ft_putstr_fd("mish: ", STDERR_FILENO);
-		if (err == INV_ARGS)
-			ft_putstr_fd("No arguments needed: ", STDERR_FILENO);
-		else if (err == FORK_ERR)
-			ft_putstr_fd("Fork error.", STDERR_FILENO);
-		else if (err == UNQUOTE)
-			ft_putstr_fd("Unmatch quote", STDERR_FILENO);
-		else if (err == NO_FILE)
-			ft_putstr_fd("No such file or directory: ", STDERR_FILENO);
-		else if (err == NO_PERM)
-			ft_putstr_fd("Permission denied: ", STDERR_FILENO);
-		else if (err == PIPE_ERR)
-			ft_putstr_fd("Error creating pipe", STDERR_FILENO);
-		else if (err == HASH_FULL)
-			ft_putstr_fd("Insert Error: Hash Table is full", STDERR_FILENO);
-		if (param)
-			ft_putstr_fd(param, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
-	}
+		print_error(param, err);
 	if (is_exit)
 		clean_and_exit(mish);
 }

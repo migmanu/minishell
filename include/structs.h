@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/26 01:34:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:29:51 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ enum e_mish_err
 	ERROR,
 	INV_ARGS,
 	FORK_ERR,
+	SYNTAX_ERR,
 	PIPE_ERR,
 	UNQUOTE,
 	HASH_FULL,
