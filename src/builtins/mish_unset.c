@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:28:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/26 01:35:40 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:15:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	mish_unset(t_data *mish, t_scmd cmd, int if_exit)
 		{
 			handle_exit(mish, "mish: unset: error deleting var", \
 			FAILURE, if_exit);
-			return ;
+			continue ;
 		}
 		i++;
 	}
