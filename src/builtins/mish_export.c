@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 16:08:41 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:29:22 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	check_key(const char *key)
 	i = 0;
 	if (key[0] == '\0' || key[0] == '=')
 		return (0);
-	while (key[i] != '\0')
+	while (key[i] != '\0' && key[i] != '=')
 	{
 		if (ft_isalpha(key[i]) == 0 && key[i] != '=')
 			return (0);
@@ -94,6 +94,7 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 	c[2] = 1;
 	if (cmd.full_cmd[1] == NULL)
 	{
+		printf("null\n");
 		hashmap_print_table(mish->env, 1);
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 		return ;
