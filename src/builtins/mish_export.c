@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 21:29:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:58:08 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 	c[2] = 1;
 	if (cmd.full_cmd[1] == NULL)
 	{
-		printf("null\n");
 		hashmap_print_table(mish->env, 1);
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 		return ;
