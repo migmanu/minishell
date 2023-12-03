@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 17:58:01 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 21:16:34 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*get_user(t_data *mish)
+static char	*get_user_and_uid(t_data *mish)
 {
 	char	**user;
 	char	*tmp;
@@ -21,6 +21,12 @@ static char	*get_user(t_data *mish)
 	user = NULL;
 	tmp = NULL; 
 	env = hashmap_to_matrix(mish->env, &env, 0, 0);
+	exec(&user, "/usr/bin/id", "id -u", env);
+	if (!user)
+		user = ft_extend_matrix(user, "-1");
+	mish->uid = ft_atoi(user[0]);
+	ft_matrixfree(&user);
+	user = NULL;
 	exec(&user, "/usr/bin/whoami", "whoami", env);
 	ft_matrixfree(&env);
 	if (!user)
@@ -84,7 +90,7 @@ static char	*create_prompt(t_data *mish)
 	char	*tmp3;
 
 	tmp = get_os(mish);
-	tmp2 = get_user(mish);
+	tmp2 = get_user_and_uid(mish);
 	tmp3 = ft_strjoin_var(9, BLACK, "", BBLACK, tmp, "  ", tmp2,
 			"@mish󰄛", WHITE, " ");
 	free(tmp);
