@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/01 17:29:51 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 20:38:54 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_data {
 	pid_t		pid;
 	pid_t		*pids;
 	char		*old_pwd;
+	int			uid;
 }	t_data;
 
 #endif

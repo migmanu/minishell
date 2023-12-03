@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:46:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/03 20:05:14 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 21:15:40 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static char	*get_var(char *str, int i, t_data *mish, char *tmp)
 		var = ft_itoa((int)mish->pid);
 	else if (str[i] == '?')
 		var = ft_itoa(g_exit_status);
+	else if (ft_strncmp(tmp, "UID", 4) == 0)
+		var = ft_itoa(mish->uid);
 	else
 		var = ft_strdup(hashmap_search(mish->env, tmp));
 	if (!var && (str[i] == '\'' || str[i] == '\"'))
