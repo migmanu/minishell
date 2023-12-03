@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/24 12:29:44 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:26:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 	{
 		if (execve(cmd->full_cmd[0], cmd->full_cmd, env) != 0)
 		{
-			handle_exit(mish, "command not found", NO_FILE, IS_EXIT);
+			handle_exit(mish, cmd->full_cmd[0], NO_FILE, IS_EXIT);
 		}
 	}
 }
@@ -78,6 +78,8 @@ void	wait_loop(t_data *mish, int c)
 		g_exit_status = WEXITSTATUS(status);
 }
 
+// Handles execution. If only one, built-in command,
+// no fork is done.
 void	executor(t_data *mish)
 {
 	t_scmd	*first;
@@ -88,7 +90,8 @@ void	executor(t_data *mish)
 	if (!mish->cmds)
 		return ;
 	first = mish->cmds->content;
-	if (mish->cmds->next == NULL && check_if_builtin(first->full_cmd[0]) == 0)
+	if (mish->cmds->next == NULL && check_if_builtin(first->full_cmd[0]) == 0
+		&& ft_strncmp("env", first->full_cmd[0], 3) != 0)
 	{
 		builtins_router(mish, *first, NOT_EXIT);
 		return ;

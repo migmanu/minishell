@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/22 19:59:08 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:19:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	dup_cmd(t_scmd *cmd)
 	}
 }
 
+// If pipes are present, modifies the fd_in and fd_out of each
+// command, except the fd_in of the first and the fd_out of
+// the last one. Those need to be set before. C ends up as a
+// count of all commands to execute.
 void	set_file_descriptors(t_data *mish, int fds[2], int *c)
 {
 	t_scmd	*cmd;

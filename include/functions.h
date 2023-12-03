@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/30 11:39:40 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 19:48:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void				config_signals(void);
 void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
 void				set_file_descriptors(t_data *mish, int fds[2], int *c);
-char				*get_cmd_path(char *cmd, char *env[]);
 void				dup_cmd(t_scmd *cmd);
+void				exec_cmd(t_data *mish, t_scmd *cmd);
 
 // testing
 void				create_mock_mish(t_data *mish, char *line);
