@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:46:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/03 14:23:12 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 20:05:14 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static char	*get_var(char *str, int i, t_data *mish, char *tmp)
 		var = ft_strdup(hashmap_search(mish->env, tmp));
 	if (!var && (str[i] == '\'' || str[i] == '\"'))
 		var = ft_strdup(tmp);
-	else if (!var && find_inset(&str[i], "!@#%^&|\"\'$?<> ") + (ft_strchr("$?",
-				str[i]) != 0) == -1)
+	else if (!var && find_inset(&str[i], "!@#%^&|\"\'$?<> ") == -1
+		&& i > 0 && ft_strchr("=", str[i - 1]))
 		var = NULL;
 	else if (!var)
 		var = ft_strdup("");
@@ -68,7 +68,7 @@ char	*expand_vars(t_data *mish, char *str, int quotes[2], int i)
 		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
 		if (!quotes[0] && str[i] == '$' && str[i + 1] && ((!quotes[1]
 					&& find_inset(&str[i + 1], "=/~%^{}:; ")) || (quotes[1]
-					&& find_inset(&str[i + 1], "=/~%^{}:;\"\'"))))
+					&& find_inset(&str[i + 1], "=/~%^{}:;\"\' "))))
 			return (expand_vars(mish, get_subvars(str, ++i, mish), quotes, -1));
 	}
 	return (str);
