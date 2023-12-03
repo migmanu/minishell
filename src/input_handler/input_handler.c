@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:20:01 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/29 17:53:16 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/03 13:46:19 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,44 @@ static char	**tokenizer(char *line)
 	return (words);
 }
 
+static void	redefine_matrix(char **matrix, int i, int matrix_len)
+{
+	int		j;
+	char	*tmp;
+
+	j = 0;
+	while (j < matrix_len)
+	{
+		if (j < i)
+			j++;
+		else
+		{
+			tmp = matrix[j];
+			matrix[j] = matrix[j + 1];
+			matrix[j + 1] = tmp;
+			j++;
+		}
+	}
+}
+
+// Revisar los tokens eliminando los que esten como null
 static void	expander(t_data *mish, char **tokens)
 {
 	int	i;
 	int	quotes[2];
+	int	matrix_len;
 
-	i = -1;
-	while (tokens && tokens[++i])
+	matrix_len = ft_matrixlen(tokens);
+	i = 0;
+	while (tokens && tokens[i])
 	{
 		tokens[i] = expand_vars(mish, tokens[i], quotes, -1);
 		tokens[i] = expand_home(tokens[i], -1, quotes,
 				ft_strdup(hashmap_search(mish->env, "HOME")));
+		if (!tokens[i])
+			redefine_matrix(tokens, i, matrix_len);
+		else
+			i++;
 	}
 }
 
