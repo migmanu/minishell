@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:46:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/01 17:08:58 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 14:23:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ static char	*get_var(char *str, int i, t_data *mish, char *tmp)
 		var = ft_itoa(g_exit_status);
 	else
 		var = ft_strdup(hashmap_search(mish->env, tmp));
+	if (!var && (str[i] == '\'' || str[i] == '\"'))
+		var = ft_strdup(tmp);
+	else if (!var && find_inset(&str[i], "!@#%^&|\"\'$?<> ") + (ft_strchr("$?",
+				str[i]) != 0) == -1)
+		var = NULL;
+	else if (!var)
+		var = ft_strdup("");
 	return (var);
 }
 
@@ -34,6 +41,8 @@ static char	*get_subvars(char *str, int i, t_data *mish)
 
 	end = find_inset(&str[i], "!@#%^&|\"\'$?<> ") + (ft_strchr("$?",
 				str[i]) != 0);
+	if (!end && (str[i] == '\'' || str[i] == '\"'))
+		end += find_inset(&str[i + 1], "\"\'") + 1;
 	if (end == -1)
 		end = ft_strlen(str) - 1;
 	tmp = ft_substr(str, i, end);
@@ -42,8 +51,7 @@ static char	*get_subvars(char *str, int i, t_data *mish)
 	tmp = ft_substr(str, 0, i - 1);
 	path = ft_strjoin(tmp, var);
 	free(tmp);
-	if (var)
-		free(var);
+	free(var);
 	tmp = ft_strjoin(path, &str[i + end]);
 	free(path);
 	free(str);
@@ -59,8 +67,8 @@ char	*expand_vars(t_data *mish, char *str, int quotes[2], int i)
 		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
 		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
 		if (!quotes[0] && str[i] == '$' && str[i + 1] && ((!quotes[1]
-					&& find_inset(&str[i + 1], "/~%^{}:; ")) || (quotes[1]
-					&& find_inset(&str[i + 1], "/~%^{}:;\""))))
+					&& find_inset(&str[i + 1], "=/~%^{}:; ")) || (quotes[1]
+					&& find_inset(&str[i + 1], "=/~%^{}:;\"\'"))))
 			return (expand_vars(mish, get_subvars(str, ++i, mish), quotes, -1));
 	}
 	return (str);

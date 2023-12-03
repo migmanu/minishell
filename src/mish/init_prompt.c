@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/29 17:33:30 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:58:01 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char	*get_cd(t_data *mish)
 {
 	char	*home;
 	char	*pwd;
+	char	*tmp;
 
 	pwd = ft_strdup(hashmap_search(mish->env, "PWD"));
 	if (!pwd)
@@ -67,7 +68,9 @@ static char	*get_cd(t_data *mish)
 	home = hashmap_search(mish->env, "HOME");
 	if (home && home[0] && ft_strnstr(pwd, home, ft_strlen(pwd)))
 	{
-		pwd = ft_strjoin("~", &pwd[ft_strlen(home)]);
+		tmp = pwd;
+		pwd = ft_strjoin("~", &tmp[ft_strlen(home)]);
+		free(tmp);
 	}
 	home = ft_strjoin_var(6, MAGENTA, " 󰝰 ", pwd, DEFAULT, BLACK, "");
 	free(pwd);
