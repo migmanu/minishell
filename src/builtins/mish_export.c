@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/30 11:44:48 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/03 16:08:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	get_key_and_value(char **vars, char **key, char **value, int c[])
 	}
 }
 
-// WARNING: this function returns 0 when error
+// This function returns 0 when error
 static int	add_custom_vars(t_data *mish, char **vars, int c[])
 {
 	char	*key;
@@ -67,6 +67,24 @@ static int	add_custom_vars(t_data *mish, char **vars, int c[])
 	return (c[2]);
 }
 
+static int	check_key(const char *key)
+{
+	int	i;
+
+	i = 0;
+	if (key[0] == '\0' || key[0] == '=')
+		return (0);
+	while (key[i] != '\0')
+	{
+		if (ft_isalpha(key[i]) == 0 && key[i] != '=')
+			return (0);
+		if (key[i] == '=' && ft_isalpha(key[i - 1]) == 0 && key[i + 1] != '\0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	c[3];
@@ -80,10 +98,11 @@ void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 		return ;
 	}
-	if (cmd.full_cmd[1][0] == '\0')
+	if (check_key(cmd.full_cmd[1]) == 0)
 	{
-		ft_putstr_fd("mish: export: `': not a valid identifier\n", \
-		STDERR_FILENO);
+		ft_putstr_fd("mish: export: ", STDERR_FILENO);
+		ft_putstr_fd(cmd.full_cmd[1], STDERR_FILENO);
+		ft_putstr_fd(" not a valid identifier\n", STDERR_FILENO);
 		handle_exit(mish, NULL, FAILURE, if_exit);
 		return ;
 	}
