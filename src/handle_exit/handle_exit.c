@@ -6,11 +6,12 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/04 16:21:42 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:47:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <sys/types.h>
 
 void	free_scmd(void *content)
 {

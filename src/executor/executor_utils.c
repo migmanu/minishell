@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 17:16:32 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:54:22 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ void	dup_cmd(t_scmd *cmd)
 	if (cmd->in_fd != STDIN_FILENO)
 	{
 		dup2(cmd->in_fd, STDIN_FILENO);
+	}
+}
+
+void	clean_executor(t_data *mish)
+{
+	if (mish->cmds)
+		ft_lstclear(&mish->cmds, free_scmd);
+	if (mish->pids)
+	{
+		free(mish->pids);
+		mish->pids = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 12:30:54 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 17:54:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char				*get_path(t_data *mish, char *cmd);
 void				set_file_descriptors(t_data *mish, int fds[2], int *c);
 void				dup_cmd(t_scmd *cmd);
 void				exec_cmd(t_data *mish, t_scmd *cmd);
+void				clean_executor(t_data *mish);
 
 // testing
 void				create_mock_mish(t_data *mish, char *line);
