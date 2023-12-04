@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 09:28:01 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:03:10 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ static int	add_custom_vars(t_data *mish, char **vars, int c[])
 	while (vars[c[0]] != NULL && c[2] == 1)
 	{
 		get_key_and_value(vars, &key, &value, c);
+		if (check_key(key) == 0)
+		{
+			c[0]++;
+			continue ;
+		}
 		custom = get_hashmap_custom(mish->env, key);
 		search_and_delete(mish, key);
 		c[2] = (hashmap_insert(key, value, mish->env, custom) != NULL);
@@ -66,49 +71,46 @@ static int	add_custom_vars(t_data *mish, char **vars, int c[])
 	return (c[2]);
 }
 
-static int	check_key(const char *key)
+static int	export_loop(t_data *mish, t_scmd cmd, int *c)
 {
+	int	result;
 	int	i;
 
-	i = 0;
-	if (key[0] == '\0' || key[0] == '=')
-		return (0);
-	while (key[i] != '\0' && key[i] != '=')
+	result = SUCCESS;
+	i = 1;
+	while (cmd.full_cmd[i] != NULL)
 	{
-		if (ft_isalpha(key[i]) == 0 && key[i] != '=')
-			return (0);
-		if (key[i] == '=' && ft_isalpha(key[i - 1]) == 0 && key[i + 1] != '\0')
-			return (0);
+		if (check_key(cmd.full_cmd[i]) == 0)
+		{
+			ft_putstr_fd("mish: export: ", STDERR_FILENO);
+			ft_putstr_fd(cmd.full_cmd[i], STDERR_FILENO);
+			ft_putstr_fd(" not a valid identifier\n", STDERR_FILENO);
+			result = FAILURE;
+		}
+		else 
+		{
+			if (add_custom_vars(mish, cmd.full_cmd, c) == 0)
+				result = HASH_FULL;
+		}
 		i++;
 	}
-	return (1);
+	return (result);
 }
 
 void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	c[3];
+	int	result;
 
-	c[0] = 1;
-	c[1] = 0;
-	c[2] = 1;
 	if (cmd.full_cmd[1] == NULL)
 	{
 		hashmap_print_table(mish->env, 1);
 		handle_exit(mish, NULL, SUCCESS, if_exit);
 		return ;
 	}
-	if (check_key(cmd.full_cmd[1]) == 0)
-	{
-		ft_putstr_fd("mish: export: ", STDERR_FILENO);
-		ft_putstr_fd(cmd.full_cmd[1], STDERR_FILENO);
-		ft_putstr_fd(" not a valid identifier\n", STDERR_FILENO);
-		handle_exit(mish, NULL, FAILURE, if_exit);
-		return ;
-	}
-	if (add_custom_vars(mish, cmd.full_cmd, c) == 0)
-	{
-		handle_exit(mish, NULL, HASH_FULL, if_exit);
-		return ;
-	}
-	handle_exit(mish, NULL, SUCCESS, if_exit);
+	c[0] = 1;
+	c[1] = 0;
+	c[2] = 1;
+	result = export_loop(mish, cmd, c);
+	handle_exit(mish, NULL, result, if_exit);
 }

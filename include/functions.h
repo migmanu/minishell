@@ -103,6 +103,7 @@ void				mish_exit(t_data *mish, t_scmd cmd);
 void				mish_pwd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_cd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_export(t_data *mish, t_scmd cmd, int if_exit);
+int					check_key(const char *key);
 void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_env(t_data *mish, t_scmd cmd, int if_exit);
