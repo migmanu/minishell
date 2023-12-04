@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 13:09:31 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 16:10:05 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum e_mish_err
 	IS_DIR,
 	HIS_WRONG_ARG,
 	HIS_WRONG_ARGS,
+	CD_ERR,
 	NO_PERM = 126,
 	NO_FILE = 127,
 };
