@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 17:54:44 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:59:30 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int					check_key(const char *key);
 void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_env(t_data *mish, t_scmd cmd, int if_exit);
+int					add_envp(t_hashmap *envs, char *str);
 void				mish_history(t_data *mish, t_scmd cmd, int if_exit);
 
 void				search_and_delete(t_data *mish, char *key);
