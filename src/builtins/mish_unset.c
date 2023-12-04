@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:28:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 12:20:54 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:28:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	check_key(const char *key)
 		return (0);
 	while (key[i] != '\0' && key[i] != '=')
 	{
-		if (ft_isalpha(key[i]) == 0 && key[i] != '=')
+		if (ft_isalnum(key[i]) == 0 && key[i] != '=')
 			return (0);
-		if (key[i] == '=' && ft_isalpha(key[i - 1]) == 0 && key[i + 1] != '\0')
+		if (key[i] == '=' && ft_isalnum(key[i - 1]) == 0 && key[i + 1] != '\0')
 			return (0);
 		i++;
 	}
