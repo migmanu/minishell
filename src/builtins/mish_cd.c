@@ -6,11 +6,12 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 13:40:12 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:13:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 static int	change_dir(t_data *mish, char *pwd, char *old_pwd, int if_exit)
 {
@@ -70,6 +71,12 @@ void	mish_cd(t_data *mish, t_scmd cmd, int if_exit)
 	char	*pwd;
 	char	*old_pwd;
 
+	if (cmd.full_cmd[2] != NULL)
+	{
+		ft_putstr_fd("mish: cd: too many arguments\n", STDERR_FILENO);
+		handle_exit(mish, NULL, FAILURE, if_exit);
+		return ;
+	}
 	pwd = cmd.full_cmd[1];
 	old_pwd = ft_strdup(hashmap_search(mish->env, "PWD"));
 	if (expand_pwd(mish, &pwd, cmd.full_cmd[1], if_exit) == FAILURE)
