@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/30 11:52:55 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 13:40:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	change_dir(t_data *mish, char *pwd, char *old_pwd, int if_exit)
 		handle_exit(mish, "mish: cd: hashmap insert failed", FAILURE, if_exit);
 		return (FAILURE);
 	}
-	search_and_delete(mish, "OLDPWD");
 	search_and_delete(mish, "PWD");
+	search_and_delete(mish, "OLDPWD");
 	if (hashmap_insert("PWD", curr, mish->env, 0) == NULL
 		|| hashmap_insert("OLDPWD", old_pwd, mish->env, 0) == NULL)
 	{
