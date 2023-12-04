@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 15:59:38 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:26:20 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ void	executor(t_data *mish)
 	wait_loop(mish, c);
 	if (mish->cmds)
 		ft_lstclear(&mish->cmds, free_scmd);
-	if (mish->pids)
-		free(mish->pids);
+	/*if (mish->pids)*/
+		/*free(mish->pids);*/
 }
