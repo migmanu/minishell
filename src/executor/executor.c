@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 16:26:20 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:25:40 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,24 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 
 	len = 0;
 	builtins_router(mish, *cmd, IS_EXIT);
-	cmd->path = get_path(mish, cmd->full_cmd[0]);
+	cmd->path = NULL;
+	if (cmd->full_cmd[0][0] != '/')
+		cmd->path = get_path(mish, cmd->full_cmd[0]);
 	hashmap_to_matrix(mish->env, &env, 0, 0);
+	if (cmd->path == NULL)
+		cmd->path = ft_strdup(cmd->full_cmd[0]);
 	if (execve(cmd->path, cmd->full_cmd, env) != 0)
 	{
-		if (execve(cmd->full_cmd[0], cmd->full_cmd, env) != 0)
-		{
-			len = ft_strlen(cmd->full_cmd[0]);
-			if (cmd->full_cmd[0][len - 1] == '/'
-				|| cmd->full_cmd[0][len - 1] == '.')
-				handle_exit(mish, cmd->full_cmd[0], IS_DIR, IS_EXIT);
-			else if (cmd->full_cmd[0][0] == '/')
-				handle_exit(mish, cmd->full_cmd[0], NO_FILE, IS_EXIT);
-			else
-				handle_exit(mish, cmd->full_cmd[0], CMD_NOT_FOUND, IS_EXIT);
-		}
+		free(cmd->path);
+		cmd->path = NULL;
+		len = ft_strlen(cmd->full_cmd[0]);
+		if (cmd->full_cmd[0][len - 1] == '/'
+			|| cmd->full_cmd[0][len - 1] == '.')
+			handle_exit(mish, cmd->full_cmd[0], IS_DIR, IS_EXIT);
+		else if (cmd->full_cmd[0][0] == '/')
+			handle_exit(mish, cmd->full_cmd[0], NO_FILE, IS_EXIT);
+		else
+			handle_exit(mish, cmd->full_cmd[0], CMD_NOT_FOUND, IS_EXIT);
 	}
 }
 
