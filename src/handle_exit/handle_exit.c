@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/04 13:21:54 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 15:57:51 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	print_error2(int err)
 		ft_putstr_fd(": numeric argument required", STDERR_FILENO);
 	else if (err == HIS_WRONG_ARGS)
 		ft_putstr_fd("too many arguments", STDERR_FILENO);
+	else if (err == NO_FILE)
+		ft_putstr_fd(": No such file or directory", STDERR_FILENO);
 }
 
 void	print_error(char *param, int err)
@@ -61,8 +63,6 @@ void	print_error(char *param, int err)
 		ft_putstr_fd("Fork error.", STDERR_FILENO);
 	else if (err == UNQUOTE)
 		ft_putstr_fd("Unmatch quote", STDERR_FILENO);
-	else if (err == NO_FILE)
-		ft_putstr_fd("No such file or directory: ", STDERR_FILENO);
 	else if (err == NO_PERM)
 		ft_putstr_fd("Permission denied: ", STDERR_FILENO);
 	else if (err == PIPE_ERR)
