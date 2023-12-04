@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/01 17:30:10 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 09:53:39 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void	print_error(char *param, int err)
 		ft_putstr_fd("syntax error near unexpected token ", STDERR_FILENO);
 	else if (err == HASH_FULL)
 		ft_putstr_fd("Insert Error: Hash Table is full", STDERR_FILENO);
+	else if (err == NO_MEM)
+		ft_putstr_fd("No memory left on device: ", STDERR_FILENO);
 	if (param)
 		ft_putstr_fd(param, STDERR_FILENO);
+	if (err == CMD_NOT_FOUND)
+		ft_putstr_fd(": command not found", STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
