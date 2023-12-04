@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 20:26:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 09:54:05 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 	{
 		if (execve(cmd->full_cmd[0], cmd->full_cmd, env) != 0)
 		{
-			handle_exit(mish, cmd->full_cmd[0], NO_FILE, IS_EXIT);
+			handle_exit(mish, cmd->full_cmd[0], CMD_NOT_FOUND, IS_EXIT);
 		}
 	}
 }
@@ -99,7 +99,7 @@ void	executor(t_data *mish)
 	set_file_descriptors(mish, fds, &c);
 	mish->pids = malloc(sizeof(int) * c);
 	if (!mish->pids)
-		handle_exit(mish, "malloc failed!", FAILURE, NOT_EXIT);
+		handle_exit(mish, "exec", FAILURE, NOT_EXIT);
 	executor_loop(mish, c);
 	wait_loop(mish, c);
 	if (mish->cmds)

@@ -6,12 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 21:58:08 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 09:28:01 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 static int	get_hashmap_custom(t_hashmap *env, char *key)
 {

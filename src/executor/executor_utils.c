@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 20:19:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 09:50:00 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*get_path(t_data *mish, char *cmd)
 
 	i = 0;
 	path_vec = ft_split(hashmap_search(mish->env, "PATH") + 5, ':');
-	i = 0;
 	while (path_vec[i])
 	{
 		tmp_path = ft_strjoin("/", cmd);
