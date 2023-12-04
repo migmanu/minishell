@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 09:54:05 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:25:32 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 	{
 		if (execve(cmd->full_cmd[0], cmd->full_cmd, env) != 0)
 		{
+			if (cmd->full_cmd[0][0] == '/')
+				handle_exit(mish, cmd->full_cmd[0], IS_DIR, IS_EXIT);
 			handle_exit(mish, cmd->full_cmd[0], CMD_NOT_FOUND, IS_EXIT);
 		}
 	}

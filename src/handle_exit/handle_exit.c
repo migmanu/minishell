@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/04 09:53:39 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:14:56 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ static void	clean_and_exit(t_data *mish)
 	exit(g_exit_status);
 }
 
+void	print_error2(int err)
+{
+	if (err == CMD_NOT_FOUND)
+		ft_putstr_fd(": command not found", STDERR_FILENO);
+	else if (err == IS_DIR)
+		ft_putstr_fd(": is a directory", STDERR_FILENO);
+}
+
 void	print_error(char *param, int err)
 {
 	ft_putstr_fd("mish: ", STDERR_FILENO);
@@ -63,8 +71,7 @@ void	print_error(char *param, int err)
 		ft_putstr_fd("No memory left on device: ", STDERR_FILENO);
 	if (param)
 		ft_putstr_fd(param, STDERR_FILENO);
-	if (err == CMD_NOT_FOUND)
-		ft_putstr_fd(": command not found", STDERR_FILENO);
+	print_error2(err);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
@@ -76,6 +83,10 @@ void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 		g_exit_status = 1;
 	else if (err == SYNTAX_ERR)
 		g_exit_status = 2;
+	else if (err == CMD_NOT_FOUND)
+		g_exit_status = 127;
+	else if (err == IS_DIR)
+		g_exit_status = 126;
 	else
 		g_exit_status = err;
 	if (err != SUCCESS && err != FAILURE && err != ERROR)
