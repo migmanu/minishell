@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 21:16:34 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:00:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,9 @@ char	*init_prompt(t_data *mish)
 		return (NULL);
 	}
 	if (line[0] != '\0')
+	{
+		add_mish_history(mish, line);
 		add_history(line);
+	}
 	return (line);
 }

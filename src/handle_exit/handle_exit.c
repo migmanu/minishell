@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/04 10:14:56 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 13:21:54 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	print_error2(int err)
 		ft_putstr_fd(": command not found", STDERR_FILENO);
 	else if (err == IS_DIR)
 		ft_putstr_fd(": is a directory", STDERR_FILENO);
+	else if (err == HIS_WRONG_ARG)
+		ft_putstr_fd(": numeric argument required", STDERR_FILENO);
+	else if (err == HIS_WRONG_ARGS)
+		ft_putstr_fd("too many arguments", STDERR_FILENO);
 }
 
 void	print_error(char *param, int err)
@@ -69,6 +73,8 @@ void	print_error(char *param, int err)
 		ft_putstr_fd("Insert Error: Hash Table is full", STDERR_FILENO);
 	else if (err == NO_MEM)
 		ft_putstr_fd("No memory left on device: ", STDERR_FILENO);
+	else if (err == HIS_WRONG_ARG || err == HIS_WRONG_ARGS)
+		ft_putstr_fd("history: ", STDERR_FILENO);
 	if (param)
 		ft_putstr_fd(param, STDERR_FILENO);
 	print_error2(err);
@@ -79,7 +85,8 @@ void	print_error(char *param, int err)
 // allocated memory and exits with g_exit_status
 void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 {
-	if (err == FORK_ERR || err == PIPE_ERR)
+	if (err == FORK_ERR || err == PIPE_ERR || err == HIS_WRONG_ARG
+		|| err == HIS_WRONG_ARGS)
 		g_exit_status = 1;
 	else if (err == SYNTAX_ERR)
 		g_exit_status = 2;

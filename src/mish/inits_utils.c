@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_to_hashmap.c                                   :+:      :+:    :+:   */
+/*   inits_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:55:28 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/11/28 21:14:46 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:36:01 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	add_mish_history(t_data *mish, char *line)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(line);
+	if (!tmp)
+		return ;
+	mish->history = ft_extend_matrix(mish->history, tmp);
+	free(tmp);
+}
 
 static char	*dup_key(char *env_line)
 {
