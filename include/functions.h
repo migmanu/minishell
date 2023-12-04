@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 11:37:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/04 12:30:54 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 # include "structs.h"
 
+// MISH
+// init_prompt.c
 char				*init_prompt(t_data *mish);
 // init_mish.c
 void				init_mish(t_data *mish, char *argv[], char *envp[]);
-// env_to_hash.c
+// inits_utils.c
 t_hashmap			*env_to_hash(char **env);
+void				add_mish_history(t_data *mish, char *line);
 // utils.c
 char				*ft_strjoin_var(unsigned int arg_size, ...);
 char				**hashmap_to_matrix(t_hashmap *env, char ***matrix,
@@ -104,6 +107,7 @@ int					check_key(const char *key);
 void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_env(t_data *mish, t_scmd cmd, int if_exit);
+void				mish_history(t_data *mish, t_scmd cmd, int if_exit);
 
 void				search_and_delete(t_data *mish, char *key);
 #endif

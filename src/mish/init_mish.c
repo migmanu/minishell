@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/28 21:13:16 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:09:20 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	init_mish(t_data *mish, char *argv[], char *envp[])
 	mish->cmds = NULL;
 	mish->env = env_to_hash(envp);
 	mish->pids = NULL;
+	mish->pid = 0;
+	mish->old_pwd = NULL;
+	mish->uid = 0;
+	mish->history = NULL;
 	check_env(mish, argv);
 	get_sh_pid(mish);
 }
