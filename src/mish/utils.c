@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:36:20 by johnavar          #+#    #+#             */
-/*   Updated: 2023/11/30 11:36:25 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/04 13:45:26 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	search_and_delete(t_data *mish, char *key)
 		return ;
 	if (hashmap_delete(mish->env, key) == FAILURE)
 	{
-		ft_putstr_fd("mish: export: hashmap_delete error\n", STDERR_FILENO);
+		ft_putstr_fd("mish: ", STDERR_FILENO);
+		ft_putstr_fd(key, STDERR_FILENO);
+		ft_putstr_fd(" hashmap_delete error\n", STDERR_FILENO);
 		return ;
 	}
 }
