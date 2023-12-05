@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:28:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 18:28:44 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:24:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,12 @@ static int	unset_loop(t_data *mish, t_scmd cmd, int *c)
 
 void	mish_unset(t_data *mish, t_scmd cmd, int if_exit)
 {
-	int	result;
-	int	i;
 	int	c[2];
 
 	c[0] = -1;
 	c[1] = 0;
-	i = 1;
 	if (cmd.full_cmd[1] == NULL)
 		handle_exit(mish, NULL, SUCCESS, if_exit);
-	result = unset_loop(mish, cmd, c);
+	unset_loop(mish, cmd, c);
 	handle_exit(mish, NULL, SUCCESS, if_exit);
 }
