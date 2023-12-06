@@ -6,14 +6,14 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:58:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/24 11:45:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:14:48 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // checks if the -n flag is used un any form, even
-// incorrectly used like -nnnn. Returns 1 if str
+// incorrectly used like -nnnn. Returns 0 if str
 // is not flag
 static int	check_flag(char *str)
 {
@@ -27,10 +27,10 @@ static int	check_flag(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] != 'n')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 // Imitates Bash's echo function. If if_exit set to true (1),
@@ -45,7 +45,7 @@ void	mish_echo(t_data *mish, t_scmd cmd, int if_exit)
 	f = 0;
 	while (cmd.full_cmd[i] != NULL)
 	{
-		if (check_flag(cmd.full_cmd[i]) != 0 || f == 1)
+		if (check_flag(cmd.full_cmd[i]) != 1 || f == 1)
 		{
 			f = 1;
 			ft_putstr_fd(cmd.full_cmd[i], cmd.out_fd);

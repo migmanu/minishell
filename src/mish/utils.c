@@ -6,12 +6,13 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:36:20 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/04 13:45:26 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:10:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Wrapper for the hashmap_delete function.
 void	search_and_delete(t_data *mish, char *key)
 {
 	if (hashmap_search_key(mish->env, key) == NULL)

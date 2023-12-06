@@ -6,12 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 17:55:40 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:19:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// First goes for builtin functions. If none found, executes binary
+// if one is found. It also checks for cases like '/' and prints
+// proper error.
 void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
 	char	**env;
@@ -91,7 +94,7 @@ void	wait_loop(t_data *mish, int c)
 }
 
 // Handles execution. If only one, built-in command,
-// no fork is done.
+// that is not `env`, no fork is done.
 void	executor(t_data *mish)
 {
 	t_scmd	*first;
