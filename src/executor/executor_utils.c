@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 12:08:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:23:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,16 @@ void	set_file_descriptors(t_data *mish, int fds[2], int *c)
 			{
 				cmd->out_fd = fds[1];
 			}
-			if (next_cmd->in_fd == STDIN_FILENO)
+			if (next_cmd->in_fd == STDIN_FILENO && cmd->out_fd == fds[1])
 			{
 				next_cmd->in_fd = fds[0];
 			}
+			if (cmd->out_fd != fds[1])
+			{
+				close(fds[0]);
+				close(fds[1]);
+			}
+			printf("cmd out: %d, next cmd in: %d\n", cmd->out_fd, next_cmd->in_fd);
 		}
 		curr = curr->next;
 	}
