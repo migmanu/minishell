@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 16:02:51 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 11:58:34 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	add_custom_vars(t_data *mish, char **vars, int c[])
 	while (vars[c[0]] != NULL && c[2] == 1)
 	{
 		get_key_and_value(vars, &key, &value, c);
-		if (check_key(key) == 0)
+		if (check_key(key, -1, 1) == 0)
 		{
 			c[0]++;
 			continue ;
@@ -80,7 +80,7 @@ static int	export_loop(t_data *mish, t_scmd cmd, int *c)
 	i = 1;
 	while (cmd.full_cmd[i] != NULL)
 	{
-		if (check_key(cmd.full_cmd[i]) == 0)
+		if (check_key(cmd.full_cmd[i], -1, 1) == 0)
 		{
 			ft_putstr_fd("mish: export: ", STDERR_FILENO);
 			ft_putstr_fd(cmd.full_cmd[i], STDERR_FILENO);
