@@ -6,23 +6,22 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 17:51:51 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 20:31:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 // First goes for builtin functions. If none found, executes binary
 // if one is found. It also checks for cases like '/' and prints
-// proper error.
-void	exec_cmd(t_data *mish, t_scmd *cmd)
+// proper error. len must always be set to 0.
+void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
 {
 	char	**env;
-	int		len;
 
 	if (cmd->full_cmd == NULL)
 		handle_exit(mish, NULL, SUCCESS, IS_EXIT);
-	len = 0;
 	builtins_router(mish, *cmd, IS_EXIT);
 	cmd->path = NULL;
 	if (cmd->full_cmd[0][0] != '/')
@@ -53,7 +52,7 @@ void	fork_cmds(t_data *mish, t_scmd *cmd, int pids[], int c)
 	if (pids[c] == 0)
 	{
 		dup_cmd(cmd);
-		exec_cmd(mish, cmd);
+		exec_cmd(mish, cmd, 0);
 	}
 	else
 	{
