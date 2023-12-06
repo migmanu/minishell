@@ -6,12 +6,12 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/06 19:38:11 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:30:33 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <asm-generic/ioctls.h>
+// #include <asm-generic/ioctls.h>
 #include <readline/readline.h>
 #include <unistd.h>
 
