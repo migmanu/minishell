@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 17:55:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:43:43 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_data {
 	char		*old_pwd;
 	int			uid;
 	char		**history;
+	int			in_cmd;
 }	t_data;
 
 #endif

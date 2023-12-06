@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 17:59:30 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:01:19 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ void				free_scmd(void *content);
 
 // SIGNALS
 // singals.c
-void				config_signals(void);
+void				config_signals(t_data *mish);
 
 // executor
 void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
 void				set_file_descriptors(t_data *mish, int fds[2], int *c);
 void				dup_cmd(t_scmd *cmd);
-void				exec_cmd(t_data *mish, t_scmd *cmd);
+void				exec_cmd(t_data *mish, t_scmd *cmd, int len);
 void				clean_executor(t_data *mish);
 
 // testing
@@ -104,7 +104,7 @@ void				mish_exit(t_data *mish, t_scmd cmd);
 void				mish_pwd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_cd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_export(t_data *mish, t_scmd cmd, int if_exit);
-int					check_key(const char *key);
+int					check_key(const char *key, int i, int exp);
 void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_env(t_data *mish, t_scmd cmd, int if_exit);

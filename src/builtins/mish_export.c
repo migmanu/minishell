@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:25:59 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 16:02:51 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:22:04 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	get_hashmap_custom(t_hashmap *env, char *key)
 	return (1);
 }
 
+// Separates vars into key and value. Does not check for proper format. 
 static void	get_key_and_value(char **vars, char **key, char **value, int c[])
 {
 	if (ft_strchr(vars[c[0]], '=') == NULL)
@@ -56,7 +57,7 @@ static int	add_custom_vars(t_data *mish, char **vars, int c[])
 	while (vars[c[0]] != NULL && c[2] == 1)
 	{
 		get_key_and_value(vars, &key, &value, c);
-		if (check_key(key) == 0)
+		if (check_key(key, -1, 1) == 0)
 		{
 			c[0]++;
 			continue ;
@@ -80,7 +81,7 @@ static int	export_loop(t_data *mish, t_scmd cmd, int *c)
 	i = 1;
 	while (cmd.full_cmd[i] != NULL)
 	{
-		if (check_key(cmd.full_cmd[i]) == 0)
+		if (check_key(cmd.full_cmd[i], -1, 1) == 0)
 		{
 			ft_putstr_fd("mish: export: ", STDERR_FILENO);
 			ft_putstr_fd(cmd.full_cmd[i], STDERR_FILENO);
@@ -97,6 +98,11 @@ static int	export_loop(t_data *mish, t_scmd cmd, int *c)
 	return (result);
 }
 
+// Imitates the bash function export. Works with no flags.
+// If if_exit set to true (1), mish_cd will kill 
+// current process. False used for when only one 
+// builtin command inputed. If no arg, it just prints
+// current custom vars.
 void	mish_export(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	c[3];

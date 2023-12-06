@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 16:49:40 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:13:43 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	get_dirs(t_data *mish, char **curr, char *pwd, int if_exit)
 	return (SUCCESS);
 }
 
+// Changes  PWD and OLDPWD, deleting and freeing previous 
+// versions.
 static int	change_dir(t_data *mish, char *pwd, int if_exit)
 {
 	char	*curr;
@@ -52,6 +54,7 @@ static int	change_dir(t_data *mish, char *pwd, int if_exit)
 	return (SUCCESS);
 }
 
+// Expands th '~' and cd with no arguments into home dir.
 static int	expand_pwd(t_data *mish, char **pwd, char *arg, int if_exit)
 {
 	if (*pwd == NULL)

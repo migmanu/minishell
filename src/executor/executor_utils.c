@@ -6,12 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 17:54:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:13:18 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <unistd.h>
 
+// Variation of a classic get_path function that
+// uses our hashmap as source.
 char	*get_path(t_data *mish, char *cmd)
 {
 	char	**path_vec;
@@ -63,6 +66,31 @@ void	clean_executor(t_data *mish)
 	}
 }
 
+static void	pipe_cmds(t_scmd *cmd, t_scmd *next_cmd, int fds[])
+{
+	pipe(fds);
+	if (cmd->out_fd == STDOUT_FILENO)
+	{
+		cmd->out_fd = fds[1];
+	}
+	if (next_cmd->in_fd == STDIN_FILENO)
+	{
+		next_cmd->in_fd = fds[0];
+	}
+	if (cmd->out_fd != fds[1])
+	{
+		printf("closing write\n");
+		close(fds[1]);
+	}
+	if (next_cmd->in_fd != fds[0])
+	{
+		printf("closing read\n");
+		close(fds[0]);
+	}
+	printf("cmd out: %d, next cmd in: %d\n", cmd->out_fd, next_cmd->in_fd);
+	printf("pipe write %d, read %d\n", fds[1], fds[0]);
+}
+
 // If pipes are present, modifies the fd_in and fd_out of each
 // command, except the fd_in of the first and the fd_out of
 // the last one. Those need to be set before. C ends up as a
@@ -81,15 +109,7 @@ void	set_file_descriptors(t_data *mish, int fds[2], int *c)
 		if (curr->next != NULL)
 		{
 			next_cmd = curr->next->content;
-			pipe(fds);
-			if (cmd->out_fd == STDOUT_FILENO)
-			{
-				cmd->out_fd = fds[1];
-			}
-			if (next_cmd->in_fd == STDIN_FILENO)
-			{
-				next_cmd->in_fd = fds[0];
-			}
+			pipe_cmds(cmd, next_cmd, fds);
 		}
 		curr = curr->next;
 	}
