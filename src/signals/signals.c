@@ -6,31 +6,36 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/06 18:35:56 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:06:50 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <asm-generic/ioctls.h>
 #include <readline/readline.h>
+#include <unistd.h>
 
 static void	handle_sigint(int signum)
 {
 	if (signum == SIGINT)
 	{
 		g_exit_status = 128 + signum;
-		write(1, "\n", 1);
+		// write(1, "\n", 1);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		rl_redisplay();
+		// rl_redisplay();
 	}
 }
 
+// Blocking command 
 static void	handle_sigint_ln(int signum)
 {
 	if (signum == SIGINT)
 	{
 		g_exit_status = 128 + signum;
 		write(1, "\n", 1);
+		//ioctl(STDIN_FILENO, TIOCSTI, NULL);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
