@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/1/13 14:01:08 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 12:15:45 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:09:42 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // returns 0 if the str corresponds to the name
 // of a builtin function. 1 otherwise.
+// TODO: inver return values for consistency
 int	check_if_builtin(const char *str)
 {
 	if (ft_strncmp("echo", str, 5) == 0)

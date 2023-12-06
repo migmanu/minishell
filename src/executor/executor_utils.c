@@ -6,12 +6,14 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 17:54:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:08:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Variation of a classic get_path function that
+// uses our hashmap as source.
 char	*get_path(t_data *mish, char *cmd)
 {
 	char	**path_vec;

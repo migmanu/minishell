@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:13:15 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 13:26:46 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:41:48 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static int	is_nbr(char *str)
 	return (1);
 }
 
+// Prints the command history. If if_exit set to true, exits
+// the process. False is generally used for cases of single
+// builtin commands that require no fork.
 void	mish_history(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	len;

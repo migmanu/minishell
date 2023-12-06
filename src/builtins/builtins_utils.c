@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:12:58 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 17:59:14 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:11:47 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	ft_chr_pos(const char *str, const char c)
 	return (-1);
 }
 
+// Wraper for the hashmap_insert function that
+// divides str in key and value, if any. It
+// also searches for and deletes, any previous
+// version of a to be inserted key.
 int	add_envp(t_hashmap *envs, char *str)
 {
 	char	*key;

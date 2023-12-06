@@ -6,12 +6,15 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:25:19 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/03 20:10:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:09:07 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Imitates Bash's pwd function. If if_exit set to IS_EXIT (1),
+// mish_cd will kill current process. NOT_EXIT used for when
+// only one builtin command inputed
 void	mish_pwd(t_data *mish, t_scmd cmd, int if_exit)
 {
 	char	*str;

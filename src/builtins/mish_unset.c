@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:28:11 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 12:02:24 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:09:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ static int	unset_loop(t_data *mish, t_scmd cmd, int *c)
 	return (c[1]);
 }
 
+// Imitates Bash's unset function. If if_exit set to IS_EXIT (1),
+// mish_cd will kill current process. NOT_EXIT used for when
+// only one builtin command inputed. Unset has less syntax
+// requirements than export.
 void	mish_unset(t_data *mish, t_scmd cmd, int if_exit)
 {
 	int	result;

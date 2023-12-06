@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:08:00 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 18:00:33 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:16:04 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ static void	check_if_cmd(t_data *mish, t_scmd *cmd)
 
 // Imitates the bash function env. Works with no flags.
 // Makes a copy of the mish envp and works with that.
+// If if_exit set to true (1), mish_cd will kill 
+// current process. False used for when only one 
+// builtin command inputed.
 void	mish_env(t_data *mish, t_scmd cmd, int if_exit)
 {
 	t_hashmap	*env_cpy;
