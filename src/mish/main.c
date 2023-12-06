@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/06 19:06:01 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:38:16 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char *argv[], char *envp[])
 		handle_exit(NULL, argv[1], INV_ARGS, IS_EXIT);
 	init_mish(&mish, argv, envp);
 	mish.in_cmd = 0;
-	g_in_hr = 0;
 	while (1)
 	{
 		config_signals(&mish);
