@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/06 17:27:25 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:34:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static char	*get_heredoc_str(char *str[2], size_t len, char *limit, char *err)
 	while (g_exit_status != 130 && (!str[0] || ft_strncmp(str[0], limit, len)
 			|| ft_strlen(limit) != len))
 	{
+		printf("exit status %d\n", g_exit_status);
 		tmp = str[1];
 		str[1] = ft_strjoin(str[1], str[0]);
 		free(tmp);
