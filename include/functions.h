@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/04 17:59:30 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:00:08 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void				mish_exit(t_data *mish, t_scmd cmd);
 void				mish_pwd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_cd(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_export(t_data *mish, t_scmd cmd, int if_exit);
-int					check_key(const char *key);
+int					check_key(const char *key, int i, int exp);
 void				mish_unset(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_echo(t_data *mish, t_scmd cmd, int if_exit);
 void				mish_env(t_data *mish, t_scmd cmd, int if_exit);
