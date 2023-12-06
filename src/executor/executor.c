@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 16:52:56 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:51:51 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 	char	**env;
 	int		len;
 
+	if (cmd->full_cmd == NULL)
+		handle_exit(mish, NULL, SUCCESS, IS_EXIT);
 	len = 0;
 	builtins_router(mish, *cmd, IS_EXIT);
 	cmd->path = NULL;
@@ -105,11 +107,11 @@ void	executor(t_data *mish)
 	if (!mish->cmds)
 		return ;
 	first = mish->cmds->content;
-	if (first->full_cmd == NULL)
-		return ;
-	if (mish->cmds->next == NULL && check_if_builtin(first->full_cmd[0]) == 0
+	if (mish->cmds->next == NULL && first->full_cmd != NULL
+		&& check_if_builtin(first->full_cmd[0]) == 0
 		&& ft_strncmp("env", first->full_cmd[0], 3) != 0)
 	{
+		printf("onpye one\n");
 		builtins_router(mish, *first, NOT_EXIT);
 		return ;
 	}
