@@ -6,13 +6,13 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/07 17:46:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 19:49:46 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	close_fds(t_data *mish)
+void	close_fds(t_data *mish, t_scmd *cmd)
 {
 	t_scmd	*node;
 	t_list	*curr;
@@ -21,6 +21,13 @@ void	close_fds(t_data *mish)
 	while (curr != NULL)
 	{
 		node = curr->content;
+		if (node == cmd)
+		{
+			ft_putstr_fd(cmd->full_cmd[0], STDERR_FILENO);
+			ft_putstr_fd(" same!\n", STDERR_FILENO);
+			curr = curr->next;
+			continue ;
+		}
 		if (node->in_fd != STDIN_FILENO)
 			close(node->in_fd);
 		if (node->out_fd != STDOUT_FILENO)
@@ -74,7 +81,7 @@ void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 		g_exit_status = err;
 	if (err != SUCCESS && err != FAILURE && err != ERROR)
 		print_error(param, err);
-	close_fds(mish);
+	close_fds(mish, NULL);
 	if (is_exit)
 		clean_and_exit(mish);
 }
