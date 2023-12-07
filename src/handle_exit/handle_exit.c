@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/04 17:47:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:45:43 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	print_error2(int err)
 		ft_putstr_fd(": numeric argument required", STDERR_FILENO);
 	else if (err == HIS_WRONG_ARGS)
 		ft_putstr_fd("too many arguments", STDERR_FILENO);
-	else if (err == NO_FILE)
+	else if (err == NO_FILE || err == CD_ERR)
 		ft_putstr_fd(": No such file or directory", STDERR_FILENO);
+	else if (err == NOT_DIR)
+		ft_putstr_fd(": Not a directory", STDERR_FILENO);
 }
 
 void	print_error(char *param, int err)
@@ -87,7 +89,7 @@ void	print_error(char *param, int err)
 void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 {
 	if (err == FORK_ERR || err == PIPE_ERR || err == HIS_WRONG_ARG
-		|| err == HIS_WRONG_ARGS || err == CD_ERR)
+		|| err == HIS_WRONG_ARGS || err == CD_ERR || err == NOT_DIR)
 		g_exit_status = 1;
 	else if (err == SYNTAX_ERR)
 		g_exit_status = 2;

@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:34:46 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/06 15:43:43 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:44:27 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum e_mish_err
 	NO_MEM,
 	CMD_NOT_FOUND,
 	IS_DIR,
+	NOT_DIR,
 	HIS_WRONG_ARG,
 	HIS_WRONG_ARGS,
 	CD_ERR,
