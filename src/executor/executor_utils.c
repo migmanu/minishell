@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 21:13:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:55:43 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ void	dup_cmd(t_scmd *cmd)
 	if (cmd->out_fd != STDOUT_FILENO)
 	{
 		dup2(cmd->out_fd, STDOUT_FILENO);
+		// close(cmd->out_fd);
 	}
 	if (cmd->in_fd != STDIN_FILENO)
 	{
 		dup2(cmd->in_fd, STDIN_FILENO);
+		// close(cmd->in_fd);
 	}
 }
 

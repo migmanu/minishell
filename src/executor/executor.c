@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 12:57:42 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 14:01:09 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	executor(t_data *mish)
 		&& check_if_builtin(first->full_cmd[0]) == 0
 		&& ft_strncmp("env", first->full_cmd[0], 3) != 0)
 	{
-		printf("onpye one\n");
 		builtins_router(mish, *first, NOT_EXIT);
 		return ;
 	}
