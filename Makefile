@@ -6,16 +6,35 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/11/19 00:30:21 by sebasnadu        ###   ########.fr        #
+#    Updated: 2023/12/07 16:01:49 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SOURCES
-SRCS_DIR = ./src
-SRCS = $(wildcard $(SRCS_DIR)/*/*.c)
-SRCS += $(wildcard $(SRCS_DIR)/main.c)
+SRCS_DIR = ./src/
+FILES = mish/main.c mish/init_mish.c mish/init_prompt.c mish/inits_utils.c \
+       mish/utils.c builtins/builtins_router.c  \
+       builtins/mish_cd.c builtins/mish_env.c builtins/mish_export.c \
+       builtins/mish_pwd.c builtins/builtins_utils.c builtins/mish_echo.c \
+       builtins/mish_exit.c builtins/mish_history.c builtins/mish_unset.c \
+       executor/executor.c executor/executor_utils.c \
+       handle_exit/handle_exit.c \
+       hashmap/hash_algo.c hashmap/hashmap_free_item.c \
+       hashmap/hashmap_print_table.c hashmap/hashmap_create_item.c \
+       hashmap/hashmap_free_table.c hashmap/hashmap_search.c \
+       hashmap/hashmap_create_table.c hashmap/hashmap_handle_collision.c \
+       hashmap/hashmap_search_key.c hashmap/hashmap_delete.c \
+       hashmap/hashmap_insert.c \
+       input_handler/expander_utils.c input_handler/input_handler.c \
+       input_handler/redirections_utils.c input_handler/tokenizer_utils.c \
+       input_handler/get_node.c input_handler/redirections.c \
+       input_handler/syntax_list_utils.c input_handler/utils.c \
+       signals/signals.c
 
-OBJ_FILES = $(patsubst %.c, %.o, $(SRCS))
+SRCS = $(addprefix $(SRCS_DIR), $(FILES))
+
+OBJ_DIR = ./obj/
+OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 #LIBFT
 LIBFT_DIR = ./libft
@@ -24,7 +43,8 @@ READLINE_MAC_PATH = /opt/homebrew/opt/readline
 
 #LIBRARIES
 ifeq ($(shell uname), Darwin)
-	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR)/includes -I$(READLINE_MAC_PATH)/include
+	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR)/includes \ 
+	-I$(READLINE_MAC_PATH)/include
 	LDFLAGS = -lreadline \
 			  -L$(READLINE_MAC_PATH)/lib -L$(LIBFT_DIR) -lft
 else
@@ -62,8 +82,8 @@ $(NAME): $(OBJ_FILES) $(LIBFT_PATH)
 $(LIBFT_PATH):
 	@make -C $(LIBFT_DIR) -s
 
-%.o: %.c
-	@git submodule update --init -q
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
