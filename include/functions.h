@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 12:46:26 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 17:57:45 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ int					get_fd(int oldfd, char *path, int flags[2]);
 void				handle_exit(t_data *mish, char *param,
 						int err, int is_exit);
 void				free_scmd(void *content);
+void				close_fds(t_data *mish);
+void				print_error(char *param, int err);
+void				print_error2(int err);
 
 // SIGNALS
 // singals.c
