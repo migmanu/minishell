@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 13:55:43 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:53:44 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ char	*get_path(t_data *mish, char *cmd)
 	int		i;
 
 	i = 0;
-	path_vec = ft_split(hashmap_search(mish->env, "PATH") + 5, ':');
+	tmp_path = hashmap_search(mish->env, "PATH");
+	if (tmp_path == NULL)
+		return (NULL);
+	path_vec = ft_split(tmp_path + 5, ':');
+	tmp_path = NULL;
 	path = NULL;
 	while (path_vec[i])
 	{
@@ -36,10 +40,7 @@ char	*get_path(t_data *mish, char *cmd)
 		path = NULL;
 		i++;
 	}
-	i = 0;
-	while (path_vec[i])
-		free(path_vec[i++]);
-	free(path_vec);
+	ft_matrixfree(&path_vec);
 	return (path);
 }
 
@@ -48,12 +49,10 @@ void	dup_cmd(t_scmd *cmd)
 	if (cmd->out_fd != STDOUT_FILENO)
 	{
 		dup2(cmd->out_fd, STDOUT_FILENO);
-		// close(cmd->out_fd);
 	}
 	if (cmd->in_fd != STDIN_FILENO)
 	{
 		dup2(cmd->in_fd, STDIN_FILENO);
-		// close(cmd->in_fd);
 	}
 }
 
@@ -68,6 +67,8 @@ void	clean_executor(t_data *mish)
 	}
 }
 
+// In charge of piping between commands. If any have in or out
+// already redirected, it closes that side of the pipe.
 static void	pipe_cmds(t_scmd *cmd, t_scmd *next_cmd, int fds[])
 {
 	pipe(fds);
@@ -81,16 +82,12 @@ static void	pipe_cmds(t_scmd *cmd, t_scmd *next_cmd, int fds[])
 	}
 	if (cmd->out_fd != fds[1])
 	{
-		printf("closing write\n");
 		close(fds[1]);
 	}
 	if (next_cmd->in_fd != fds[0])
 	{
-		printf("closing read\n");
 		close(fds[0]);
 	}
-	printf("cmd out: %d, next cmd in: %d\n", cmd->out_fd, next_cmd->in_fd);
-	printf("pipe write %d, read %d\n", fds[1], fds[0]);
 }
 
 // If pipes are present, modifies the fd_in and fd_out of each
