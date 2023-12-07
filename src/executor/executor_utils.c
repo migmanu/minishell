@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 21:13:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:15:01 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,12 @@ static void	pipe_cmds(t_scmd *cmd, t_scmd *next_cmd, int fds[])
 	}
 	if (cmd->out_fd != fds[1])
 	{
-		printf("closing write\n");
 		close(fds[1]);
 	}
 	if (next_cmd->in_fd != fds[0])
 	{
-		printf("closing read\n");
 		close(fds[0]);
 	}
-	printf("cmd out: %d, next cmd in: %d\n", cmd->out_fd, next_cmd->in_fd);
-	printf("pipe write %d, read %d\n", fds[1], fds[0]);
 }
 
 // If pipes are present, modifies the fd_in and fd_out of each
