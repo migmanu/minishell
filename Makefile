@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/12/07 16:01:49 by jmigoya-         ###   ########.fr        #
+#    Updated: 2023/12/07 16:19:06 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 clean:
 	@echo $(RED) "Cleaning..." $(EOC)
 	@make clean -C $(LIBFT_DIR) -s
-	@$(RM) $(OBJ_FILES)
+	@$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	@echo $(PURPLE) "Full Cleaning...🧹" $(EOC)
