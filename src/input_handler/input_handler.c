@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:20:01 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/03 13:46:19 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:36:29 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	redefine_matrix(char **matrix, int i, int matrix_len)
 	}
 }
 
-// Revisar los tokens eliminando los que esten como null
 static void	expander(t_data *mish, char **tokens)
 {
 	int	i;
@@ -61,6 +60,12 @@ static void	expander(t_data *mish, char **tokens)
 	i = 0;
 	while (tokens && tokens[i])
 	{
+		if (i > 1 && (tokens[i - 1] && tokens[i - 2]) && tokens[i - 1][0] == '<'
+				&& tokens[i - 2][0] == '<')
+		{
+			i++;
+			continue ;
+		}
 		tokens[i] = expand_vars(mish, tokens[i], quotes, -1);
 		tokens[i] = expand_home(tokens[i], -1, quotes,
 				ft_strdup(hashmap_search(mish->env, "HOME")));

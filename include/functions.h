@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 17:57:45 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:06:57 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void				executor(t_data *mish);
 char				*get_path(t_data *mish, char *cmd);
 void				set_file_descriptors(t_data *mish, int fds[2], int *c);
 void				dup_cmd(t_scmd *cmd);
-void				exec_cmd(t_data *mish, t_scmd *cmd, int len);
+void				exec_cmd(t_data *mish, t_scmd *cmd);
 void				clean_executor(t_data *mish);
 
 // testing

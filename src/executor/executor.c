@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 17:57:27 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:06:15 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // First goes for builtin functions. If none found, executes binary
 // if one is found. It also checks for cases like '/' and prints
 // proper error. len must always be set to 0.
-void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
+void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
 	char	**env;
 
@@ -33,9 +33,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
 	{
 		free(cmd->path);
 		cmd->path = NULL;
-		len = ft_strlen(cmd->full_cmd[0]);
-		if (cmd->full_cmd[0][len - 1] == '/'
-			|| cmd->full_cmd[0][len - 1] == '.')
+		if (opendir(cmd->full_cmd[0]) != NULL)
 			handle_exit(mish, cmd->full_cmd[0], IS_DIR, IS_EXIT);
 		else if (cmd->full_cmd[0][0] == '/')
 			handle_exit(mish, cmd->full_cmd[0], NO_FILE, IS_EXIT);
@@ -53,7 +51,7 @@ void	fork_cmds(t_data *mish, t_scmd *cmd, int pids[], int c)
 	if (pids[c] == 0)
 	{
 		dup_cmd(cmd);
-		exec_cmd(mish, cmd, 0);
+		exec_cmd(mish, cmd);
 	}
 	else
 	{
