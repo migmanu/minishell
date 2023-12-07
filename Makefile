@@ -6,11 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/12/07 16:39:42 by sebasnadu        ###   ########.fr        #
-=======
-#    Updated: 2023/12/07 17:46:03 by jmigoya-         ###   ########.fr        #
->>>>>>> aa9b4fb55e8c30ad19189a67f7452632b95512c0
+#    Updated: 2023/12/07 18:11:26 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +44,7 @@ READLINE_MAC_PATH = /opt/homebrew/opt/readline
 #LIBRARIES
 ifeq ($(shell uname), Darwin)
 	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR)/includes \
-	-I$(READLINE_MAC_PATH)/include
+				   -I$(READLINE_MAC_PATH)/include
 	LDFLAGS = -lreadline \
 			  -L$(READLINE_MAC_PATH)/lib -L$(LIBFT_DIR) -lft
 else
