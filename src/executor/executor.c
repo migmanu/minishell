@@ -6,12 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 14:45:51 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:11:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 // First goes for builtin functions. If none found, executes binary
 // if one is found. It also checks for cases like '/' and prints
