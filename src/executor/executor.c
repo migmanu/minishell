@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 16:41:23 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 18:25:57 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
 {
 	char	**env;
 
+	close_fds(mish);
 	if (cmd->full_cmd == NULL)
 		handle_exit(mish, NULL, SUCCESS, IS_EXIT);
 	builtins_router(mish, *cmd, IS_EXIT);

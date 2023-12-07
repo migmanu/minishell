@@ -6,7 +6,11 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/12/07 16:41:57 by sebasnadu        ###   ########.fr        #
+=======
+#    Updated: 2023/12/07 18:11:26 by sebasnadu        ###   ########.fr        #
+>>>>>>> main
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +22,7 @@ FILES = mish/main.c mish/init_mish.c mish/init_prompt.c mish/inits_utils.c \
        builtins/mish_pwd.c builtins/builtins_utils.c builtins/mish_echo.c \
        builtins/mish_exit.c builtins/mish_history.c builtins/mish_unset.c \
        executor/executor.c executor/executor_utils.c \
-       handle_exit/handle_exit.c \
+       handle_exit/handle_exit.c handle_exit/handle_exit_utils.c \
        hashmap/hash_algo.c hashmap/hashmap_free_item.c \
        hashmap/hashmap_print_table.c hashmap/hashmap_create_item.c \
        hashmap/hashmap_free_table.c hashmap/hashmap_search.c \
@@ -44,7 +48,11 @@ READLINE_MAC_PATH = /opt/homebrew/opt/readline
 #LIBRARIES
 ifeq ($(shell uname), Darwin)
 	INCLUDE_DIRS = -I ./include -I$(LIBFT_DIR)/includes \
+<<<<<<< HEAD
 	-I$(READLINE_MAC_PATH)/include
+=======
+				   -I$(READLINE_MAC_PATH)/include
+>>>>>>> main
 	LDFLAGS = -lreadline \
 			  -L$(READLINE_MAC_PATH)/lib -L$(LIBFT_DIR) -lft
 else
