@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:08:05 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 13:15:01 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 14:45:20 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ char	*get_path(t_data *mish, char *cmd)
 	int		i;
 
 	i = 0;
-	path_vec = ft_split(hashmap_search(mish->env, "PATH") + 5, ':');
+	tmp_path = hashmap_search(mish->env, "PATH");
+	if (tmp_path == NULL)
+		return (NULL);
+	path_vec = ft_split(tmp_path + 5, ':');
+	tmp_path = NULL;
 	path = NULL;
 	while (path_vec[i])
 	{
@@ -36,10 +40,7 @@ char	*get_path(t_data *mish, char *cmd)
 		path = NULL;
 		i++;
 	}
-	i = 0;
-	while (path_vec[i])
-		free(path_vec[i++]);
-	free(path_vec);
+	ft_matrixfree(&path_vec);
 	return (path);
 }
 
@@ -66,6 +67,8 @@ void	clean_executor(t_data *mish)
 	}
 }
 
+// In charge of piping between commands. If any have in or out
+// already redirected, it closes that side of the pipe.
 static void	pipe_cmds(t_scmd *cmd, t_scmd *next_cmd, int fds[])
 {
 	pipe(fds);
