@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/06 19:06:10 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 12:59:02 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	return (fd);
 }
 
-// TODO:add ctr-c behaviour
 static char	*get_heredoc_str(char *str[2], size_t len, char *limit, char *err)
 {
 	char	*tmp;

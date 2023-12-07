@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/06 18:01:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 12:46:26 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ void				free_scmd(void *content);
 
 // SIGNALS
 // singals.c
-void				config_signals(t_data *mish);
+void				config_signals_input(void);
+void				config_signals_exec(void);
+void				handle_sigint_heredoc(int signum);
 
 // executor
 void				executor(t_data *mish);

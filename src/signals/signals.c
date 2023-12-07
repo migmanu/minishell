@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:11 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/06 21:30:33 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 13:04:46 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,28 @@
 #include <readline/readline.h>
 #include <unistd.h>
 
-static void	handle_sigint(int signum)
+static void	handle_sigint_input(int signum)
 {
-	if (signum == SIGINT)
-	{
-		g_exit_status = 128 + signum;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
+	g_exit_status = 128 + signum;
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
 }
 
-// Blocking command 
-static void	handle_sigint_ln(int signum)
+static void	handle_sigint_exec(int signum)
 {
-	if (signum == SIGINT)
-	{
-		g_exit_status = 128 + signum;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-	}
+	g_exit_status = 128 + signum;
+	write(1, "\n", 1);
 }
 
-void	config_signals(t_data *mish)
+void	config_signals_input(void)
 {
-	if (mish->in_cmd == 1)
-	{
-		signal(SIGINT, handle_sigint_ln);
-	}
-	else if (mish->in_cmd == 0)
-	{
-		signal(SIGINT, handle_sigint);
-	}
+	signal(SIGINT, handle_sigint_input);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	config_signals_exec(void)
+{
+	signal(SIGINT, handle_sigint_exec);
 	signal(SIGQUIT, SIG_IGN);
 }
