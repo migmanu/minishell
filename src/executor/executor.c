@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 20:31:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 12:57:42 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
 void	fork_cmds(t_data *mish, t_scmd *cmd, int pids[], int c)
 {
 	pids[c] = fork();
+	config_signals_exec();
 	if (pids[c] == -1)
 		handle_exit(mish, NULL, FORK_ERR, NOT_EXIT);
 	if (pids[c] == 0)
@@ -72,6 +73,7 @@ void	executor_loop(t_data *mish, int c)
 	i = 0;
 	while (curr && i < c)
 	{
+		signal(SIGINT, SIG_IGN);
 		fork_cmds(mish, curr->content, mish->pids, i);
 		curr = curr->next;
 		i++;
