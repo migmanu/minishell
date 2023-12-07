@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/07 13:29:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:26:59 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <unistd.h>
+# include <dirent.h>
 
 # define WRITE_END 1
 # define READ_END 0

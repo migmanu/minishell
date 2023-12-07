@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 18:01:07 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/07 18:57:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 int	get_fd(int oldfd, char *path, int flags[2])
 {
 	int	fd;
-	DIR	*dir;
 
-	dir = opendir(path);
 	if (oldfd > 2)
 		close(oldfd);
 	if (!path)
@@ -29,9 +27,8 @@ int	get_fd(int oldfd, char *path, int flags[2])
 		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
 		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
-	else if (dir)
+	else if (flags[0] && opendir(path) != NULL)
 		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
-	closedir(dir);
 	if (flags[0] && flags[1])
 		fd = open(path, O_WRONLY | O_APPEND | O_CREAT, 0666);
 	else if (flags[0] && !flags[1])

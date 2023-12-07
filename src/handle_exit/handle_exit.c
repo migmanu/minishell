@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/07 17:46:52 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:51:45 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 		g_exit_status = err;
 	if (err != SUCCESS && err != FAILURE && err != ERROR)
 		print_error(param, err);
-	close_fds(mish);
+	if (mish && mish->cmds)
+		close_fds(mish);
 	if (is_exit)
 		clean_and_exit(mish);
 }
