@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/08 14:27:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:10:01 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	executor(t_data *mish)
 		&& ft_strncmp("env", first->full_cmd[0], 3) != 0)
 	{
 		builtins_router(mish, *first, NOT_EXIT);
+		clean_executor(mish);
 		return ;
 	}
 	set_file_descriptors(mish, fds, &c);
