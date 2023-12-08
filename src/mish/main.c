@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/08 14:30:22 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:32:20 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ int	main(int argc, char *argv[], char *envp[])
 		line = init_prompt(&mish);
 		if (!line)
 			break ;
-		mish.in_cmd = 1;
-		if (line[0] == '\0')
-			mish.in_cmd = 0;
 		input_handler(line, &mish);
 		executor(&mish);
 		if (g_signal == SIGINT)
