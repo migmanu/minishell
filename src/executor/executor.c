@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 20:06:15 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:52:16 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // First goes for builtin functions. If none found, executes binary
 // if one is found. It also checks for cases like '/' and prints
-// proper error. len must always be set to 0.
+// proper error.
 void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
 	char	**env;
