@@ -6,16 +6,16 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 18:57:12 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:49:33 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <dirent.h>
 
 int	get_fd(int oldfd, char *path, int flags[2])
 {
-	int	fd;
+	struct stat	path_stat;
+	int			fd;
 
 	if (oldfd > 2)
 		close(oldfd);
@@ -27,6 +27,8 @@ int	get_fd(int oldfd, char *path, int flags[2])
 		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
 		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
+	else if (flags[0] && stat(path, &path_stat) == 0 && (S_ISDIR(path_stat.st_mode)) == 1)
+		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
 	else if (flags[0] && opendir(path) != NULL)
 		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
 	if (flags[0] && flags[1])
