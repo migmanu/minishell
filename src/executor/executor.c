@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 19:48:32 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:16:38 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
 {
 	char	**env;
 
-	close_fds(mish, cmd);
 	if (cmd->full_cmd == NULL)
 		handle_exit(mish, NULL, SUCCESS, IS_EXIT);
 	builtins_router(mish, *cmd, IS_EXIT);
@@ -29,6 +28,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd, int len)
 	hashmap_to_matrix(mish->env, &env, 0, 0);
 	if (cmd->path == NULL)
 		cmd->path = ft_strdup(cmd->full_cmd[0]);
+	close_fds(mish, NULL);
 	if (execve(cmd->path, cmd->full_cmd, env) != 0)
 	{
 		free(cmd->path);
