@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/07 19:49:46 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:37:08 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	close_fds(t_data *mish, t_scmd *cmd)
 		node = curr->content;
 		if (node == cmd)
 		{
-			ft_putstr_fd(cmd->full_cmd[0], STDERR_FILENO);
-			ft_putstr_fd(" same!\n", STDERR_FILENO);
 			curr = curr->next;
 			continue ;
 		}
