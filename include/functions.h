@@ -80,7 +80,7 @@ int					get_fd(int oldfd, char *path, int flags[2]);
 void				handle_exit(t_data *mish, char *param,
 						int err, int is_exit);
 void				free_scmd(void *content);
-void				close_fds(t_data *mish);
+void				close_fds(t_data *mish, t_scmd *cmd);
 void				print_error(char *param, int err);
 void				print_error2(int err);
 

@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	close_fds(t_data *mish)
+void	close_fds(t_data *mish, t_scmd *cmd)
 {
 	t_scmd	*node;
 	t_list	*curr;
@@ -21,6 +21,11 @@ void	close_fds(t_data *mish)
 	while (curr != NULL)
 	{
 		node = curr->content;
+		if (node == cmd)
+		{
+			curr = curr->next;
+			continue ;
+		}
 		if (node->in_fd != STDIN_FILENO)
 			close(node->in_fd);
 		if (node->out_fd != STDOUT_FILENO)

@@ -19,7 +19,6 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
 	char	**env;
 
-	close_fds(mish);
 	if (cmd->full_cmd == NULL)
 		handle_exit(mish, NULL, SUCCESS, IS_EXIT);
 	builtins_router(mish, *cmd, IS_EXIT);
@@ -29,6 +28,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 	hashmap_to_matrix(mish->env, &env, 0, 0);
 	if (cmd->path == NULL)
 		cmd->path = ft_strdup(cmd->full_cmd[0]);
+	close_fds(mish, NULL);
 	if (execve(cmd->path, cmd->full_cmd, env) != 0)
 	{
 		free(cmd->path);
