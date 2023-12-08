@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:22:24 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/08 12:19:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:21:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@
 # define PRT_ENV 2
 
 extern int	g_signal;
-extern int	g_exit_status;
 
 #endif
