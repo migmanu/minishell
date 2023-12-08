@@ -6,7 +6,7 @@
 /*   By: johnavar <johnavar@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:19 by johnavar          #+#    #+#             */
-/*   Updated: 2023/12/08 14:53:20 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:39:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void	clean_and_exit(t_data *mish)
 // allocated memory and exits with g_exit_status
 void	handle_exit(t_data *mish, char *param, int err, int is_exit)
 {
+	if (!mish)
+		return ;
 	if (err == FORK_ERR || err == PIPE_ERR || err == HIS_WRONG_ARG
 		|| err == HIS_WRONG_ARGS || err == CD_ERR || err == NOT_DIR)
 		mish->exit_status = 1;
