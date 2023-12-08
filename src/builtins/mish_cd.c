@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:20:56 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 17:53:37 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:43:23 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	get_dirs(t_data *mish, char **curr, char *pwd, int if_exit)
 {
 	struct stat	path_stat;
 
-	if (stat(pwd, &path_stat) == 0 && (path_stat.st_mode) == 1)
+	if (stat(pwd, &path_stat) == 0 && (S_ISREG(path_stat.st_mode)) == 1)
 	{
 		handle_exit(mish, pwd, NOT_DIR, if_exit);
 		return (CD_ERR);
