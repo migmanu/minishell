@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:45:06 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/08 14:51:33 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:59:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,35 @@ static char	**push_token(char **cmds, char *token, int i)
 	return (new);
 }
 
-static void	get_node_err(char **cmds[2], int *i)
+static void	get_node_err(char **cmds[2], int *i, t_data *mish)
 {
 	if (cmds[1][*i] && cmds[1][*i][0] == '|')
-		handle_exit(NULL, "`||'", SYNTAX_ERR, NOT_EXIT);
+		handle_exit(mish, "`||'", SYNTAX_ERR, NOT_EXIT);
 	else
-		handle_exit(NULL, "`|'", SYNTAX_ERR, NOT_EXIT);
+		handle_exit(mish, "`|'", SYNTAX_ERR, NOT_EXIT);
 	*i = -2;
 }
 
-t_scmd	*get_node(t_scmd *node, char **cmds[2], int *i, int *exit_status)
+t_scmd	*get_node(t_scmd *node, char **cmds[2], int *i, t_data *mish)
 {
 	if (cmds[1][*i] && !(*i == 1 && cmds[1][*i - 1][0] == '|'))
 	{
 		if (cmds[1][*i][0] == '>' && cmds[1][*i + 1]
 			&& cmds[1][*i + 1][0] == '>')
-			node = redir_out_append(node, cmds[0], i);
+			node = redir_out_append(node, cmds[0], i, mish);
 		else if (cmds[1][*i][0] == '>')
-			node = redir_out(node, cmds[0], i, exit_status);
+			node = redir_out(node, cmds[0], i, mish);
 		else if (cmds[1][*i][0] == '<' && cmds[1][*i + 1]
 			&& cmds[1][*i + 1][0] == '<')
-			node = redir_in_heredoc(node, cmds[0], i, exit_status);
+			node = redir_in_heredoc(node, cmds[0], i, mish);
 		else if (cmds[1][*i][0] == '<')
-			node = redir_in(node, cmds[0], i, exit_status);
+			node = redir_in(node, cmds[0], i, mish);
 		else if (cmds[1][*i][0] != '|')
 			node->full_cmd = push_token(node->full_cmd, cmds[0][*i], -1);
 		else
-			get_node_err(cmds, i);
+			get_node_err(cmds, i, mish);
 		return (node);
 	}
-	get_node_err(cmds, i);
+	get_node_err(cmds, i, mish);
 	return (node);
 }

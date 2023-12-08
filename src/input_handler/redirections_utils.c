@@ -6,31 +6,38 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/08 14:47:45 by johnavar         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:32:51 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	get_fd(int oldfd, char *path, int flags[2])
+static void	get_fd_util(char *path, int flags[2], t_data *mish)
 {
 	struct stat	path_stat;
+
+	if (access(path, F_OK) == -1 && !flags[0])
+		handle_exit(mish, path, NO_FILE, NOT_EXIT);
+	else if (!flags[0] && access(path, R_OK) == -1)
+		handle_exit(mish, path, NO_PERM, NOT_EXIT);
+	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
+		handle_exit(mish, path, NO_PERM, NOT_EXIT);
+	else if (flags[0] && stat(path, &path_stat) == 0
+		&& (S_ISDIR(path_stat.st_mode)) == 1)
+		handle_exit(mish, path, IS_DIR, NOT_EXIT);
+	else if (flags[0] && opendir(path) != NULL)
+		handle_exit(mish, path, IS_DIR, NOT_EXIT);
+}
+
+int	get_fd(int oldfd, char *path, int flags[2], t_data *mish)
+{
 	int			fd;
 
 	if (oldfd > 2)
 		close(oldfd);
 	if (!path)
 		return (-1);
-	if (access(path, F_OK) == -1 && !flags[0])
-		handle_exit(NULL, path, NO_FILE, NOT_EXIT);
-	else if (!flags[0] && access(path, R_OK) == -1)
-		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
-	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
-		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
-	else if (flags[0] && stat(path, &path_stat) == 0 && (S_ISDIR(path_stat.st_mode)) == 1)
-		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
-	else if (flags[0] && opendir(path) != NULL)
-		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
+	get_fd_util(path, flags, mish);
 	if (flags[0] && flags[1])
 		fd = open(path, O_WRONLY | O_APPEND | O_CREAT, 0666);
 	else if (flags[0] && !flags[1])
@@ -70,7 +77,7 @@ static char	*get_heredoc_str(char *str[2], size_t len, char *limit, char *err)
 	return (str[1]);
 }
 
-int	get_heredoc_fd(char *limit, int *exit_status)
+int	get_heredoc_fd(char *limit, t_data *mish)
 {
 	int		fd[2];
 	char	*err;
@@ -78,11 +85,11 @@ int	get_heredoc_fd(char *limit, int *exit_status)
 
 	str[0] = NULL;
 	str[1] = NULL;
-	*exit_status = 0;
+	mish->exit_status = 0;
 	err = "minishell: warning: here-document delimited by end-of-file";
 	if (pipe(fd) == -1)
 	{
-		handle_exit(NULL, NULL, PIPE_ERR, NOT_EXIT);
+		handle_exit(mish, NULL, PIPE_ERR, NOT_EXIT);
 		return (-1);
 	}
 	str[1] = get_heredoc_str(str, 0, limit, err);
