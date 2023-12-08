@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:43:12 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 12:00:12 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 14:27:27 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static char	*create_prompt(t_data *mish)
 	free(tmp);
 	free(tmp2);
 	tmp2 = get_cd(mish);
-	if (g_exit_status == 0)
+	if (mish->exit_status == 0)
 		tmp = ft_strjoin(tmp2, GREEN);
 	else
 		tmp = ft_strjoin(tmp2, RED);

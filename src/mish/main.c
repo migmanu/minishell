@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:50:52 by migmanu           #+#    #+#             */
-/*   Updated: 2023/12/08 14:32:20 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:50:32 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		g_signal = 0;
-		mish.in_cmd = 0;
 		config_signals_input();
 		line = init_prompt(&mish);
 		if (!line)
