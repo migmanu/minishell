@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 22:08:00 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 19:18:34 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:04:24 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	check_if_cmd(t_data *mish, t_scmd *cmd)
 		free(cmd->full_cmd[0]);
 		cmd->full_cmd[0] = NULL;
 		cmd->full_cmd = cmd->full_cmd + 1;
-		exec_cmd(mish, cmd, 0);
+		exec_cmd(mish, cmd);
 		i++;
 	}
 }
