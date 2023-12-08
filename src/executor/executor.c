@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/08 11:52:16 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:10:01 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	wait_loop(t_data *mish, int c)
 	}
 	waitpid(mish->pids[i], &status, 0);
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		mish->exit_status = WEXITSTATUS(status);
 }
 
 // Handles execution. If only one, built-in command,
@@ -111,6 +111,7 @@ void	executor(t_data *mish)
 		&& ft_strncmp("env", first->full_cmd[0], 3) != 0)
 	{
 		builtins_router(mish, *first, NOT_EXIT);
+		clean_executor(mish);
 		return ;
 	}
 	set_file_descriptors(mish, fds, &c);

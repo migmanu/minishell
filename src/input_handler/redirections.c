@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:57:07 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/01 18:06:37 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 14:49:32 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_scmd	*redir_out_append(t_scmd *node, char **cmds, int *i)
 	return (node);
 }
 
-t_scmd	*redir_out(t_scmd *node, char **cmds, int *i)
+t_scmd	*redir_out(t_scmd *node, char **cmds, int *i, int *exit_status)
 {
 	int		flags[2];
 
@@ -52,13 +52,13 @@ t_scmd	*redir_out(t_scmd *node, char **cmds, int *i)
 		else if (node->out_fd != -1 || (cmds[*i] && cmds [*i][0] == '|'))
 			handle_exit(NULL, "`newline'", SYNTAX_ERR, NOT_EXIT);
 		else
-			g_exit_status = 1;
+			*exit_status = 1;
 		*i = -1;
 	}
 	return (node);
 }
 
-t_scmd	*redir_in_heredoc(t_scmd *node, char **cmds, int *i)
+t_scmd	*redir_in_heredoc(t_scmd *node, char **cmds, int *i, int *exit_status)
 {
 	char	*limit;
 
@@ -67,7 +67,7 @@ t_scmd	*redir_in_heredoc(t_scmd *node, char **cmds, int *i)
 	if (cmds[++(*i)] && (cmds[*i][0] != '<' && cmds[*i][0] != '|'))
 	{
 		limit = cmds[*i];
-		node->in_fd = get_heredoc_fd(limit);
+		node->in_fd = get_heredoc_fd(limit, exit_status);
 	}
 	if (!cmds[*i] || cmds[*i][0] == '<' || cmds[*i][0] == '|'
 		|| node->in_fd == -1)
@@ -83,7 +83,7 @@ t_scmd	*redir_in_heredoc(t_scmd *node, char **cmds, int *i)
 	return (node);
 }
 
-t_scmd	*redir_in(t_scmd *node, char **cmds, int *i)
+t_scmd	*redir_in(t_scmd *node, char **cmds, int *i, int *exit_status)
 {
 	int		flags[2];
 
@@ -99,7 +99,7 @@ t_scmd	*redir_in(t_scmd *node, char **cmds, int *i)
 				&& (cmds[*i][0] == '>' || cmds[*i][0] == '|')))
 			handle_exit(NULL, "`newline'", SYNTAX_ERR, NOT_EXIT);
 		else
-			g_exit_status = 1;
+			*exit_status = 1;
 		*i = -1;
 	}
 	return (node);

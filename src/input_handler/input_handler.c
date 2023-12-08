@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:20:01 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 19:36:29 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 14:39:41 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	expander(t_data *mish, char **tokens)
 	}
 }
 
-static t_list	*fill_syntax_list(char **tokens, int i)
+static t_list	*fill_syntax_list(char **tokens, int i, int *exit_status)
 {
 	char	**tmp[2];
 	t_list	*cmds[2];
@@ -94,7 +94,7 @@ static t_list	*fill_syntax_list(char **tokens, int i)
 			ft_lstadd_back(&cmds[0], ft_lstnew(init_node()));
 			cmds[1] = ft_lstlast(cmds[0]);
 		}
-		cmds[1]->content = get_node(cmds[1]->content, tmp, &i);
+		cmds[1]->content = get_node(cmds[1]->content, tmp, &i, exit_status);
 		if (i < 0)
 			return (clean_fail(cmds[0], tokens, tmp[0]));
 		if (!tokens[i])
@@ -117,6 +117,6 @@ void	*input_handler(char *line, t_data *mish)
 		return ("");
 	}
 	expander(mish, tokens);
-	mish->cmds = fill_syntax_list(tokens, -1);
+	mish->cmds = fill_syntax_list( tokens, -1, &(mish->exit_status));
 	return (mish);
 }
