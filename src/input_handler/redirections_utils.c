@@ -6,16 +6,16 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 18:57:12 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 14:47:45 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <dirent.h>
 
 int	get_fd(int oldfd, char *path, int flags[2])
 {
-	int	fd;
+	struct stat	path_stat;
+	int			fd;
 
 	if (oldfd > 2)
 		close(oldfd);
@@ -27,6 +27,8 @@ int	get_fd(int oldfd, char *path, int flags[2])
 		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
 	else if (flags[0] && access(path, W_OK) == -1 && access(path, F_OK) == 0)
 		handle_exit(NULL, path, NO_PERM, NOT_EXIT);
+	else if (flags[0] && stat(path, &path_stat) == 0 && (S_ISDIR(path_stat.st_mode)) == 1)
+		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
 	else if (flags[0] && opendir(path) != NULL)
 		handle_exit(NULL, path, IS_DIR, NOT_EXIT);
 	if (flags[0] && flags[1])
@@ -46,7 +48,7 @@ static char	*get_heredoc_str(char *str[2], size_t len, char *limit, char *err)
 
 	str[0] = ft_calloc(sizeof(char), 1);
 	str[1] = ft_calloc(sizeof(char), 1);
-	while (g_exit_status != 130 && (!str[0] || ft_strncmp(str[0], limit, len)
+	while (g_signal != SIGINT && (!str[0] || ft_strncmp(str[0], limit, len)
 			|| ft_strlen(limit) != len))
 	{
 		tmp = str[1];
@@ -68,7 +70,7 @@ static char	*get_heredoc_str(char *str[2], size_t len, char *limit, char *err)
 	return (str[1]);
 }
 
-int	get_heredoc_fd(char *limit)
+int	get_heredoc_fd(char *limit, int *exit_status)
 {
 	int		fd[2];
 	char	*err;
@@ -76,7 +78,7 @@ int	get_heredoc_fd(char *limit)
 
 	str[0] = NULL;
 	str[1] = NULL;
-	g_exit_status = 0;
+	*exit_status = 0;
 	err = "minishell: warning: here-document delimited by end-of-file";
 	if (pipe(fd) == -1)
 	{
@@ -87,7 +89,7 @@ int	get_heredoc_fd(char *limit)
 	write(fd[WRITE_END], str[1], ft_strlen(str[1]));
 	free(str[1]);
 	close(fd[WRITE_END]);
-	if (g_exit_status == 130)
+	if (g_signal == SIGINT)
 	{
 		close(fd[READ_END]);
 		return (-1);

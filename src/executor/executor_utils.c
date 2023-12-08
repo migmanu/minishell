@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 // Variation of a classic get_path function that
 // uses our hashmap as source.

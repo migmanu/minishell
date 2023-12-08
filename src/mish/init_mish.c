@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:33:52 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/04 11:09:20 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 14:26:50 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_data	*check_env(t_data *mish, char *argv[])
 
 void	init_mish(t_data *mish, char *argv[], char *envp[])
 {
-	g_exit_status = 0;
+	mish->exit_status = 0;
 	mish->cmds = NULL;
 	mish->env = env_to_hash(envp);
 	mish->pids = NULL;

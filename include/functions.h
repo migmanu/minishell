@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:38:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/07 20:06:57 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 14:49:07 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ int					len_noquotes(char *str);
 t_scmd				*init_node(void);
 t_list				*clean_fail(t_list *cmds, char **tokens, char **tmp);
 // get_node.c
-t_scmd				*get_node(t_scmd *node, char **cmds[2], int *i);
+t_scmd				*get_node(t_scmd *node, char **cmds[2], int *i, int *exit_status);
 // redirections.c
-t_scmd				*redir_in(t_scmd *node, char **cmds, int *i);
-t_scmd				*redir_in_heredoc(t_scmd *node, char **cmds, int *i);
-t_scmd				*redir_out(t_scmd *node, char **cmds, int *i);
+t_scmd				*redir_in(t_scmd *node, char **cmds, int *i, int *exit_status);
+t_scmd				*redir_in_heredoc(t_scmd *node, char **cmds, int *i, int *exit_status);
+t_scmd				*redir_out(t_scmd *node, char **cmds, int *i, int *exit_status);
 t_scmd				*redir_out_append(t_scmd *node, char **cmds, int *i);
 // redirections_utils.c
-int					get_heredoc_fd(char *limit);
+int					get_heredoc_fd(char *limit, int *exit_status);
 int					get_fd(int oldfd, char *path, int flags[2]);
 
 // HANDLE_EXIT
@@ -80,7 +80,7 @@ int					get_fd(int oldfd, char *path, int flags[2]);
 void				handle_exit(t_data *mish, char *param,
 						int err, int is_exit);
 void				free_scmd(void *content);
-void				close_fds(t_data *mish);
+void				close_fds(t_data *mish, t_scmd *cmd);
 void				print_error(char *param, int err);
 void				print_error2(int err);
 

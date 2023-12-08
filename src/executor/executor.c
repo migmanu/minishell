@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:49:09 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/07 20:06:15 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2023/12/08 15:10:01 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 // First goes for builtin functions. If none found, executes binary
 // if one is found. It also checks for cases like '/' and prints
-// proper error. len must always be set to 0.
+// proper error.
 void	exec_cmd(t_data *mish, t_scmd *cmd)
 {
 	char	**env;
 
-	close_fds(mish);
 	if (cmd->full_cmd == NULL)
 		handle_exit(mish, NULL, SUCCESS, IS_EXIT);
 	builtins_router(mish, *cmd, IS_EXIT);
@@ -29,6 +28,7 @@ void	exec_cmd(t_data *mish, t_scmd *cmd)
 	hashmap_to_matrix(mish->env, &env, 0, 0);
 	if (cmd->path == NULL)
 		cmd->path = ft_strdup(cmd->full_cmd[0]);
+	close_fds(mish, NULL);
 	if (execve(cmd->path, cmd->full_cmd, env) != 0)
 	{
 		free(cmd->path);
@@ -91,7 +91,7 @@ void	wait_loop(t_data *mish, int c)
 	}
 	waitpid(mish->pids[i], &status, 0);
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		mish->exit_status = WEXITSTATUS(status);
 }
 
 // Handles execution. If only one, built-in command,
@@ -111,6 +111,7 @@ void	executor(t_data *mish)
 		&& ft_strncmp("env", first->full_cmd[0], 3) != 0)
 	{
 		builtins_router(mish, *first, NOT_EXIT);
+		clean_executor(mish);
 		return ;
 	}
 	set_file_descriptors(mish, fds, &c);
