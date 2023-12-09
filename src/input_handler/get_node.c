@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:45:06 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/08 16:59:12 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/09 11:45:08 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,16 @@ t_scmd	*get_node(t_scmd *node, char **cmds[2], int *i, t_data *mish)
 	{
 		if (cmds[1][*i][0] == '>' && cmds[1][*i + 1]
 			&& cmds[1][*i + 1][0] == '>')
-			node = redir_out_append(node, cmds[0], i, mish);
+			node = redir_out_append(node, cmds, i, mish);
 		else if (cmds[1][*i][0] == '>')
-			node = redir_out(node, cmds[0], i, mish);
+			node = redir_out(node, cmds, i, mish);
 		else if (cmds[1][*i][0] == '<' && cmds[1][*i + 1]
 			&& cmds[1][*i + 1][0] == '<')
-			node = redir_in_heredoc(node, cmds[0], i, mish);
+			node = redir_in_heredoc(node, cmds, i, mish);
 		else if (cmds[1][*i][0] == '<')
-			node = redir_in(node, cmds[0], i, mish);
-		else if (cmds[1][*i][0] != '|')
+			node = redir_in(node, cmds, i, mish);
+		else if (cmds[1][*i][0] != '|' || (cmds[1][*i][0] == '|'
+				&& cmds[1][*i][1] == 0))
 			node->full_cmd = push_token(node->full_cmd, cmds[0][*i], -1);
 		else
 			get_node_err(cmds, i, mish);
