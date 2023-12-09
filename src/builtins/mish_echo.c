@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:58:49 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/12/06 16:12:45 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/09 12:35:16 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_flag(char *str)
 	int	i;
 
 	if (!str)
-		return (-1);
+		return (0);
 	if (str[0] != '-' || str[1] != 'n')
 		return (0);
 	i = 1;

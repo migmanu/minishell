@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:00:19 by sebasnadu         #+#    #+#             */
-/*   Updated: 2023/12/08 17:32:51 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/12/08 21:54:41 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static void	get_fd_util(char *path, int flags[2], t_data *mish)
 		handle_exit(mish, path, NO_PERM, NOT_EXIT);
 	else if (flags[0] && stat(path, &path_stat) == 0
 		&& (S_ISDIR(path_stat.st_mode)) == 1)
-		handle_exit(mish, path, IS_DIR, NOT_EXIT);
-	else if (flags[0] && opendir(path) != NULL)
 		handle_exit(mish, path, IS_DIR, NOT_EXIT);
 }
 
