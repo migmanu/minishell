@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/12/07 18:28:16 by sebasnadu        ###   ########.fr        #
+#    Updated: 2023/12/09 13:44:29 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ $(LIBFT_PATH):
 	@make -C $(LIBFT_DIR) -s
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
+	@git submodule update --init -q
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
