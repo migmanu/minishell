@@ -7,7 +7,9 @@ This is the 42 Berlin School `minishell` project, written by [author 1][author 2
 The `minishell` project requires students to develop a simple clone of Bash. It is also the first group project of the 42 Core Curriculum. From these two statements, we can easily identify the main challenges and goals of the task:
 
 - Acquire a deep understanding of Bash inner workings.
-- Coordinate work with your teammate. We believe that without properly addressing and planning for these two challenges from the very beginning, `minishell` will quickly turn into what a lot of students call "minihell."
+- Coordinate work with your teammate.
+
+We believe that without properly addressing and planning for these two challenges from the very beginning, `minishell` will quickly turn into what a lot of students call "minihell."
 
 ### Understanding Bash
 
