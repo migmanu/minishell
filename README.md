@@ -17,6 +17,6 @@ Released in 1989, Bash has by now acquired almost mythical status. It is a unive
 
 - SOURCES
 
-In our experience, no amount of reading will actually prepare you for some of Bash's more obscure behaviors. And although a lot of them are out of the scope of the project, there's still plenty that needs to be considered, even if, like us, you do not go for the bonus. We encountered a lot of these difficult cases while testing our almost finished project. This is the most stressful way of discovering them. Luckily, by then our program was solid enough to withstand most of them.
+In our experience, no amount of reading will actually prepare you for some of Bash's more obscure behaviors. And although a lot of them are out of the scope of the project, there's still plenty that needs to be considered, even if you do not go for the bonus. We encountered a lot of these difficult cases while testing our almost finished project. This is the most stressful way of discovering them. Luckily, by then our program was robust enough to withstand most of them.
 
 ### Coordinating Teamwork
