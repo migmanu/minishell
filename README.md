@@ -16,6 +16,7 @@
 <p>We believe that without properly addressing and planning for these two challenges from the very beginning, <code>minishell</code> will quickly turn into what a lot of students call &quot;minihell.&quot;</p>
 <h3 id="understanding-bash">Understanding Bash</h3>
 <p>Released in 1989, Bash has by now acquired almost mythical status. It is a universal tool that every programmer should feel, at the very least, acquainted with, if not properly comfortable. Therefore, sources at your disposal are plenty. If you are a 42 student, we advise you to search Slack for resources provided by fellow students over the years. Be aware, the <code>minishell</code> subject has changed over time, so not all advice is relevant. Here is a list of some of the most mentioned and useful links:</p>
+
 #### Repositories
 
 - [Repo with cool explaination](https://github.com/maiadegraaf/minishell)
