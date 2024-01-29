@@ -20,7 +20,7 @@
 
 - [Repo with cool explaination](https://github.com/maiadegraaf/minishell)
 - [Evaluation sheet](https://github.com/wis-aerrajiy/school21-checklists/blob/update_minishell/ng_3_minishell.pdf)
-- 
+  
 #### How-to's / minishell specific articles
 
 - [Minishell: Building a mini-bash (a @42 project)](https://m4nnb3ll.medium.com/minishell-building-a-mini-bash-a-42-project-b55a10598218) | tutorial
@@ -28,7 +28,7 @@
 - [Another list of edge cases and expected behaviors](https://docs.google.com/spreadsheets/u/0/d/1uJHQu0VPsjjBkR4hxOeCMEt3AOM1Hp_SmUzPFhAH-nA/htmlview?lsrp=1#gid=0) | some are not expected by the project subject
 - [High level explanation of the project](https://haglobah.github.io/Mastering-42/holy_graph/minishell.html) | has good sources
 - [42 Slack char about how to implement history](https://42born2code.slack.com/archives/CN9RHKQHW/p1654165861713979)
-- 
+  
 #### On the shell
 
 - [Really in-depth video series explanation of how the shell works](https://www.youtube.com/playlist?list=PLFAC320731F539902) | watch at 1.25x
@@ -38,11 +38,11 @@
 - [Shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 - [Write your own shell](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf) | paper on how to write a shell which might apply better for a non-bonus minishell.
 - [A lot of cool resources in one place.](https://minishell.simple.ink/)
-- 
+  
 #### On the allowed functions
 
 - [General info from all the allowed functions (in Korean).](https://velog.io/@chez_bono/Minishell#%EA%B5%AC%ED%98%84%ED%95%B4%EC%95%BC-%ED%95%A0-%EB%B9%8C%ED%8A%B8%EC%9D%B8)
-- 
+  
 <p>In our experience, no amount of reading will actually prepare you for some of Bash&#39;s more obscure behaviors. And although a lot of them are out of the scope of the project, there&#39;s still plenty that needs to be considered, even if you do not go for the bonus. We encountered a lot of these difficult cases while testing our almost finished project. This is the most stressful way of discovering them. Luckily, by then our program was robust enough to withstand most of them.</p>
 <p>Nevertheless, there are two available online spreadsheets that cover a huge amount of cases to test for. You can find them linked above. It's a good idea to go through most, if not all, of them at least once to test your <code>minishell</code>. Maybe a read before could avoid some issues down the line too. But <strong>be aware</strong>, a lot of the cases mentioned in these spreadsheets are out of scope, apply only for bonus or are outright wrong. Do not follow them blindly, but test each with Bash on your own.</p>
 
