@@ -1,5 +1,5 @@
 <h1 id="the-mish-project">The Mish Project</h1>
-<p>This is the 42 Berlin School <code>minishell</code> project, written by [author 1][author 2], in accordance with the version number [version number] of the subject [include subject and link]. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
+<p>This is the 42 Berlin School <code>minishell</code> project, written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the [subject](https://github.com/migmanu/minishell/blob/better_readme/en.subject.pdf). This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
 <h2 id="installation">Installation</h2>
 <p>If you want to test our <code>minishell</code>, Mish, you can do so in both Linux and Max.</p>
 <ul>
@@ -28,7 +28,7 @@
 - [List of edge cases to test for](https://docs.google.com/spreadsheets/d/1TDwyd-S0WBAXehgkrKQtBJ6zquQ4p6k7JfE5g3jICNA/edit#gid=0)
 - [Another list of edge cases and expected behaviors](https://docs.google.com/spreadsheets/u/0/d/1uJHQu0VPsjjBkR4hxOeCMEt3AOM1Hp_SmUzPFhAH-nA/htmlview?lsrp=1#gid=0) | some are not expected by the project subject
 - [High level explanation of the project](https://haglobah.github.io/Mastering-42/holy_graph/minishell.html) | has good sources
-- [42 Slack char about how to implement history](https://42born2code.slack.com/archives/CN9RHKQHW/p1654165861713979)
+- [42 Slack chat about how to implement history](https://42born2code.slack.com/archives/CN9RHKQHW/p1654165861713979)
   
 #### On the shell
 
@@ -48,9 +48,12 @@
 <p>Nevertheless, there are two available online spreadsheets that cover a huge amount of cases to test for. You can find them linked above. It's a good idea to go through most, if not all, of them at least once to test your <code>minishell</code>. Maybe a read before could avoid some issues down the line too. But <strong>be aware</strong>, a lot of the cases mentioned in these spreadsheets are out of scope, apply only for bonus or are outright wrong. Do not follow them blindly, but test each with Bash on your own.</p>
 
 <h3 id="coordinating-teamwork">Coordinating Teamwork</h3>
-<p>There was no great compleity regarding teamwork. Given the small size of the team and our generous time availability, we went through a simple workflow. Each change or bug fix was done inside a bransh of this repository, pushed, reviewd by the other author and merged. We could make this work because we communicated a lot, either through Slack or coding side by side.</p>
+<p>There was no great complexity regarding teamwork. Given the small size of the team and our generous time availability, we went through a simple workflow. Each change or bug fix was done inside a branch of this repository, pushed, reviewd by the other author and merged. We could make this work because we communicated a lot, either through Slack or coding side by side.</p>
 <p>Regardless of how you chose to organize work, you will need to communicate as much as possible and try to understand whats going on even inside the files you have not written.</p>
 <h2 id="how-mish-works">How Mish Works</h2>
-<p>After you&#39;ve read the listed sources, youll learn that Bash is composed of four distinct parts: the <code>parser</code>, the <code>tokenizer</code>, the <code>expander</code>, and the <code>executor</code>. Tokens are put into a tree, which is then executed in the appropiate order. This should probably be your layout if you are aiming for the bonus.</p>
-<p>Otherwise things can be simplified a bit. Mish does not have a separate <code>expander</code>. Inside the <code>input_handler</code> directory .
+<p>After you&#39;ve read the listed sources, you'll learn that Bash is composed of four distinct parts: the <code>parser</code>, the <code>tokenizer</code>, the <code>expander</code>, and the <code>executor</code>. Tokens are put into a tree, which is then executed in the appropriate order. This should probably be your layout if you are aiming for the bonus.</p>
+<p>But things can be simplified a bit if you don't d the bonus. Mish does not have a separate <code>expander</code>. Inside the <code>input_handler</code> directory .
 There is no tree structure but a list of commands that gets executed from beginning to end.</p>
+<p>There are a lot of edge cases the initial parsing has to take into consideration. Those spreadsheets certainly came in handy. It was also challenging to design the correct behavior for pipes. Be especially attentive to blocking commands like `cat` and how they interact with different types of commands like `ls` or `head`. Pipes are a somewhat abstract concept, so a lot of trial and error went into solving this part</p>
+<p>You might also notice that we used a hash map for storing the environment variables. Although this involved some extra work at the beginning, it ended up simplifying a lot of our work. It certainly saved us from bugs in some, unanticipated, edge-cases. Though it is certainly not necessary to develop a hash map, we highly recommend to try it out.</p>
+<p>In the spirit of not spoiling the project for anyone, we are not gonna go into detailed explanation of how Mish works. If you have any doubts or need help, you can reach us via Slack to jmigoya- and johnavar.</p>
