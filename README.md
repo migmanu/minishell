@@ -1,4 +1,4 @@
-![Screenshot from 2024-01-29 13-57-01](https://github.com/migmanu/minishell/assets/52668755/1224a97f-f85b-4319-8c5c-023245556172)
+![MISH](https://github.com/migmanu/minishell/assets/52668755/77ca9273-9cd4-40bc-a26d-40ee526e114f)
 
 
 <h1 id="the-mish-project">The Mish Project</h1>
