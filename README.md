@@ -1,3 +1,6 @@
+![Screenshot from 2024-01-29 13-57-01](https://github.com/migmanu/minishell/assets/52668755/1224a97f-f85b-4319-8c5c-023245556172)
+
+
 <h1 id="the-mish-project">The Mish Project</h1>
 <p>This is the 42 Berlin School <code>minishell</code> project, written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the subject. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
 <h2 id="installation">Installation</h2>
