@@ -1,5 +1,5 @@
 <h1 id="the-mish-project">The Mish Project</h1>
-<p>This is the 42 Berlin School <code>minishell</code> project, written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the [subject]([url](https://github.com/migmanu/minishell/blob/main/en.subject.pdf)) . This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
+<p>This is the 42 Berlin School <code>minishell</code> project, written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the [subject](https://github.com/migmanu/minishell/blob/main/en.subject.pdf) . This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
 <h2 id="installation">Installation</h2>
 <p>If you want to test our <code>minishell</code>, Mish, you can do so in both Linux and Max.</p>
 <ul>
