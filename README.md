@@ -16,7 +16,7 @@
   ```
   Wait until <code>libft</code> is cloned and built.
   <li><strong>Run Mish:</strong></li>
-  ```
+ ```bash
   ./minishell
   ```
 </ol>
@@ -78,7 +78,7 @@
 </ul>
 <p>
 To this you obviously have to add the built-in commands the subject requires. These are:</p>
-  <lu>
+  <ul>
   <li>cd</li>
   <li>echo</li>
   <li>pwd</li>
@@ -86,7 +86,7 @@ To this you obviously have to add the built-in commands the subject requires. Th
   <li>unset</li>
   <li>env</li>
   <li>exit</li>
-  </lu>
+  </ul>
 <p>But things can be simplified a bit if you don't d the bonus. Mish does not have a separate <code>expander</code>. Inside the <code>input_handler</code> directory .
 There is no tree structure but a list of commands that gets executed from beginning to end.</p>
 <p>There are a lot of edge cases the initial parsing has to take into consideration. Those spreadsheets certainly came in handy. It was also challenging to design the correct behavior for pipes. Be especially attentive to blocking commands like `cat` and how they interact with different types of commands like `ls` or `head`. Pipes are a somewhat abstract concept, so a lot of trial and error went into solving this part</p>
