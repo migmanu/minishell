@@ -2,7 +2,9 @@
 
 
 <h1 id="the-mish-project">The Mish Project</h1>
-<p>This is the 42 Berlin School <code>minishell</code> project, written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the subject. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
+<p>Welcome to Mish: A Simple Bash Clone Developed for the 42 Berlin School Minishell Project.</p>
+<p></p>
+<p>Written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the subject. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
 <h2 id="installation">Installation</h2>
 <p>If you want to test our <code>minishell</code>, Mish, you can do so in both Linux and Max.</p>
 <ul>
