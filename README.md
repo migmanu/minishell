@@ -18,7 +18,7 @@
   <li><strong>Run Mish:</strong></li>
   ```
   ./minishell
-```
+  ```
 </ol>
 <p>Now you're ready to explore Mish! If you encounter any issues or have questions, feel free to reach out to us.</p>
 <h2 id="about-the-project">About the Project</h2>
@@ -77,17 +77,16 @@
 <li>The <code>executor</code>: Manages forks, calls to commads and built-in commands (like <code>cd</code>). Must be well design in order for the piping to work exactly as in bash. Pay attention to cases like <code>cat cat ls</code>. </li>
 </ul>
 <p>
-To this you obviously have to add the built-in commands the subject requires. These are:
-<lu>
-<li>cd</li>
-<li>echo</li>
-<li>pwd</li>
-<li>export</li>
-<li>unset</li>
-<li>env</li>
-<li>exit</li>
-</lu>
-</p>
+To this you obviously have to add the built-in commands the subject requires. These are:</p>
+  <lu>
+  <li>cd</li>
+  <li>echo</li>
+  <li>pwd</li>
+  <li>export</li>
+  <li>unset</li>
+  <li>env</li>
+  <li>exit</li>
+  </lu>
 <p>But things can be simplified a bit if you don't d the bonus. Mish does not have a separate <code>expander</code>. Inside the <code>input_handler</code> directory .
 There is no tree structure but a list of commands that gets executed from beginning to end.</p>
 <p>There are a lot of edge cases the initial parsing has to take into consideration. Those spreadsheets certainly came in handy. It was also challenging to design the correct behavior for pipes. Be especially attentive to blocking commands like `cat` and how they interact with different types of commands like `ls` or `head`. Pipes are a somewhat abstract concept, so a lot of trial and error went into solving this part</p>
