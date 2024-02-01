@@ -3,7 +3,7 @@
 
 <h1 id="the-mish-project">The Mish Project</h1>
 <p>Welcome to Mish: A Simple Bash Clone Developed for the 42 Berlin School Minishell Project.</p>
-<p>Written by [migmanu](https://github.com/migmanu/) and [SebasNadu](https://github.com/SebasNadu/), in accordance with version number 7.1 of the subject. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
+<p>Written by [migmanu]([https://github.com/maiadegraaf/minishell](https://github.com/migmanu/)) and [SebasNadu](https://github.com/SebasNadu/), in accordance with version number 7.1 of the subject. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
 <h2 id="installation">Installation</h2>
 <p>To test our <code>minishell</code>, Mish, follow these steps on both Linux and macOS:</p>
 <ol>
