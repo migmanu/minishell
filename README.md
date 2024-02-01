@@ -3,15 +3,24 @@
 
 <h1 id="the-mish-project">The Mish Project</h1>
 <p>Welcome to Mish: A Simple Bash Clone Developed for the 42 Berlin School Minishell Project.</p>
-<p></p>
 <p>Written by @migmanu and @SebasNadu, in accordance with version number 7.1 of the subject. This project does not cover the bonus part of the subject. In total, it took us around four weeks to finish the whole thing.</p>
 <h2 id="installation">Installation</h2>
-<p>If you want to test our <code>minishell</code>, Mish, you can do so in both Linux and Max.</p>
-<ul>
-<li>Clone the repo into your system</li>
-<li>run the <code>make</code> command and wait until <code>libft</code> is cloned and built</li>
-<li>run <code>./minishell</code> to open Mish.</li>
-</ul>
+<p>To test our <code>minishell</code>, Mish, follow these steps on both Linux and macOS:</p>
+<ol>
+  <li><strong>Clone and build the repository:</strong></li>
+
+  ```bash
+  git clone https://github.com/your-username/your-repo.git
+  cd your-repo
+  make
+  ```
+  Wait until <code>libft</code> is cloned and built.
+  <li><strong>Run Mish:</strong></li>
+  ```
+  ./minishell
+```
+</ol>
+<p>Now you're ready to explore Mish! If you encounter any issues or have questions, feel free to reach out to us.</p>
 <h2 id="about-the-project">About the Project</h2>
 <p>The <code>minishell</code> project requires students to develop a simple clone of Bash. It is also the first group project of the 42 Core Curriculum. From these two statements, we can easily identify the main challenges and goals of the task:</p>
 <ul>
@@ -20,7 +29,8 @@
 </ul>
 <p>We believe that without properly addressing and planning for these two challenges from the very beginning, <code>minishell</code> will quickly turn into what a lot of students call &quot;minihell.&quot;</p>
 <h3 id="understanding-bash">Understanding Bash</h3>
-<p>Released in 1989, Bash has by now acquired almost mythical status. It is a universal tool that every programmer should feel, at the very least, acquainted with, if not properly comfortable. Therefore, sources at your disposal are plenty. If you are a 42 student, we advise you to search Slack for resources provided by fellow students over the years. Be aware, the <code>minishell</code> subject has changed over time, so not all advice is relevant. Here is a list of some of the most mentioned and useful links:</p>
+<p>Released in 1989, Bash has by now acquired almost mythical status. It is a universal tool that every programmer should feel, at the very least, acquainted with, if not properly comfortable. Therefore, sources at your disposal are plenty. If you are a 42 student, we advise you to search Slack for resources provided by fellow students over the years. Be aware, the <code>minishell</code> subject has changed over time, so not all advice is relevant. </p>
+<p>Here is a list of some of the most mentioned and useful links we found online:</p>
 
 #### Repositories
 
@@ -53,10 +63,31 @@
 <p>Nevertheless, there are two available online spreadsheets that cover a huge amount of cases to test for. You can find them linked above. It's a good idea to go through most, if not all, of them at least once to test your <code>minishell</code>. Maybe a read before could avoid some issues down the line too. But <strong>be aware</strong>, a lot of the cases mentioned in these spreadsheets are out of scope, apply only for bonus or are outright wrong. Do not follow them blindly, but test each with Bash on your own.</p>
 
 <h3 id="coordinating-teamwork">Coordinating Teamwork</h3>
-<p>There was no great complexity regarding teamwork. Given the small size of the team and our generous time availability, we went through a simple workflow. Each change or bug fix was done inside a branch of this repository, pushed, reviewd by the other author and merged. We could make this work because we communicated a lot, either through Slack or coding side by side.</p>
+<p>There was no great complexity regarding teamwork. Given the small size of the team and our generous time availability, we went through a simple workflow.</p>
+<p>For this you must have a basic understanding of Git, its advantages and dangers. There are many, easy to find, resources online. We can recommend this [game](https://learngitbranching.js.org/) for a fun approach.</p>
+</p>
+<p>Each change or bug fix was done inside a branch of this repository, pushed, reviewd by the other author and merged. We could make this work because we communicated a lot, either through Slack or coding side by side.</p>
 <p>Regardless of how you chose to organize work, you will need to communicate as much as possible and try to understand whats going on even inside the files you have not written.</p>
 <h2 id="how-mish-works">How Mish Works</h2>
 <p>After you&#39;ve read the listed sources, you'll learn that Bash is composed of four distinct parts: the <code>parser</code>, the <code>tokenizer</code>, the <code>expander</code>, and the <code>executor</code>. Tokens are put into a tree, which is then executed in the appropriate order. This should probably be your layout if you are aiming for the bonus.</p>
+<ul>
+<li>The <code>parser</code>: In charge of reading through the inputed command. It deals with problems such as syntax</li>
+<li>The <code>tokenizer</code>: Divides the inputed command into tokes, basic units of execution. Some of this tokes we call <code>operators</code>, like the pipe symbol, others are <code>words</code>, which can be commands and/or arguments</li>
+<li>The <code>expander</code>: Expands expresions included within <code>$()</code>, such as enviroment variables.</li>
+<li>The <code>executor</code>: Manages forks, calls to commads and built-in commands (like <code>cd</code>). Must be well design in order for the piping to work exactly as in bash. Pay attention to cases like <code>cat cat ls</code>. </li>
+</ul>
+<p>
+To this you obviously have to add the built-in commands the subject requires. These are:
+<lu>
+<li>cd</li>
+<li>echo</li>
+<li>pwd</li>
+<li>export</li>
+<li>unset</li>
+<li>env</li>
+<li>exit</li>
+</lu>
+</p>
 <p>But things can be simplified a bit if you don't d the bonus. Mish does not have a separate <code>expander</code>. Inside the <code>input_handler</code> directory .
 There is no tree structure but a list of commands that gets executed from beginning to end.</p>
 <p>There are a lot of edge cases the initial parsing has to take into consideration. Those spreadsheets certainly came in handy. It was also challenging to design the correct behavior for pipes. Be especially attentive to blocking commands like `cat` and how they interact with different types of commands like `ls` or `head`. Pipes are a somewhat abstract concept, so a lot of trial and error went into solving this part</p>
