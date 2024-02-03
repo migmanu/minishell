@@ -4,6 +4,9 @@
 <p>Welcome to Mish: A Simple Bash Clone Developed for the 42 Berlin School Minishell Project.</p>
 <p>Written by <a href="https://github.com/migmanu/">migmanu</a> and <a href="https://github.com/SebasNadu/">SebasNadu</a>
 , in accordance with version number 7.1 of the subject. This project does not cover the bonus part. In total, it took us around four weeks to finish the whole thing.</p>
+<picture>
+    <img alt="minishell" src="https://github.com/SebasNadu/42_minishell/assets/98430438/fafa7b95-7df7-49a6-8f71-1c93415a1b28">
+</picture>
 <h2 id="installation">Installation</h2>
 <p>To test our <code>minishell</code>, Mish, follow these steps on both Linux and macOS:</p>
 <br>
@@ -81,6 +84,11 @@ Wait until <code>libft</code> is cloned and built.
 	<li>The <code>executor</code>: Manages forks, calls to commads and built-in commands (like <code>cd</code>). Must be well design in order for the piping to work exactly as in bash. Pay attention to cases like <code>cat cat ls</code>. </li>
 </ul>
 <p>
+<picture>
+    <img alt="bash_flow" src="https://github.com/SebasNadu/42_minishell/assets/98430438/35b27643-572a-443b-b257-146652ff9b91" width="500">
+</picture>
+<sup><sub><small>Visualization by https://twitter.com/@_lrlna</small></sub></sup>
+
 To this you obviously have to add the built-in commands the subject requires. These are:</p>
 <ul>
 	<li>cd</li>
@@ -91,10 +99,13 @@ To this you obviously have to add the built-in commands the subject requires. Th
 	<li>env</li>
 	<li>exit</li>
 </ul>
-![-vnpXSyzxyPpPK3TqYdV1pedY3MnsEnyyGUH1WlTd0O29Cl_CWtWzxvLw0jtkLWW6M5ESa9EmCYW-b](https://github.com/SebasNadu/42_minishell/assets/98430438/35b27643-572a-443b-b257-146652ff9b91)
+
 <p>But things can be simplified if you choose not to do the bonus. Mish does not use a tree structure to create an AST; instead, it employs a list of commands. This structure not only encompasses the entire command created after parsing the tokens but also handles redirections. If you aim to develop a more sophisticated shell and complete the bonus, an AST is the way to go; otherwise, a simple list suffices for the task.</p>
-![Untitled-2024-02-02-1157](https://github.com/SebasNadu/42_minishell/assets/98430438/c76b1025-0b59-48bd-b7f6-a1dbe64c68bf)
-<p>There are a lot of edge cases the initial parsing has to take into consideration. Those spreadsheets certainly came in handy. It was also challenging to design the correct behavior for pipes. Be especially attentive to blocking com![Uploading Untitled-2024-02-02-1157.excalidraw.svg…]()
-mands like `cat` and how they interact with different types of commands like `ls` or `head`. Pipes are a somewhat abstract concept, so a lot of trial and error went into solving this part</p>
+<picture>
+    <img alt="mish_flow" src="https://github.com/SebasNadu/42_minishell/assets/98430438/c697a355-89e3-4035-b880-11ddc4fc3824" width="800">
+</picture>
+</br>
+</br>
+<p>There are a lot of edge cases the initial parsing has to take into consideration. Those spreadsheets certainly came in handy. It was also challenging to design the correct behavior for pipes. Be especially attentive to blocking commands like `cat` and how they interact with different types of commands like `ls` or `head`. Pipes are a somewhat abstract concept, so a lot of trial and error went into solving this part</p>
 <p>You might also notice that we used a hash map for storing the environment variables. Although this involved some extra work at the beginning, it ended up simplifying a lot of our work. It certainly saved us from bugs in some, unanticipated, edge-cases. Though it is certainly not necessary to develop a hash map, we highly recommend to try it out.</p>
 <p>In the spirit of not spoiling the project for anyone, we are not gonna go into detailed explanation of how Mish works. If you have any doubts or need help, you can reach us via Slack to <code>jmigoya-</code> and <code>johnavar</code> .</p>
