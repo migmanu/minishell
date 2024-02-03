@@ -10,6 +10,7 @@
 <h2 id="installation">Installation</h2>
 <p>To test our <code>minishell</code>, Mish, follow these steps on both Linux and macOS:</p>
 <br>
+<ol>
   <li><strong>Clone and build the repository:</strong></li>
 
 ```bash
@@ -24,7 +25,7 @@ Wait until <code>libft</code> is cloned and built.
  ```bash
   ./minishell
   ```
-
+</ol>
 <p>Now you're ready to explore Mish! If you encounter any issues or have questions, feel free to reach out to us.</p>
 <h2 id="about-the-project">About the Project</h2>
 <p>The <code>minishell</code> project requires students to develop a simple clone of Bash. It is also the first group project of the 42 Core Curriculum. From these two statements, we can easily identify the main challenges and goals of the task:</p>
@@ -90,6 +91,7 @@ Wait until <code>libft</code> is cloned and built.
 <sup><sub><small>Visualization by https://twitter.com/@_lrlna</small></sub></sup>
 
 To this you obviously have to add the built-in commands the subject requires. These are:</p>
+
 <ul>
 	<li>cd</li>
 	<li>echo</li>
