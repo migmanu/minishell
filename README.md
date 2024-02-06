@@ -22,9 +22,7 @@ make
 Wait until <code>libft</code> is cloned and built.
 
   <li><strong>Run Mish:</strong></li>
- ```bash
-  ./minishell
-  ```
+ <code>./minishell</code>
 </ol>
 <p>Now you're ready to explore Mish! If you encounter any issues or have questions, feel free to reach out to us.</p>
 <h2 id="about-the-project">About the Project</h2>
